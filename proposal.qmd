@@ -58,22 +58,26 @@ Make sure to load the data and use inline code for some of this information.
 # Get basic information about the dataset
 forest |>
   head() |>
-  formattable()
+  formattable()             #<1>
 
 # The properties of the data
 forest |>
-  diagnose() |>
+  diagnose() |>             #<2>
   formattable()
 ```
 
-\<description\>
+1.  The `formattable` package is used to create formatted tables and data frames for better data visualization. This package is particularly useful for creating visually appealing and informative tables for data analysis and reporting.
+
+2.  The `diagnose()` is used for data profiling, data quality assessment, and diagnostics.
+
+*\<description\>*
 
 ### Forest Area Data
 
 ```{r forest_area_basic_info, message=FALSE, warning=FALSE}
 # Get basic information about the dataset
 forest_area |>
-  head() |>
+  head() |>                    
   formattable()
 
 # The properties of the data
@@ -82,7 +86,7 @@ forest_area |>
   formattable()
 ```
 
-\<description\>
+*\<description\>*
 
 ### Brazil Loss Data
 
@@ -98,7 +102,7 @@ brazil_loss |>
   formattable()
 ```
 
-\<description\>
+*\<description\>*
 
 ### Soyabean Usage Data
 
@@ -114,7 +118,7 @@ soyabean_use |>
   formattable()
 ```
 
-\<description\>
+*\<description\>*
 
 ### Vegetable oil Data
 
@@ -130,7 +134,7 @@ vegetable_oil |>
   formattable()
 ```
 
-\<description\>
+*\<description\>*
 
 ### Deforestation by Source
 
@@ -146,11 +150,15 @@ deforestation_by_source |>
   formattable()
 ```
 
-\<description\>
+*\<description\>*
 
 ### Why we chose this dataset?
 
-\<Info on why we chose the dataset\>
+The selection of datasets for this project is driven by both technical and analytical considerations, particularly related to data visualization. Moreover, deforestation is a serious environmental problem with far-reaching effects. Understanding its trends, drivers, and impacts is critical for informed decision-making and environmental protection. The dataset from `Our World in Data` provides a reliable data with less junk data and also it contains comprehensive set of variables related to deforestation in this scenario. In the context of data visualization, the technical characteristics of a dataset (cleanliness, structure, consistency) play a key role in creating clear and insightful visualizations.
+
+The dataset is well-structured, making them suitable for editing and visualizing data. It contains various tables like `forest`, `brazil_loss`, `soybean_use`, `forest_area`, `vegetable_oil` and `deforestation_by_source` that allows analysis to target specific aspects of deforestation. These dimensions enable multi-layered analysis and visualization, allowing you to investigate different aspects of a problem. Different variables and data dimensions allow you to create diverse visualizations to consider different aspects of deforestation.
+
+The richness of the dataset provides many opportunities to create effective data visualizations. From time series graphs to choropleth maps to scatter plots, there are many visualization techniques that can effectively convey complex information. In summary, the selection of this dataset is driven by its technical suitability for analysis and its relevance to the critical issue of deforestation.
 
 ## Questions
 
