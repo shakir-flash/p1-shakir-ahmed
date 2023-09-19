@@ -1,31 +1,173 @@
 ---
-title: "Proposal title"
+title: "Visualizing the Impact of Deforestation"
 subtitle: "Proposal"
 format: html
 editor: visual
+code-annotations: hover
+categories: 
+  - Proposal
+  - DataViz
+  - TidyTuesday
 ---
 
-```{r}
-#| label: load-pkgs
-#| message: false
-library(tidyverse)
+## Packages Setup
+
+```{r load_pkgs, message=FALSE, warning=FALSE, output=FALSE}
+### GETTING THE LIBRARIES
+if (!require(pacman)) #<1>
+  install.packages(pacman)
+
+
+pacman::p_load(tidyverse,
+               gridExtra,
+               tidytuesdayR,
+               dplyr,
+               dlookr,        # Exploratory data analysis
+               DMwR2, 
+               here,          # Standardizes paths to data
+               formattable,
+               ggpubr)   #<2>
 ```
+
+1.  This block is to check if `pacman` package is installed or not, if it isn't then the package will be installed.
+
+2.  `p_load` is a function from `pacman` package to load other packages, if isn't installed `pacman` will handle the installation.
 
 ## Dataset
 
-```{r}
-#| label: load-dataset
-#| message: false
+```{r load_dataset, message=FALSE, warning=FALSE}
+# Getting the Data using the tidytuesdayR package 
+deforestation_data <- tidytuesdayR::tt_load(2021, week = 15)
+
+# Getting all the underlying data in the dataset
+forest        <- deforestation_data$forest
+forest_area   <- deforestation_data$forest_area
+brazil_loss   <- deforestation_data$brazil_loss
+soyabean_use  <- deforestation_data$soybean_use
+vegetable_oil <- deforestation_data$vegetable_oil
+deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
 
 Make sure to load the data and use inline code for some of this information.
 
+### Forest Data
+
+```{r forest_basic_info, message=FALSE, warning=FALSE}
+# Get basic information about the dataset
+forest |>
+  head() |>
+  formattable()
+
+# The properties of the data
+forest |>
+  diagnose() |>
+  formattable()
+```
+
+\<description\>
+
+### Forest Area Data
+
+```{r forest_area_basic_info, message=FALSE, warning=FALSE}
+# Get basic information about the dataset
+forest_area |>
+  head() |>
+  formattable()
+
+# The properties of the data
+forest_area |>
+  diagnose() |>
+  formattable()
+```
+
+\<description\>
+
+### Brazil Loss Data
+
+```{r brazil_loss_basic_info, message=FALSE, warning=FALSE}
+# Get basic information about the dataset
+brazil_loss |>
+  head() |>
+  formattable()
+
+# The properties of the data
+brazil_loss |>
+  diagnose() |>
+  formattable()
+```
+
+\<description\>
+
+### Soyabean Usage Data
+
+```{r soyabean_use_basic_info, message=FALSE, warning=FALSE}
+# Get basic information about the dataset
+soyabean_use |>
+  head() |>
+  formattable()
+
+# The properties of the data
+soyabean_use |>
+  diagnose() |>
+  formattable()
+```
+
+\<description\>
+
+### Vegetable oil Data
+
+```{r vegetable_oil_basic_info, message=FALSE, warning=FALSE}
+# Get basic information about the dataset
+vegetable_oil |>
+  head() |>
+  formattable()
+
+# The properties of the data
+vegetable_oil |>
+  diagnose() |>
+  formattable()
+```
+
+\<description\>
+
+### Deforestation by Source
+
+```{r deforestation_by_source_info, message=FALSE, warning=FALSE}
+# Get basic information about the dataset
+deforestation_by_source |>
+  head() |>
+  formattable()
+
+# The properties of the data
+deforestation_by_source |>
+  diagnose() |>
+  formattable()
+```
+
+\<description\>
+
+### Why we chose this dataset?
+
+\<Info on why we chose the dataset\>
+
 ## Questions
 
 The two questions you want to answer.
 
+### Question 1
+
+\<question here\>
+
+### Question 2
+
+\<question here\>
+
 ## Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+
+### **Approach for question 1**
+
+### Approach for question 2
