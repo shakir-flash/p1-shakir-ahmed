@@ -12,7 +12,7 @@ categories:
 
 ## Packages Setup
 
-```{r load_pkgs, message=FALSE, warning=FALSE, output=FALSE}
+```{r load_pkgs, message=FALSE, warning=FALSE, output=FALSE, include=FALSE}
 ### GETTING THE LIBRARIES
 if (!require(pacman)) #<1>
   install.packages(pacman)
@@ -152,32 +152,34 @@ deforestation_by_source |>
 
 *\<description\>*
 
-### Why we chose this dataset?
+### Why we chose this data-set?
 
-The selection of datasets for this project is driven by both technical and analytical considerations, particularly related to data visualization. Moreover, deforestation is a serious environmental problem with far-reaching effects. Understanding its trends, drivers, and impacts is critical for informed decision-making and environmental protection. The dataset from `Our World in Data` provides a reliable data with less junk data and also it contains comprehensive set of variables related to deforestation in this scenario. In the context of data visualization, the technical characteristics of a dataset (cleanliness, structure, consistency) play a key role in creating clear and insightful visualizations.
+The selection of data-sets for this project is driven by both technical and analytical considerations, particularly related to data visualization. Moreover, deforestation is a serious environmental problem with far-reaching effects. Understanding its trends, drivers, and impacts is critical for informed decision-making and environmental protection. The data-set from `Our World in Data` provides a reliable data with less junk data and also it contains comprehensive set of variables related to deforestation in this scenario. In the context of data visualization, the technical characteristics of a dataset (cleanliness, structure, consistency) play a key role in creating clear and insightful visualizations.
 
-The dataset is well-structured, making them suitable for editing and visualizing data. It contains various tables like `forest`, `brazil_loss`, `soybean_use`, `forest_area`, `vegetable_oil` and `deforestation_by_source` that allows analysis to target specific aspects of deforestation. These dimensions enable multi-layered analysis and visualization, allowing you to investigate different aspects of a problem. Different variables and data dimensions allow you to create diverse visualizations to consider different aspects of deforestation.
+The data-set is well-structured, making them suitable for editing and visualizing data. It contains various tables like `forest`, `brazil_loss`, `soybean_use`, `forest_area`, `vegetable_oil` and `deforestation_by_source` that allows analysis to target specific aspects of deforestation. These dimensions enable multi-layered analysis and visualization, allowing you to investigate different aspects of a problem. Different variables and data dimensions allow you to create diverse visualizations to consider different aspects of deforestation.
 
-The richness of the dataset provides many opportunities to create effective data visualizations. From time series graphs to choropleth maps to scatter plots, there are many visualization techniques that can effectively convey complex information. In summary, the selection of this dataset is driven by its technical suitability for analysis and its relevance to the critical issue of deforestation.
+The richness of the data-set provides many opportunities to create effective data visualizations. From time series graphs to choropleth maps to scatter plots, there are many visualization techniques that can effectively convey complex information. In summary, the selection of this data-set is driven by its technical suitability for analysis and its relevance to the critical issue of deforestation.
 
-## Questions
+## 1. Questions
 
-The two questions you want to answer.
+The two questions to be answered are:
 
 ### Question 1
 
-What does the global forest area look like over past 3 decades? 
+What does the global forest area look like over past 3 decades?
 
 ### Question 2
 
-\<question here\>
+How has the production of Soya bean in Africa changed over time, and how does it impact the afforestation or deforestation rates?
 
 ## Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
 
 ### **Approach for question 1**
-For this plot, we wanted to visualise how the global area under forests has changed over the years. We wanted to represent this data in a graphical manner and show how reducing forest cover over the years could be related to other ecological changes taking place.
-To visualise the `TidyTuesday` dataset, we are planning to clean it further to only get certain parts that are required. We are planning to create a map plot using the `rnaturalearth`,`ggmap` and `plotly` libraries. The mapping of data from dataset to the map plot will be done using `geocode()` library. The comparison of the plot will be done through years `1990-2015` as we have slightly better recorded data for these years and using this we should be able to show an overview of changes in forest cover over the past years.
+
+For this plot, we wanted to visualize how the global area under forests has changed over the years. We wanted to represent this data in a graphical manner and show how reducing forest cover over the years could be related to other ecological changes taking place. To visualize the `TidyTuesday` data-set, we are planning to clean it further to only get certain parts that are required. We are planning to create a map plot using the `rnaturalearth`,`ggmap` and `plotly` libraries. The mapping of data from data-set to the map plot will be done using `geocode()` library. The comparison of the plot will be done through years `1990-2015` as we have slightly better recorded data for these years and using this we should be able to show an overview of changes in forest cover over the past years.
 
 ### Approach for question 2
+
+For this plot, we want to visualize the trend in the production of soybeans over the years in the continent of Africa. To perform this task, we are going to use the `TidyTuesday` dataset and perform data manipulation to obtain a new column showing the total production of soybeans. Columns present in the table are- `human_food` ,`animal_feed` and `processed.` We will then use `ggplot` to create a line graph to visualize the rate of change in production. Furthermore, we will compare and correlate the increase or decrease in soybean production with the rates of deforestation and afforestation to determine the general trend in both. This data comparison will be done for the years `1990-2013`, as the data-set provides an abundance of useful insights.
