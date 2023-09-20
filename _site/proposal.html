@@ -214,11 +214,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="2" data-code-cell="annotated-cell-1">This block is to check if <code>pacman</code> package is installed or not, if it isn’t then the package will be installed.</span>
+<span data-code-lines="2" data-code-cell="annotated-cell-1" data-code-annotation="1">This block is to check if <code>pacman</code> package is installed or not, if it isn’t then the package will be installed.</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-lines="9" data-code-cell="annotated-cell-1"><code>p_load</code> is a function from <code>pacman</code> package to load other packages, if isn’t installed <code>pacman</code> will handle the installation.</span>
+<span data-code-lines="9" data-code-cell="annotated-cell-1" data-code-annotation="2"><code>p_load</code> is a function from <code>pacman</code> package to load other packages, if isn’t installed <code>pacman</code> will handle the installation.</span>
 </dd>
 </dl>
 </div>
@@ -250,103 +250,386 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="forest-data">Forest Data</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>forest <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span>
-<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>forest <span class="sc">|&gt;</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>forest <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="4" data-code-cell="annotated-cell-3">The <code>formattable</code> package is used to create formatted tables and data frames for better data visualization. This package is particularly useful for creating visually appealing and informative tables for data analysis and reporting.</span>
+<span data-code-lines="2" data-code-cell="annotated-cell-3" data-code-annotation="1">Not displaying the output since it doesn’t have much significance.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-lines="8" data-code-cell="annotated-cell-3">The <code>diagnose()</code> is used for data profiling, data quality assessment, and diagnostics.</span>
+<span data-code-lines="4" data-code-cell="annotated-cell-3" data-code-annotation="2">The <code>diagnose()</code> is used for data profiling, data quality assessment, and diagnostics.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-lines="5" data-code-cell="annotated-cell-3" data-code-annotation="3">The <code>formattable</code> package is used to create formatted tables and data frames for better data visualization. This package is particularly useful for creating visually appealing and informative tables for data analysis and reporting.</span>
 </dd>
 </dl>
 </div>
 </div>
-<p>The Forest dataset contains information on the change in forest area every 5 years. With 475 observations, the dataset consists of the 4 variables: country, country code, year, and the net forest conversion in hectares.</p>
+<p>The Forest dataset contains information on the change in forest area every 5 years. With 475 observations, the dataset consists of the 4 variables: entity(country), code, year, and the net forest conversion in hectares. The column <code>code</code> has some missing values around 1% and we won’t be using that column anyway since we have entity column.</p>
 </section>
 <section id="forest-area-data" class="level3">
 <h3 class="anchored" data-anchor-id="forest-area-data">Forest Area Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>forest_area <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span>                    </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>forest_area <span class="sc">|&gt;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data   </span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>forest_area <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-4" data-code-annotation="1">Not displaying the output since it doesn’t have much significance.</span>
+</dd>
+</dl>
 </div>
-<p>The Forest area dataset looks at the change in global forest area as a percent of global forest area amongst a sample of 7846 observations. The data collected consists of 4 variables: country, country code, year, and percent of global forest area.</p>
+</div>
+<p>The Forest area dataset looks at the change in global forest area as a percent of global forest area amongst a sample of 7846 observations. The data collected consists of 4 variables: entity, code, year, and percent of global forest area. The column <code>code</code> has some missing values around 13% and we won’t be using that column anyway since we have entity column.</p>
 </section>
 <section id="brazil-loss-data" class="level3">
 <h3 class="anchored" data-anchor-id="brazil-loss-data">Brazil Loss Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>brazil_loss <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>brazil_loss <span class="sc">|&gt;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>brazil_loss <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-5" data-code-annotation="1">Not displaying the output since it doesn’t have much significance.</span>
+</dd>
+</dl>
 </div>
-<p>The Brazil loss dataset compares loss of Brazilian forest across different types of forest disturbances.13 observations are analyzed amongst 14 variables which include country, country code, year, commercial crops, flooding, natural disturbances, pasture for livestock, logging for lumber, fire loss, mining, infrastructure, roads, tree plantations, and small scale clearing.</p>
+</div>
+<p>The Brazil loss dataset compares loss of Brazilian forest across different types of forest disturbances.13 observations are analyzed amongst 14 variables which include entity, code, year, commercial crops, flooding, natural disturbances, pasture for livestock, logging for lumber, fire loss, mining, infrastructure, roads, tree plantations, and small scale clearing. And we found no missing values in the data after running <code>diagnosis()</code> on top of it.</p>
 </section>
 <section id="soybean-usage-data" class="level3">
 <h3 class="anchored" data-anchor-id="soybean-usage-data">Soybean Usage Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>soyabean_use <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>soyabean_use <span class="sc">|&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>soyabean_use <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+variables
+</th>
+<th style="text-align:right;">
+types
+</th>
+<th style="text-align:right;">
+missing_count
+</th>
+<th style="text-align:right;">
+missing_percent
+</th>
+<th style="text-align:right;">
+unique_count
+</th>
+<th style="text-align:right;">
+unique_rate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+entity
+</td>
+<td style="text-align:right;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+0.020915429
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+code
+</td>
+<td style="text-align:right;">
+character
+</td>
+<td style="text-align:right;">
+1734
+</td>
+<td style="text-align:right;">
+17.520461
+</td>
+<td style="text-align:right;">
+174
+</td>
+<td style="text-align:right;">
+0.017581085
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+year
+</td>
+<td style="text-align:right;">
+numeric
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+0.005355158
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+human_food
+</td>
+<td style="text-align:right;">
+numeric
+</td>
+<td style="text-align:right;">
+215
+</td>
+<td style="text-align:right;">
+2.172375
+</td>
+<td style="text-align:right;">
+712
+</td>
+<td style="text-align:right;">
+0.071940992
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+animal_feed
+</td>
+<td style="text-align:right;">
+numeric
+</td>
+<td style="text-align:right;">
+5538
+</td>
+<td style="text-align:right;">
+55.956350
+</td>
+<td style="text-align:right;">
+705
+</td>
+<td style="text-align:right;">
+0.071233707
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+processed
+</td>
+<td style="text-align:right;">
+numeric
+</td>
+<td style="text-align:right;">
+3644
+</td>
+<td style="text-align:right;">
+36.819238
+</td>
+<td style="text-align:right;">
+1989
+</td>
+<td style="text-align:right;">
+0.200969991
+</td>
+</tr>
+</tbody>
+
+</table>
 </div>
-<p>The dataset called Soybean usage dataset consists of information relating to soybean production and use by year and country. 9897 observations were analyzed across 6 variables: country, country code, year, use for human food (e.g., tempeh, tofu), used for animal food, and processed into vegetable oil/biofuel/processed animal feed.</p>
+</div>
+<p>The data-set called Soybean usage data-set consists of information relating to soybean production and use by year and country. 9897 observations were analyzed across 6 variables: <code>entity</code>, <code>code</code>, <code>year</code>, use for <code>human food</code> (e.g., tempeh, tofu), used for <code>animal food</code>, and <code>processed</code> into vegetable oil/bio-fuel/processed animal feed. The columns <code>animal_feed</code> and <code>processed</code> are having significant missing values.</p>
 </section>
 <section id="vegetable-oil-data" class="level3">
 <h3 class="anchored" data-anchor-id="vegetable-oil-data">Vegetable oil Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>vegetable_oil <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>vegetable_oil <span class="sc">|&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>vegetable_oil <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+variables
+</th>
+<th style="text-align:right;">
+types
+</th>
+<th style="text-align:right;">
+missing_count
+</th>
+<th style="text-align:right;">
+missing_percent
+</th>
+<th style="text-align:right;">
+unique_count
+</th>
+<th style="text-align:right;">
+unique_rate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+entity
+</td>
+<td style="text-align:right;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+232
+</td>
+<td style="text-align:right;">
+1.612993e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+code
+</td>
+<td style="text-align:right;">
+character
+</td>
+<td style="text-align:right;">
+22633
+</td>
+<td style="text-align:right;">
+15.73572
+</td>
+<td style="text-align:right;">
+199
+</td>
+<td style="text-align:right;">
+1.383559e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+year
+</td>
+<td style="text-align:right;">
+numeric
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+3.754380e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+crop_oil
+</td>
+<td style="text-align:right;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+9.038322e-05
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+production
+</td>
+<td style="text-align:right;">
+numeric
+</td>
+<td style="text-align:right;">
+85635
+</td>
+<td style="text-align:right;">
+59.53821
+</td>
+<td style="text-align:right;">
+26443
+</td>
+<td style="text-align:right;">
+1.838464e-01
+</td>
+</tr>
+</tbody>
+
+</table>
 </div>
-<p>In the vegetable oil dataset, 143,832 observations were used to analyze the vegetable oil production by crop type and year. Additionally, the variables consisted of country, country code, year, crop that was used to produce vegetable oil, and oil production in tons.</p>
+</div>
+<p>In the vegetable oil data-set, 143,832 observations were used to analyze the vegetable oil production by crop type and year. Additionally, the variables consisted of <code>entity</code>, <code>code</code>, <code>year</code>, <code>crop oil</code> and <code>production</code> which contains the production vegetable oil, and oil production in tons. The columns <code>animal_feed</code> and <code>processed</code> are having significant missing values.</p>
 </section>
 <section id="deforestation-by-source" class="level3">
 <h3 class="anchored" data-anchor-id="deforestation-by-source">Deforestation by Source</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get basic information about the dataset</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>deforestation_by_source <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>deforestation_by_source <span class="sc">|&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The properties of the data</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>deforestation_by_source <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diagnose</span>() <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formattable</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="2" data-code-cell="annotated-cell-8" data-code-annotation="1">Not displaying the output since it doesn’t have much significance.</span>
+</dd>
+</dl>
 </div>
-<p>10 observations within the deforestation by source dataset compared different farming entities to forest loss by year. The dataset includes four variables: farming entities, country, year, and forest loss.</p>
+</div>
+<p>10 observations within the deforestation by source dataset compared different farming entities to forest loss by year. The dataset includes four variables: <code>entity</code>, <code>country</code>, <code>year</code>, and <code>forest loss</code>. The column <code>code</code> has some missing values around 100% and we won’t be using that column anyway since we have entity column.</p>
 </section>
 <section id="why-we-chose-this-data-set" class="level3">
 <h3 class="anchored" data-anchor-id="why-we-chose-this-data-set">Why we chose this data-set?</h3>
