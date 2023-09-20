@@ -1,5 +1,5 @@
 ---
-title: "Visualizing the Impact of Deforestatio"
+title: "Visualizing the Forest Conversion"
 subtitle: "INFO 526 - Project 1"
 author: "The Plotting Pandas - Meghan, Shakir, Maria, Eshaan, Bharath"
 format: html

@@ -6,11 +6,11 @@ editor: visual
 
 This project was developed by **The Plotting Pandas** for [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
 
--   Megan Hokama: Third-year Ph.D. student in Educational Psychology at University of Arizona. 
+-   Megan Hokama: Third-year Ph.D. student in Educational Psychology at University of Arizona.
 
--   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).
+-   Maria SURESH: First-year graduate student pursuing Data Science at University of Arizona.
 
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
+-   Shakir Ahmed: First-year graduate student pursuing Data Science at University of Arizona.
 
 -   Eshaan Mathakari: First-year graduate student pursuing Data Science at University of Arizona.
 
