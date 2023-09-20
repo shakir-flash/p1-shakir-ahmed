@@ -12,6 +12,6 @@ This project was developed by **The Plotting Pandas** for [INFO 526 - Data Analy
 
 -   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
 
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
+-   Eshaan Mathakari: First-year graduate student pursuing Data Science at University of Arizona.
 
 -   Bharath Velamala: First-year graduate student in Data Science at University of Arizona.
