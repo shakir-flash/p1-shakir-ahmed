@@ -174,7 +174,7 @@ How has the production of Soya bean in Africa changed over time, and how does it
 
 ## Analysis plan
 
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+So we have come with approaches for both of the questions and are described below.
 
 ### **Approach for question 1**
 
@@ -183,3 +183,7 @@ For this plot, we wanted to visualize how the global area under forests has chan
 ### Approach for question 2
 
 For this plot, we want to visualize the trend in the production of soybeans over the years in the continent of Africa. To perform this task, we are going to use the `TidyTuesday` dataset and perform data manipulation to obtain a new column showing the total production of soybeans. Columns present in the table are- `human_food` ,`animal_feed` and `processed.` We will then use `ggplot` to create a line graph to visualize the rate of change in production. Furthermore, we will compare and correlate the increase or decrease in soybean production with the rates of deforestation and afforestation to determine the general trend in both. This data comparison will be done for the years `1990-2013`, as the data-set provides an abundance of useful insights.
+
+::: callout-note
+And since this is the approach we intend to explore and solve the questions which we came up with, bits and pieces of the approach might change.
+:::
