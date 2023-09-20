@@ -4,7 +4,7 @@
     "href": "proposal.html",
     "title": "Visualizing the Forest Conversion",
     "section": "",
-    "text": "### GETTING THE LIBRARIES\n1if (!require(pacman))\n  install.packages(pacman)\n\n\npacman::p_load(tidyverse,\n               tidytuesdayR,\n2               formattable)\n\n\n1\n\nThis block is to check if pacman package is installed or not, if it isn’t then the package will be installed.\n\n2\n\np_load is a function from pacman package to load other packages, if isn’t installed pacman will handle the installation."
+    "text": "### GETTING THE LIBRARIES\n1if (!require(pacman))\n  install.packages(pacman)\n\n\npacman::p_load(tidyverse,\n               tidytuesdayR,\n               dlookr,\n2               formattable)\n\n\n1\n\nThis block is to check if pacman package is installed or not, if it isn’t then the package will be installed.\n\n2\n\np_load is a function from pacman package to load other packages, if isn’t installed pacman will handle the installation."
   },
   {
     "objectID": "proposal.html#data-set",

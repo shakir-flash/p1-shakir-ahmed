@@ -19,6 +19,7 @@ if (!require(pacman)) #<1>
 
 pacman::p_load(tidyverse,
                tidytuesdayR,
+               dlookr,
                formattable)   #<2>
 ```
 
