@@ -118,7 +118,7 @@ vegetable_oil |>
   formattable()
 ```
 
-In the vegetable oil data-set, 143,832 observations were used to analyze the vegetable oil production by crop type and year. Additionally, the variables consisted of `entity`, `code`, `year`, `crop oil` and `production` which contains the production vegetable oil, and oil production in tons. The columns `animal_feed` and `processed` are having significant missing values.
+In the vegetable oil data-set, 143,832 observations were used to analyze the vegetable oil production by crop type and year. Additionally, the variables consisted of `entity`, `code`, `year`, `crop oil` and `production` which contains the production vegetable oil, and oil production in tons. The column `production` is having significant missing values.
 
 ### Deforestation by Source
 
@@ -161,7 +161,7 @@ And coming the actual visualization part the comparison of the plot will be done
 
 ### Approach for question 2
 
-For this plot, we want to visualize the trend in the production of soybeans over the years in the continent of Africa. To perform this task, we are going to use the `TidyTuesday` data-set which was sourced from `Our World in Data` and perform data manipulation to obtain a new column showing the total production of soybeans. Out of the data involved we will be mostly focusing in the `soyabean_use` data and columns present in the table are - `human_food` ,`animal_feed` and `processed`. We will then use `ggplot` to create a line graph to visualize the rate of change in production. Furthermore, we will compare and correlate the increase or decrease in soybean production with the rates of deforestation and afforestation to determine the general trend in both. This data comparison will be done for the years `1990-2013`, as the data-set provides an abundance of useful insights. We also might use other data present in the data-set to get some correlation.
+For this plot, we want to visualize the trend in the production of soybean over the years in the continent of Africa. To perform this task, we are going to use the `TidyTuesday` data-set which was sourced from `Our World in Data` and perform data manipulation to obtain a new column showing the total production of soybean. Out of the data involved we will be mostly focusing in the `soyabean_use` data and columns present in the table are - `human_food` ,`animal_feed` and `processed`. We will then use `ggplot` to create a line graph to visualize the rate of change in production. Furthermore, we will compare and correlate the increase or decrease in soybean production with the rates of deforestation and afforestation to determine the general trend in both. This data comparison will be done for the years `1990-2013`, as the data-set provides an abundance of useful insights. We also might use other data present in the data-set to get some correlation.
 
 ::: callout-note
 ## Note:
