@@ -3,7 +3,7 @@
 Project 1 repo for INFO 526 - Fall 2023.
 
 ## Resources used:
-TidyTuesday Data - https://github.com/nrennie/tidytuesday/tree/main/2021/06-04-2021
+TidyTuesday Data - [Global Deforestation 2021 Data](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06)
 
 #### Disclosure:
 Derived from the original course by Mine Çetinkaya-Rundel @ Duke University
