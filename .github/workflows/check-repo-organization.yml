@@ -2,7 +2,7 @@ on: push
 name: Check repo organization
 jobs:
   check-repo-organization:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     container:
       image: ghcr.io/gchism94/r_gh_actions:latest
     steps:
