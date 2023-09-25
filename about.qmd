@@ -8,7 +8,7 @@ This project was developed by **The Plotting Pandas** for [INFO 526 - Data Analy
 
 -   Megan Hokama: Third-year Ph.D. student in Educational Psychology at University of Arizona.
 
--   Maria SURESH: First-year graduate student pursuing Data Science at University of Arizona.
+-   Maria Nikitha Suresh: First-year graduate student pursuing Data Science at University of Arizona.
 
 -   Shakir Ahmed: First-year graduate student pursuing Data Science at University of Arizona.
 
