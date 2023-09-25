@@ -37,7 +37,7 @@ deforestation_data <- tidytuesdayR::tt_load(2021, week = 15)
 forest        <- deforestation_data$forest
 forest_area   <- deforestation_data$forest_area
 brazil_loss   <- deforestation_data$brazil_loss
-soyabean_use  <- deforestation_data$soybean_use
+soybean_use  <- deforestation_data$soybean_use
 vegetable_oil <- deforestation_data$vegetable_oil
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
 ```
@@ -98,10 +98,10 @@ The Brazil loss dataset compares loss of Brazilian forest across different types
 
 ### Soybean Usage Data
 
-```{r soyabean_use_basic_info, message=FALSE, warning=FALSE}
+```{r soybean_use_basic_info, message=FALSE, warning=FALSE}
 # Get basic information about the dataset
 # The properties of the data
-soyabean_use |>
+soybean_use |>
   diagnose() |>
   formattable()
 ```
@@ -135,9 +135,9 @@ deforestation_by_source |>    #<1>
 
 ### Why we chose this data-set?
 
-The selection of data-sets for this project is driven by both technical and analytical considerations, particularly related to data visualization. Moreover, deforestation is a serious environmental problem with far-reaching effects. Understanding its trends, drivers, and impacts is critical for informed decision-making and environmental protection. The data-set from `Our World in Data` provides a reliable data with less junk data and also it contains comprehensive set of variables related to deforestation in this scenario. In the context of data visualization, the technical characteristics of a dataset (cleanliness, structure, consistency) play a key role in creating clear and insightful visualizations.
+The selection of data-sets for this project is driven by both technical and analytical considerations, particularly related to data visualization. Moreover, deforestation is a serious environmental problem with far-reaching effects. Understanding its trends, drivers, and impacts is critical for informed decision-making and environmental protection. The data-set from `Our World in Data` provides a reliable data with less junk data and also it contains comprehensive set of variables related to deforestation in this scenario.
 
-The data-set is well-structured, making them suitable for editing and visualizing data. It contains various tables like `forest`, `brazil_loss`, `soybean_use`, `forest_area`, `vegetable_oil` and `deforestation_by_source` that allows analysis to target specific aspects of deforestation. These dimensions enable multi-layered analysis and visualization, allowing you to investigate different aspects of a problem. Different variables and data dimensions allow you to create diverse visualizations to consider different aspects of deforestation.
+The data-set is well-structured, making them suitable for editing and visualizing data. It contains various tables like `forest`, `brazil_loss`, `soybean_use`, `forest_area`, `vegetable_oil` and `deforestation_by_source` that allows analysis to target specific aspects of deforestation. Different variables and data dimensions allow us to create diverse visualizations to consider different aspects of deforestation and investigate them.
 
 The richness of the data-set provides many opportunities to create effective data visualizations. From time series graphs to choropleth maps to scatter plots, there are many visualization techniques that can effectively convey complex information. In summary, the selection of this data-set is driven by its technical suitability for analysis and its relevance to the critical issue of deforestation.
 
@@ -147,7 +147,7 @@ The two questions to be answered are:
 
 **Question 1:** What does the global forest area look like over past 3 decades, highlighting the trends of forest area conversion?
 
-**Question 2:** How has the production of Soya bean in Africa changed over time, and how does it impact the afforestation or deforestation rates?
+**Question 2:** How has the production of Soybean in Africa changed over time, and how does it impact the afforestation or deforestation rates?
 
 ## Analysis plan
 
@@ -155,13 +155,26 @@ So we have come with approaches for both of the questions and are described belo
 
 ### Approach for question 1
 
-For this plot, we wanted to visualize how the global area under forests has changed over the years. We wanted to represent this data in a graphical manner and show how reducing forest cover over the years could be related to other ecological changes taking place. To visualize the `TidyTuesday` data-set which was sourced from `Our World in Data`, we are planning to clean it further to only get certain parts that are required using `dplyr`. Out of the data involved we will be mostly focusing in the `forest` data which contains our columns of focus which is `net_forest_conversion`, `year` and `country`. From our initial analysis, we would not need to create any new variable using the data-set.
+For this plot, we wanted to visualize how the global area under forests has changed over the years. We wanted to represent this data in a graphical manner and show how reducing forest cover over the years could be related to other ecological changes taking place. To visualize the `TidyTuesday` data-set which was sourced from `Our World in Data`, we are planning to clean it further to only get certain parts that are required using `dplyr`. Out of the data involved we will be mostly focusing in the `forest` data which contains our columns of focus which is `net_forest_conversion`, `year` and `entity`. From our initial analysis, we would not need to create any new variable using the data-set.
 
 And coming the actual visualization part the comparison of the plot will be done through years `1990-2015` as we have slightly better recorded data for these years and using this we should be able to show an overview of changes in forest cover over the past years using `ggplot`. We are planning to create a map plot for the data of forest area and for specific years across the world using the `rnaturalearth`, `ggmap`, `cowplot` and `plotly` packages. The mapping of data from data-set to the map plot can also be done using `geocode()` function which we will be exploring as well.
 
 ### Approach for question 2
 
-For this plot, we want to visualize the trend in the production of soybean over the years in the continent of Africa. Three different soybean consumptions are added together to get the overall production. To perform this task, we are going to use the `TidyTuesday` data-set which was sourced from `Our World in Data` and perform data manipulation to obtain a new column showing the total production of soyabean. Out of the data involved we will be mostly focusing in the `soyabean_use` data and columns present in the table are - `human_food` ,`animal_feed` and `processed`. We will then use `ggplot` to create a line graph to visualize the rate of change in production. Furthermore, we will compare and correlate the increase or decrease in soybean production with the rates of deforestation and afforestation to determine the general trend in both. This data comparison will be done for the years `1990-2013`, as the data-set provides an abundance of useful insights. We also might use other data present in the data-set to get some correlation.
+For this plot, we want to visualize the trend in the production of soybean over the years in the continent of Africa. Three different soybean consumptions are added together to get the overall production. To perform this task, we are going to use the `TidyTuesday` data-set which was sourced from `Our World in Data` and perform data manipulation to obtain a new column showing the total production of soybean. Out of the data involved we will be mostly focusing in the `soyabean_use` data and columns present in the table are - `human_food` ,`animal_feed` and `processed`. We will then use `ggplot` to create a time series plot(line and point graph) to visualize the rate of change in production using the `geom_line()` and `geom_point()` method. Furthermore, we will compare and correlate the increase or decrease in soybean production with the rates of deforestation and afforestation to determine the general trend in both. This data comparison will be done for the years `1990-2013`, as the data-set provides an abundance of useful insights. We also might use other data present in the data-set to get some correlation.
+
+**Variables of focus for both questions:**
+
+| Variable              | Description                                                  | Source Dataset                  |
+|-----------------|----------------------------------------|---------------|
+| entity                | Country                                                      | forest, forest_area and soybean |
+| code                  | Country Code                                                 | forest, forest_area and soybean |
+| year                  | Year                                                         | forest, forest_area and soybean |
+| net_forest_conversion | Net forest conversion in hectares                            | forest                          |
+| forest_area           | Percent of global forest area                                | forest_area                     |
+| human_food            | Use for human food (tempeh, tofu, etc)                       | soybean                         |
+| animal_feed           | Used for animal food                                         | soybean                         |
+| processed             | Processed into vegetable oil, biofuel, processed animal feed | soybean                         |
 
 ::: callout-note
 ## Note:
