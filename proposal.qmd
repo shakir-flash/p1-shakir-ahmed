@@ -12,6 +12,9 @@ categories:
 ### Packages Setup
 
 ```{r load_pkgs, message=FALSE, warning=FALSE, output=FALSE}
+#| code-fold: true
+#| code-summary: "Installed Packages"
+
 ### GETTING THE LIBRARIES
 if (!require(pacman)) #<1>
   install.packages(pacman)
@@ -39,8 +42,10 @@ forest_area   <- deforestation_data$forest_area
 brazil_loss   <- deforestation_data$brazil_loss
 soybean_use   <- deforestation_data$soybean_use
 vegetable_oil <- deforestation_data$vegetable_oil
-deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
+deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')  #<1>
 ```
+
+1.  We are reading `deforestation_by_source` form raw csv file which is in github since it was not being downloaded from the `tidytuesdayR` package.
 
 The Global Deforestation data-set were published by Hannah Ritchie and Max Roser (2021) in the Our World in Data journal. This data-set contains comprehensive information on global forest cover, deforestation, and related factors. It includes multiple datas:
 
@@ -53,6 +58,9 @@ The Global Deforestation data-set were published by Hannah Ritchie and Max Roser
 ### Forest Data
 
 ```{r forest_basic_info, message=FALSE, warning=FALSE, eval=FALSE}
+#| code-fold: true
+#| code-summary: "Forest Data Diagnosis Code"
+
 # Get basic information about the dataset
 # The properties of the data #<1>
 forest |>
@@ -71,6 +79,9 @@ The Forest dataset contains information on the change in forest area every 5 yea
 ### Forest Area Data
 
 ```{r forest_area_basic_info, message=FALSE, warning=FALSE, eval=FALSE}
+#| code-fold: true
+#| code-summary: "Forest Area Data Diagnosis Code"
+
 # Get basic information about the dataset
 # The properties of the data   
 forest_area |>       #<1>
@@ -85,6 +96,9 @@ The Forest area dataset looks at the change in global forest area as a percent o
 ### Brazil Loss Data
 
 ```{r brazil_loss_basic_info, message=FALSE, warning=FALSE, eval=FALSE}
+#| code-fold: true
+#| code-summary: "Brazil Loss Data Diagnosis Code"
+
 # Get basic information about the dataset
 # The properties of the data
 brazil_loss |>        #<1>
@@ -99,6 +113,9 @@ The Brazil loss dataset compares loss of Brazilian forest across different types
 ### Soybean Usage Data
 
 ```{r soybean_use_basic_info, message=FALSE, warning=FALSE}
+#| code-fold: true
+#| code-summary: "Soybean Usage Data Diagnosis Code"
+
 # Get basic information about the dataset
 # The properties of the data
 soybean_use |>
@@ -111,6 +128,9 @@ The data-set called Soybean usage data-set consists of information relating to s
 ### Vegetable oil Data
 
 ```{r vegetable_oil_basic_info, message=FALSE, warning=FALSE}
+#| code-fold: true
+#| code-summary: "Vegetable Oil Data Diagnosis Code"
+
 # Get basic information about the dataset
 # The properties of the data
 vegetable_oil |>
@@ -123,6 +143,9 @@ In the vegetable oil data-set, 143,832 observations were used to analyze the veg
 ### Deforestation by Source
 
 ```{r deforestation_by_source_info, message=FALSE, warning=FALSE, eval=FALSE}
+#| code-fold: true
+#| code-summary: "Deforestation Source Data Diagnosis Code"
+
 # The properties of the data
 deforestation_by_source |>    #<1>
   diagnose() |>
@@ -166,7 +189,7 @@ For this plot, we want to visualize the trend in the production of soybean over 
 **Variables of focus for both questions:**
 
 | Variable              | Description                                                  | Source Data-set                 |
-|------------------|-----------------------------------------|------------------------|
+|------------------|----------------------------------|--------------------|
 | entity                | Country                                                      | forest, forest_area and soybean |
 | code                  | Country Code                                                 | forest, forest_area and soybean |
 | year                  | Year                                                         | forest, forest_area and soybean |
