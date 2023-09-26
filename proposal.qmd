@@ -53,7 +53,7 @@ The Global Deforestation data-set were published by Hannah Ritchie and Max Roser
 
 ### Forest Data
 
-```{r forest_basic_info, message=FALSE, warning=FALSE, eval=FALSE}
+```{r forest_basic_info, message=FALSE, warning=FALSE}
 #| code-fold: true
 #| code-summary: "Forest Data Diagnosis Code"
 
@@ -62,15 +62,13 @@ The Global Deforestation data-set were published by Hannah Ritchie and Max Roser
 forest |>
   diagnose() |>
   formattable()
-
-# Not displaying the output since it doesn't have much significance
 ```
 
 The Forest dataset contains information on the change in forest area every 5 years. With 475 observations, the dataset consists of the 4 variables: entity(country), code, year, and the net forest conversion in hectares. The column `code` has some missing values around 1% and we won't be using that column anyway since we have entity column.
 
 ### Forest Area Data
 
-```{r forest_area_basic_info, message=FALSE, warning=FALSE, eval=FALSE}
+```{r forest_area_basic_info, message=FALSE, warning=FALSE}
 #| code-fold: true
 #| code-summary: "Forest Area Data Diagnosis Code"
 
@@ -79,15 +77,13 @@ The Forest dataset contains information on the change in forest area every 5 yea
 forest_area |>
   diagnose() |>
   formattable()
-
-# Not displaying the output since it doesn't have much significance
 ```
 
 The Forest area dataset looks at the change in global forest area as a percent of global forest area amongst a sample of 7846 observations. The data collected consists of 4 variables: entity, code, year, and percent of global forest area. The column `code` has some missing values around 13% and we won't be using that column anyway since we have entity column.
 
 ### Brazil Loss Data
 
-```{r brazil_loss_basic_info, message=FALSE, warning=FALSE, eval=FALSE}
+```{r brazil_loss_basic_info, message=FALSE, warning=FALSE}
 #| code-fold: true
 #| code-summary: "Brazil Loss Data Diagnosis Code"
 
@@ -96,8 +92,6 @@ The Forest area dataset looks at the change in global forest area as a percent o
 brazil_loss |>
   diagnose() |>
   formattable()
-
-# Not displaying the output since it doesn't have much significance
 ```
 
 The Brazil loss dataset compares loss of Brazilian forest across different types of forest disturbances.13 observations are analyzed amongst 14 variables which include entity, code, year, commercial crops, flooding, natural disturbances, pasture for livestock, logging for lumber, fire loss, mining, infrastructure, roads, tree plantations, and small scale clearing. And we found no missing values in the data after running `diagnosis()` on top of it.
@@ -134,7 +128,7 @@ In the vegetable oil data-set, 143,832 observations were used to analyze the veg
 
 ### Deforestation by Source
 
-```{r deforestation_by_source_info, message=FALSE, warning=FALSE, eval=FALSE}
+```{r deforestation_by_source_info, message=FALSE, warning=FALSE}
 #| code-fold: true
 #| code-summary: "Deforestation Source Data Diagnosis Code"
 
@@ -142,8 +136,6 @@ In the vegetable oil data-set, 143,832 observations were used to analyze the veg
 deforestation_by_source |>
   diagnose() |>
   formattable()
-
-# Not displaying the output since it doesn't have much significance
 ```
 
 10 observations within the deforestation by source dataset compared different farming entities to forest loss by year. The dataset includes four variables: `entity`, `country`, `year`, and `forest loss`. The column `code` has some missing values around 100% and we won't be using that column anyway since we have entity column.
@@ -166,7 +158,7 @@ The two questions to be answered are:
 
 ## Analysis plan
 
-So we have come with approaches for both of the questions and are described below.
+The following are the approaches we will be using for each question.
 
 ### Approach for question 1
 
