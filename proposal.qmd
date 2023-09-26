@@ -16,19 +16,15 @@ categories:
 #| code-summary: "Installed Packages"
 
 ### GETTING THE LIBRARIES
-if (!require(pacman)) #<1>
+if (!require(pacman))
   install.packages(pacman)
 
 
 pacman::p_load(tidyverse,
                tidytuesdayR,
                dlookr,
-               formattable)   #<2>
+               formattable)
 ```
-
-1.  This block is to check if `pacman` package is installed or not, if it isn't then the package will be installed.
-
-2.  `p_load` is a function from `pacman` package to load other packages, if isn't installed `pacman` will handle the installation.
 
 ## Data-set
 
@@ -62,17 +58,13 @@ The Global Deforestation data-set were published by Hannah Ritchie and Max Roser
 #| code-summary: "Forest Data Diagnosis Code"
 
 # Get basic information about the dataset
-# The properties of the data #<1>
+# The properties of the data
 forest |>
-  diagnose() |>             #<2>
-  formattable()             #<3>
+  diagnose() |>
+  formattable()
+
+# Not displaying the output since it doesn't have much significance
 ```
-
-1.  Not displaying the output since it doesn't have much significance.
-
-2.  The `diagnose()` is used for data profiling, data quality assessment, and diagnostics.
-
-3.  The `formattable` package is used to create formatted tables and data frames for better data visualization. This package is particularly useful for creating visually appealing and informative tables for data analysis and reporting.
 
 The Forest dataset contains information on the change in forest area every 5 years. With 475 observations, the dataset consists of the 4 variables: entity(country), code, year, and the net forest conversion in hectares. The column `code` has some missing values around 1% and we won't be using that column anyway since we have entity column.
 
@@ -84,12 +76,12 @@ The Forest dataset contains information on the change in forest area every 5 yea
 
 # Get basic information about the dataset
 # The properties of the data   
-forest_area |>       #<1>
+forest_area |>
   diagnose() |>
   formattable()
-```
 
-1.  Not displaying the output since it doesn't have much significance.
+# Not displaying the output since it doesn't have much significance
+```
 
 The Forest area dataset looks at the change in global forest area as a percent of global forest area amongst a sample of 7846 observations. The data collected consists of 4 variables: entity, code, year, and percent of global forest area. The column `code` has some missing values around 13% and we won't be using that column anyway since we have entity column.
 
@@ -101,12 +93,12 @@ The Forest area dataset looks at the change in global forest area as a percent o
 
 # Get basic information about the dataset
 # The properties of the data
-brazil_loss |>        #<1>
+brazil_loss |>
   diagnose() |>
   formattable()
-```
 
-1.  Not displaying the output since it doesn't have much significance.
+# Not displaying the output since it doesn't have much significance
+```
 
 The Brazil loss dataset compares loss of Brazilian forest across different types of forest disturbances.13 observations are analyzed amongst 14 variables which include entity, code, year, commercial crops, flooding, natural disturbances, pasture for livestock, logging for lumber, fire loss, mining, infrastructure, roads, tree plantations, and small scale clearing. And we found no missing values in the data after running `diagnosis()` on top of it.
 
@@ -147,12 +139,12 @@ In the vegetable oil data-set, 143,832 observations were used to analyze the veg
 #| code-summary: "Deforestation Source Data Diagnosis Code"
 
 # The properties of the data
-deforestation_by_source |>    #<1>
+deforestation_by_source |>
   diagnose() |>
   formattable()
-```
 
-1.  Not displaying the output since it doesn't have much significance.
+# Not displaying the output since it doesn't have much significance
+```
 
 10 observations within the deforestation by source dataset compared different farming entities to forest loss by year. The dataset includes four variables: `entity`, `country`, `year`, and `forest loss`. The column `code` has some missing values around 100% and we won't be using that column anyway since we have entity column.
 
