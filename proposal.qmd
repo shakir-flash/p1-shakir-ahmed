@@ -37,10 +37,12 @@ forest_area   <- deforestation_data$forest_area
 brazil_loss   <- deforestation_data$brazil_loss
 soybean_use   <- deforestation_data$soybean_use
 vegetable_oil <- deforestation_data$vegetable_oil
-deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')  #<1>
-```
 
-1.  Source is being read to `deforestation_by_source` from a raw csv file which is in github , as it is not being downloaded from the `tidytuesdayR` package.
+#Data is read to deforestation_by_source from a raw csv file which is in github , as it is not being downloaded from the tidytuesdayR package.
+deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
+
+
+```
 
 The Global Deforestation data-set is published by Hannah Ritchie and Max Roser (2021) in the "Our World in Data" journal. This data-set contains comprehensive information on global forest cover, deforestation, and related factors. This data-set includes multiple data attributes:
 
