@@ -19,7 +19,6 @@ categories:
 if (!require(pacman))
   install.packages(pacman)
 
-
 pacman::p_load(tidyverse,
                tidytuesdayR,
                dlookr,
@@ -41,14 +40,14 @@ vegetable_oil <- deforestation_data$vegetable_oil
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')  #<1>
 ```
 
-1.  We are reading `deforestation_by_source` form raw csv file which is in github since it was not being downloaded from the `tidytuesdayR` package.
+1.  Source is being read to `deforestation_by_source` from a raw csv file which is in github , as it is not being downloaded from the `tidytuesdayR` package.
 
-The Global Deforestation data-set were published by Hannah Ritchie and Max Roser (2021) in the Our World in Data journal. This data-set contains comprehensive information on global forest cover, deforestation, and related factors. It includes multiple datas:
+The Global Deforestation data-set is published by Hannah Ritchie and Max Roser (2021) in the "Our World in Data" journal. This data-set contains comprehensive information on global forest cover, deforestation, and related factors. This data-set includes multiple data attributes:
 
--   `forest` : Data on net forest conversion and changes in forest cover by country over time.
+-   `forest` : Data on net forest conversion and change in forest cover by country, over time.
 -   `forest_area` : Information on the change in global forest area as a percent of the global forest area.
--   `brazil_loss` : Details on the loss of Brazilian forest due to specific causes.
--   `soybean_use` : Data on soybean production and use by year and country.
+-   `brazil_loss` : Details on the loss of Brazilian forest due to various factors.
+-   `soybean_use` : Data on soybean production and use for the years and countries.
 -   `vegetable_oil` : Vegetable oil production by crop type and year.
 
 ### Forest Data
@@ -64,7 +63,7 @@ forest |>
   formattable()
 ```
 
-The Forest dataset contains information on the change in forest area every 5 years. With 475 observations, the dataset consists of the 4 variables: entity(country), code, year, and the net forest conversion in hectares. The column `code` has some missing values around 1% and we won't be using that column anyway since we have entity column.
+The Forest data-set contains information on the change in forest area every 5 years. With 475 observations, the data-set contains 4 variables: `entity` (country), `code`, `year`, and the `net_forest_conversion` in hectares. The column `code` has some missing values, around 1%, and we won't be using that column since we have entity column.
 
 ### Forest Area Data
 
@@ -79,7 +78,7 @@ forest_area |>
   formattable()
 ```
 
-The Forest area dataset looks at the change in global forest area as a percent of global forest area amongst a sample of 7846 observations. The data collected consists of 4 variables: entity, code, year, and percent of global forest area. The column `code` has some missing values around 13% and we won't be using that column anyway since we have entity column.
+The Forest area data-set looks at the change in global forest area as a percent of global forest area amongst a sample of 7846 observations. The data collected consists of 4 variables: `entity`, `code`, `year`, and `forest_area` (percentage of forest). The column `code` has some missing values around 13% and this column will not be used as we have `entity` column.
 
 ### Brazil Loss Data
 
@@ -94,7 +93,7 @@ brazil_loss |>
   formattable()
 ```
 
-The Brazil loss dataset compares loss of Brazilian forest across different types of forest disturbances.13 observations are analyzed amongst 14 variables which include entity, code, year, commercial crops, flooding, natural disturbances, pasture for livestock, logging for lumber, fire loss, mining, infrastructure, roads, tree plantations, and small scale clearing. And we found no missing values in the data after running `diagnosis()` on top of it.
+The Brazil loss data-set compares loss of Brazilian forest across different types of forest disturbances.13 observations are analyzed amongst 14 variables which include `entity`, `code`, `year`, `commercial_crops`, `flooding_due_to_dam`, `natural_disturbance`, `pasture` for livestock, `selective_logging` for lumber, `fire` loss, `mining`, `other_infrastructure`, `roads`, `tree_plantation`, and `small_scale_clearing`. There are no missing values in the data after running `diagnosis()` function.
 
 ### Soybean Usage Data
 
@@ -109,7 +108,7 @@ soybean_use |>
   formattable()
 ```
 
-The data-set called Soybean usage data-set consists of information relating to soybean consumption and use by year and country. 9897 observations were analyzed across 6 variables: `entity`, `code`, `year`, use for `human food` (e.g., tempeh, tofu), used for `animal food`, and `processed` into vegetable oil/bio-fuel/processed animal feed. The columns `animal_feed` and `processed` are having significant missing values.
+The "Soybean_use" data-set consists of information relating to soybean consumption and use by year and country. 9897 observations were analyzed across 6 variables: `entity`, `code`, `year`, use for `human food` (e.g., tempeh, tofu), used for `animal food`, and `processed` into vegetable oil/bio-fuel/processed animal feed. The columns `animal_feed` and `processed` are having significant missing values.
 
 ### Vegetable oil Data
 
@@ -124,7 +123,7 @@ vegetable_oil |>
   formattable()
 ```
 
-In the vegetable oil data-set, 143,832 observations were used to analyze the vegetable oil production by crop type and year. Additionally, the variables consisted of `entity`, `code`, `year`, `crop oil` and `production` which contains the production vegetable oil, and oil production in tons. The column `production` is having significant missing values.
+In the vegetable oil data-set, 143,832 observations were used to analyze the vegetable oil production by crop type and year. The variables consists of `entity`, `code`, `year`, `crop oil` and `production` which contains the production vegetable oil, and oil production in tons. The column `production` has significant missing values.
 
 ### Deforestation by Source
 
@@ -138,11 +137,11 @@ deforestation_by_source |>
   formattable()
 ```
 
-10 observations within the deforestation by source dataset compared different farming entities to forest loss by year. The dataset includes four variables: `entity`, `country`, `year`, and `forest loss`. The column `code` has some missing values around 100% and we won't be using that column anyway since we have entity column.
+There are 10 observations in the `deforestation_by_source` data-set which compares different farming entities to forest loss by year. The data-set includes four variables: `entity`, `country`, `year`, and `forest loss`. The column `code` has some missing values around 100% and we won't be using that column, since we have `entity` column.
 
 ### Why we chose this data-set?
 
-The selection of data-sets for this project is driven by both technical and analytical considerations, particularly related to data visualization. Moreover, deforestation is a serious environmental problem with far-reaching effects. Understanding its trends, drivers, and impacts is critical for informed decision-making and environmental protection. The data-set from `Our World in Data` provides a reliable data with less junk data and also it contains comprehensive set of variables related to deforestation in this scenario.
+The selection of data-sets for this project is driven by both technical and analytical considerations, particularly related to data visualization. Moreover, deforestation is a serious environmental problem with far-reaching effects. Understanding its trends, drivers, and impacts is critical for informed decision-making and environmental protection. The data-set from `Our World in Data` provides a reliable data with less junk data and also contains comprehensive set of variables related to deforestation in this scenario.
 
 The data-set is well-structured, making them suitable for editing and visualizing data. It contains various tables like `forest`, `brazil_loss`, `soybean_use`, `forest_area`, `vegetable_oil` and `deforestation_by_source` that allows analysis to target specific aspects of deforestation. Different variables and data dimensions allow us to create diverse visualizations to consider different aspects of deforestation and investigate them.
 
@@ -164,15 +163,15 @@ The following are the approaches we will be using for each question.
 
 We want to visualize how the global area under forests has changed over the years. To represent the available data best, we will be creating a choropleth map of the world that displays the net forest conversion across the world. The comparison of the plot will be done through 1990-2015 for each decade. We are planning to clean it further to only get certain parts that are required using `dplyr`. For instance, we will focus on examining `forest` data to address our first research question by determining which columns are relevant to our analysis, which include `net_forest_conversion`, `year` and `entity`. Additionally, data cleaning and preparation will be performed in order to account for missing data. Since we will be analyzing temporal trends, it will prove vital to filter out missing values for the variable `year`.
 
-And also the dataset doesn't contain any geographical information to use them to create a map plot. But it has country information in entity variable, which can be used to get the geographical information. We will be using the `maps` package as an external data source to get the relevant information using `map_data()` function and then merge the obtained data with our data using the country variable. This creates new variables latitude and longitudes of the respective countries.
+And also the data-set doesn't contain any geographical information to use them to create a map plot. But it has country information in entity variable, which can be used to get the geographical information. We will be using the `maps` package as an external data source to get the relevant information using `map_data()` function and then merge the obtained data with our data using the country variable. This creates new variables latitude and longitudes of the respective countries.
 
-Then we will us the obtained dataset to plot the map plot using `geom_polygon()` from ggplot. Also, in the data visualization we will attempt to make the plot interactive using `plotly` package allowing users to enhance their understanding.
+Then we will us the obtained data-set to plot the map plot using `geom_polygon()` from ggplot. Also, in the data visualization we will attempt to make the plot interactive using `plotly` package allowing users to enhance their understanding.
 
 ### Approach for question 2
 
-We intend to illustrate the trend in the production of soybean over the years in the continent of Africa in this plot. To calculate the entire production, three different soybean consumptions are combined together. To perform this task, we are going to use the \`TidyTuesday\` data-set which was sourced from \`Our World in Data\` and perform data manipulation to obtain a new column showing the total production of soybean. We will be primarily focusing on the \`soyabean_use\`data, which is comprised of the columns (variables) \`human_food\` ,\`animal_feed\` and \`processed\`. Utilizing dplyr, we will filter data in the column entity to exclude data from outside the continent of Africa as the variable includes various countries and continents. Similar to our approach for Question 1, data cleaning and preparation will be performed in order to account for missing data.
+We intend to illustrate the trend in the production of soybean over the years in the continent of Africa in this plot. To calculate the entire production, three different soybean consumption are combined together. To perform this task, we are going to use the `TidyTuesday` data-set which was sourced from `Our World in Data` and perform data manipulation to obtain a new column showing the total production of soybean. We will be primarily focusing on the `soyabean_use`data, which is comprised of the columns (variables) `human_food` ,`animal_feed` and `processed`. Utilizing dplyr, we will filter data in the column entity to exclude data from outside the continent of Africa as the variable includes various countries and continents. Similar to our approach for Question 1, data cleaning and preparation will be performed in order to account for missing data.
 
-The rate of change in production will then be visualized using ggplot's geom_line() and geom_point() methods to construct a time series plot (line and point graph). To evaluate the overall trend in both, we will also compare and correlate changes in soybean production with rates of deforestation and afforestation. The 1990--2013 period will be used for this data comparison as the data-set provides an abundance of useful insights. We also might use other data present in the data-set to get some correlation. In order to correlate the output of soyabeans and forest area, we may also utilize bubble plot to observe how the forest area changed specifically in Africa.
+The rate of change in production will then be visualized using ggplot's `geom_line()` and `geom_point()` methods to construct a time series plot (line and point graph). To evaluate the overall trend in both, we will also compare and correlate changes in soybean production with rates of deforestation and afforestation. The 1990--2013 period will be used for this data comparison as the data-set provides an abundance of useful insights. We also might use other data present in the data-set to get some correlation. In order to correlate the output of soyabean and forest area, we may also utilize bubble plot to observe how the forest area changed specifically in Africa.
 
 **Variables of focus for both questions:**
 
@@ -190,5 +189,5 @@ The rate of change in production will then be visualized using ggplot's geom_lin
 ::: callout-note
 ## Note:
 
-And since these are the approaches we intend to explore and solve the problem statement which we came up with, bits and pieces of the approach might change.
+These are the planned approaches, and we intend to explore and solve the problem statement which we came up with. Parts of our approach might change in the final project.
 :::
