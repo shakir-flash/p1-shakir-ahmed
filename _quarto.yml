@@ -16,6 +16,8 @@ website:
         href: presentation.qmd
       - text: About
         href: about.qmd
+    logo: images\pandas_logo.png
+  favicon:  images\pandas_logo.png
 
 format:
   html:
