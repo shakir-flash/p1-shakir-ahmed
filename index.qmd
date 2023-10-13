@@ -19,6 +19,7 @@ execute:
   echo: false
 ---
 
+## Installing necessary libraries 
 ```{r load_packages, message=FALSE, include=FALSE}
 # GETTING THE LIBRARIES
 if (!require(pacman))
@@ -38,8 +39,9 @@ pacman::p_load(tidyverse,
                gganimate,
                imager,
                magick)
-```
+``` 
 
+## Set up
 ```{r ggplot_setup, message=FALSE, include=FALSE}
 #| code-summary: "ggplot theme setup"
 # setting theme for ggplot2
@@ -57,7 +59,7 @@ knitr::opts_chunk$set(
   dpi = 150             # higher dpi, sharper image
 )
 ```
-
+## Pulling data from the `tidytuesday` github repository
 ```{r load_dataset, message=FALSE, include=FALSE}
 # Getting the Data using the tidytuesdayR package 
 deforestation_data <- tidytuesdayR::tt_load(2021, week = 15)
