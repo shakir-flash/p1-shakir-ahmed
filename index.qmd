@@ -19,7 +19,7 @@ execute:
   echo: false
 ---
 
-```{r load_packages, message=false, include=FALSE}
+```{r load_packages, message=FALSE, include=FALSE}
 # GETTING THE LIBRARIES
 if (!require(pacman))
   install.packages(pacman)
@@ -40,7 +40,7 @@ pacman::p_load(tidyverse,
                magick)
 ```
 
-```{r ggplot_setup, message=false, include=FALSE}
+```{r ggplot_setup, message=FALSE, include=FALSE}
 #| code-summary: "ggplot theme setup"
 # setting theme for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 14, base_family = "sans"))
@@ -140,7 +140,212 @@ filtered_forests <- lapply(forest_decades, function(forest_ds) {
   process_forest(forest_ds, unique_countries)
 })
 ```
+```{r highlightingCountriesWithmajorChange, message=FALSE, include=FALSE}
+# filter highlighted countries
+filter_countries <- function (dataset, variable){
+  highlight_data <- subset(dataset, variable %in% c("Brazil", "Tanzania", "China", "India", "Russia", "USA", "Australia"))
+  return(highlight_data)
+}
+```
 
+```{r colourMapping, message=FALSE, include=FALSE}
+color_mapping <-
+  c(
+    "<-400k" = "#d73027",
+    "-400k to -200k" = "#f46d43",
+    "-200k to -100k" = "#fdae61",
+    "-100k to 0" = "#fee08b",
+    "0 to 100k" = "#d9ef8b",
+    "100k to 200k" = "#a6d96a",
+    "200k to 400k" = "#66bd63",
+    ">400k" = "#1a9850"
+  )
+
+world <- subset(world, region != "Antarctica")
+
+highlight_world <- filter_countries(world, world$region)
+
+highlight_filtered_data <- lapply(filtered_forests, function(forest_ds) {
+  filter_countries(forest_ds, forest_ds$entity)
+})
+```
+
+```{r plotFor1990, message=FALSE}
+# Create the ggplot map plot
+plot_1990 <- ggplot(filtered_forests$`1990`, aes(map_id = entity)) +
+  geom_map(
+    aes(fill = forest_converstion),
+    map = world,
+    color = "#B2BEB5",
+    linewidth = 0.25,
+    linetype = "blank"
+  ) +
+  geom_map(data = highlight_filtered_data$`1990`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  expand_limits(x = world$long, y = world$lat) +
+  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
+  coord_fixed(ratio = 1) +
+  labs(title = "Net Forest Conversion by Country in 1990",
+       subtitle = "Net change in forest area measures forest expansion minus deforestation",
+       caption = "Data source: Our World in Data",
+       fill = "Net Forest Conversion (hectares)"
+       ) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    legend.background = element_blank(),
+    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
+    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
+    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+  ) +
+  guides(
+    fill = guide_legend(
+      nrow = 1,
+      direction = "horizontal",
+      title.position = "top",
+      title.hjust = 0.5,
+      label.position = "bottom",
+      label.hjust = 1,
+      label.vjust = 1,
+      label.theme = element_text(lineheight = 0.25, size = 9),
+      keywidth = 1,
+      keyheight = 0.5
+    ),
+    color = guide_legend("No data", override.aes=list(fill="#F2F3F4"))
+  )
+```
+
+```{r plotFor2000, message=FALSE}
+# Create the ggplot map plot
+plot_2000 <- ggplot(filtered_forests$`2000`, aes(map_id = entity)) +
+  geom_map(
+    aes(fill = forest_converstion),
+    map = world,
+    color = "#B2BEB5",
+    linewidth = 0.25,
+    linetype = "blank"
+  ) +
+  geom_map(data = highlight_filtered_data$`2000`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  expand_limits(x = world$long, y = world$lat) +
+  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
+  coord_fixed(ratio = 1) +
+  labs(title = "Net Forest Conversion by Country in 2000",
+       subtitle = "Net change in forest area measures forest expansion minus deforestation",
+       caption = "Data source: Our World in Data",
+       fill = "Net Forest Conversion (hectares)"
+       ) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
+    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
+    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+  ) +
+  guides(
+    fill = guide_legend(
+      nrow = 1,
+      direction = "horizontal",
+      title.position = "top",
+      title.hjust = 0.5,
+      label.position = "bottom",
+      label.hjust = 1,
+      label.vjust = 1,
+      label.theme = element_text(lineheight = 0.25, size = 9),
+      keywidth = 1,
+      keyheight = 0.5,
+    )
+  )
+```
+
+```{r plotFor2010, message=FALSE}
+# Create the ggplot map plot
+plot_2010 <- ggplot(filtered_forests$`2010`, aes(map_id = entity)) +
+  geom_map(
+    aes(fill = forest_converstion),
+    map = world,
+    color = "#B2BEB5",
+    linewidth = 0.25,
+    linetype = "blank"
+  ) +
+  geom_map(data = highlight_filtered_data$`2010`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  expand_limits(x = world$long, y = world$lat) +
+  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
+  coord_fixed(ratio = 1) +
+  labs(title = "Net Forest Conversion by Country in 2010",
+       subtitle = "Net change in forest area measures forest expansion minus deforestation",
+       caption = "Data source: Our World in Data",
+       fill = "Net Forest Conversion (hectares)"
+       ) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
+    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
+    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+  ) +
+  guides(
+    fill = guide_legend(
+      nrow = 1,
+      direction = "horizontal",
+      title.position = "top",
+      title.hjust = 0.5,
+      label.position = "bottom",
+      label.hjust = 1,
+      label.vjust = 1,
+      label.theme = element_text(lineheight = 0.25, size = 9),
+      keywidth = 1,
+      keyheight = 0.5,
+    )
+  )
+```
+
+```{r plotFor2015, message=FALSE}
+# Create the ggplot map plot
+plot_2015 <- ggplot(filtered_forests$`2015`, aes(map_id = entity)) +
+  geom_map(
+    aes(fill = forest_converstion),
+    map = world,
+    color = "#B2BEB5",
+    linewidth = 0.25,
+    linetype = "blank"
+  ) +
+  geom_map(data = highlight_filtered_data$`2015`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  expand_limits(x = world$long, y = world$lat) +
+  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
+  coord_fixed(ratio = 1) +
+  labs(title = "Net Forest Conversion by Country in 2015",
+       subtitle = "Net change in forest area measures forest expansion minus deforestation",
+       caption = "Data source: Our World in Data",
+       fill = "Net Forest Conversion (hectares)"
+       ) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
+    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
+    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+  ) +
+  guides(
+    fill = guide_legend(
+      nrow = 1,
+      direction = "horizontal",
+      title.position = "top",
+      title.hjust = 0.5,
+      label.position = "bottom",
+      label.hjust = 1,
+      label.vjust = 1,
+      label.theme = element_text(lineheight = 0.25, size = 9),
+      keywidth = 1,
+      keyheight = 0.5,
+    )
+  )
+```
+
+```{r savingasGIF, message=FALSE, include=FALSE}
+```
 ## Abstract
 
 \<Abstract\>
