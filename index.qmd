@@ -31,6 +31,7 @@ pacman::p_load(tidyverse,
                gridExtra,
                tidytuesdayR,
                dplyr,
+               janitor,
                dlookr,        # Exploratory data analysis
                here,          # Standardizes paths to data
                formattable,
@@ -76,8 +77,6 @@ brazil_loss   <- deforestation_data$brazil_loss
 soybean_use   <- deforestation_data$soybean_use
 vegetable_oil <- deforestation_data$vegetable_oil
 total_forest <- read.csv ("https://raw.githubusercontent.com/INFO526-DataViz/project-01-The-Plotting-Pandas/main/data/forest-area-km.csv")
-total_forest_cleaned <- total_forest |>
-clean_names()
 
 # Data is read to deforestation_by_source from a raw csv file which is in github , as it is not being downloaded from the tidytuesdayR package.
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
@@ -530,6 +529,9 @@ Forest coverage in Brazil:
 4.  Since we now have percentage data and total data per year, we can calculate the change in forest coverage for Brazil by doing `forest_area.x` \* `forest_area.y`.
 
 ```{r q2_brazil_process,warning= FALSE, message=FALSE}
+
+#Cleaning total_forest table
+total_forest_cleaned <- clean_names(total_forest)
 
 #Making a new column to calculate the total soybean production
 soybean <- soybean_use |>
