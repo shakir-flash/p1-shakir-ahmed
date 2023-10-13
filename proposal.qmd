@@ -1,7 +1,12 @@
 ---
 title: "Visualizing the Forest Conversion"
 subtitle: "Proposal"
-format: html
+format:
+  html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
+    embed-resources: true
 editor: visual
 code-annotations: hover
 categories: 
