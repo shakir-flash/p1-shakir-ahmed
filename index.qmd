@@ -39,7 +39,8 @@ pacman::p_load(tidyverse,
                plotly,
                gganimate,
                imager,
-               magick)
+               magick
+               )
 ```
 
 ## Setup
@@ -566,7 +567,7 @@ forest_brazil <- forest_brazil|>
 
 ```{r q2_plot_soybean,warning= FALSE, message=FALSE}
 
-# Create a line plot for Brazil with points
+# Create a line plot for Brazil soybean production
 plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
   geom_line(size = 2) +
   geom_point(color = "black") +
@@ -580,11 +581,34 @@ plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "
 plot_soybean_brazil
 
 ggsave(plot_soybean_brazil, 
-       filename = "images/q2/soybean_plot_brazil.jpg", 
+       filename = "images/q2/plot_soybean_brazil.jpg", 
        height   = 8, 
        width    = 15, 
        unit     = "in", 
        dpi      = 120)
+```
+
+Animating the soybean production graph to show the trends:
+
+```{r q2_plot_soybean_anim,warning= FALSE, message=FALSE}
+
+# Animate the plot
+anim_plot_soybean <- plot_soybean_brazil + transition_reveal(year)
+
+# Save as an animated GIF
+anim_save("soybean_brazil_animation.gif", anim_plot_soybean, renderer = gifski_renderer())
+
+# Load the animated GIF
+brazil_soybean_animation <- image_read("soybean_brazil_animation.gif")
+
+# Display the animation
+brazil_soybean_animation |>
+  image_animate(fps = 25) |>
+  image_scale("600x400") # Adjust the dimensions as needed
+
+# saving image to gift
+image_write(image = brazil_soybean_animation, path = "images/soybean_brazil_animation.gif")
+brazil_soybean_animation
 ```
 
 Plotting the forest coverage in Brazil
@@ -611,6 +635,27 @@ ggsave(plot_forest_brazil,
        width    = 15, 
        unit     = "in", 
        dpi      = 120)
+```
+
+```{r q2_plot_forest_anim,warning= FALSE, message=FALSE}
+
+# Animate the plot
+anim_plot_forest <- plot_forest_brazil + transition_reveal(year)
+
+# Save as an animated GIF
+anim_save("forest_brazil_animation.gif", anim_plot_forest, renderer = gifski_renderer())
+
+# Load the animated GIF
+brazil_forest_animation <- image_read("forest_brazil_animation.gif")
+
+# Display the animation
+brazil_forest_animation |>
+  image_animate(fps = 25) |>
+  image_scale("600x400") # Adjust the dimensions as needed
+
+# saving image to gift
+image_write(image = brazil_forest_animation, path = "images/forest_brazil_animation.gif")
+brazil_forest_animation
 ```
 
 ### Discussion
