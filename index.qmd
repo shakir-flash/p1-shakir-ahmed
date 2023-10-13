@@ -176,7 +176,7 @@ filtered_forests <- lapply(forest_decades, function(forest_ds) {
   process_forest(forest_ds, unique_countries)
 })
 ```
-## Filtering countries with a Major change over past 4 decades
+## Filtering countries with a Major change over past `four` decades
 ```{r highlightingCountriesWithmajorChange, message=FALSE, include=FALSE}
 # function to filter countries which are having noteworthy forest conversion
 # input  : dataset - tibble
@@ -196,7 +196,7 @@ highlight_filtered_data <- lapply(filtered_forests, function(forest_ds) {
   filter_countries(forest_ds, forest_ds$entity)
 })
 ```
-
+## Mapping colours based on the change in `forest cover area`
 ```{r colourMapping, message=FALSE, include=FALSE}
 # color mapping for different forest conversion categories
 color_mapping <-
@@ -215,7 +215,7 @@ color_mapping <-
 ### Analysis
 
 \<Analysis\>
-
+## Plotting change in forest cover for the decade `1990` 
 ```{r plotFor1990, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`1990` dataset created earlier as a data source
@@ -277,7 +277,7 @@ ggsave(plot_1990,
        unit     = "in", 
        dpi      = 120)
 ```
-
+## Plotting change in forest cover for the decade `2000` 
 ```{r plotFor2000, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`2000` dataset created earlier as a data source
@@ -340,6 +340,7 @@ ggsave(plot_2000,
        dpi      = 120)
 ```
 
+## Plotting change in forest cover for the decade `2010` 
 ```{r plotFor2010, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`2010` dataset created earlier as a data source
@@ -402,6 +403,7 @@ ggsave(plot_2010,
        dpi      = 120)
 ```
 
+## Plotting change in forest cover for the decade `2015` 
 ```{r plotFor2015, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`2015` dataset created earlier as a data source
