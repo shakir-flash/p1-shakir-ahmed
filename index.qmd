@@ -5,7 +5,7 @@ author:
   - name: "The Plotting Pandas - Megan, Shakir, Maria, Eshaan, Bharath"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Uncovering Global Deforestaion and Soy Bean Consumption - need to change"
+description: "Uncovering Global Deforestation and Soy Bean Consumption - need to change"
 format:
    html:
     code-tools: true
@@ -19,7 +19,8 @@ execute:
   echo: false
 ---
 
-## Installing necessary libraries 
+## Installing necessary libraries
+
 ```{r load_packages, message=FALSE, include=FALSE}
 # GETTING THE LIBRARIES
 if (!require(pacman))
@@ -39,9 +40,10 @@ pacman::p_load(tidyverse,
                gganimate,
                imager,
                magick)
-``` 
+```
 
-## Set up
+## Setup
+
 ```{r ggplot_setup, message=FALSE, include=FALSE}
 #| code-summary: "ggplot theme setup"
 # setting theme for ggplot2
@@ -59,7 +61,9 @@ knitr::opts_chunk$set(
   dpi = 150             # higher dpi, sharper image
 )
 ```
+
 ## Pulling data from the `tidytuesday` github repository
+
 ```{r load_dataset, message=FALSE, include=FALSE}
 # Getting the Data using the tidytuesdayR package 
 deforestation_data <- tidytuesdayR::tt_load(2021, week = 15)
@@ -70,6 +74,9 @@ forest_area   <- deforestation_data$forest_area
 brazil_loss   <- deforestation_data$brazil_loss
 soybean_use   <- deforestation_data$soybean_use
 vegetable_oil <- deforestation_data$vegetable_oil
+total_forest <- read.csv ("https://raw.githubusercontent.com/INFO526-DataViz/project-01-The-Plotting-Pandas/main/data/forest-area-km.csv")
+total_forest_cleaned <- total_forest |>
+clean_names()
 
 # Data is read to deforestation_by_source from a raw csv file which is in github , as it is not being downloaded from the tidytuesdayR package.
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
@@ -86,12 +93,13 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 ## Question 1
 
 ### Introduction
-The following plots show the change in forest cover from `1980 - 2015` using a map plot. We can observe a significant increase in forest cover  `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years. 
+
+The following plots show the change in forest cover from `1980 - 2015` using a map plot. We can observe a significant increase in forest cover `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years.
 
 ### Approach
 
-\<Approach\>
-Fetching the world map using `maps` library
+\<Approach\> Fetching the world map using `maps` library
+
 ```{r world_data, message=FALSE, include=FALSE}
 # World data from maps
 world <- map_data("world")
@@ -105,7 +113,9 @@ unique_countries <- world |>
 # Removing Antarctica from the world data
 world <- subset(world, region != "Antarctica")
 ```
+
 Cleaning the `forest.csv` and processing data for plots
+
 ```{r process_forest_function, message=FALSE, include=FALSE}
 # function to pre process the forest dataset
 # input  : dataset - tibble
@@ -164,7 +174,9 @@ process_forest <- function (dataset, unique_countries) {
   return(filtered_data)
 }
 ```
-Combining data in a decade format 
+
+Combining data in a decade format
+
 ```{r split_forest_data, message=FALSE, include=FALSE}
 # Dividing data into tibbles based on year and it creates a list of tibbles
 forest_decades <- split(forest, f = forest$year)
@@ -175,7 +187,9 @@ filtered_forests <- lapply(forest_decades, function(forest_ds) {
   process_forest(forest_ds, unique_countries)
 })
 ```
+
 ## Filtering countries with a Major change over past `four` decades
+
 ```{r highlightingCountriesWithmajorChange, message=FALSE, include=FALSE}
 # function to filter countries which are having noteworthy forest conversion
 # input  : dataset - tibble
@@ -195,7 +209,9 @@ highlight_filtered_data <- lapply(filtered_forests, function(forest_ds) {
   filter_countries(forest_ds, forest_ds$entity)
 })
 ```
+
 Mapping colours based on the change in `forest cover area`
+
 ```{r colourMapping, message=FALSE, include=FALSE}
 # color mapping for different forest conversion categories
 color_mapping <-
@@ -213,8 +229,8 @@ color_mapping <-
 
 ### Analysis
 
-\<Analysis\>
-Plotting change in forest cover for the decade `1990` 
+\<Analysis\> Plotting change in forest cover for the decade `1990`
+
 ```{r plotFor1990, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`1990` dataset created earlier as a data source
@@ -276,7 +292,9 @@ ggsave(plot_1990,
        unit     = "in", 
        dpi      = 120)
 ```
-## Plotting change in forest cover for the decade `2000` 
+
+## Plotting change in forest cover for the decade `2000`
+
 ```{r plotFor2000, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`2000` dataset created earlier as a data source
@@ -339,7 +357,8 @@ ggsave(plot_2000,
        dpi      = 120)
 ```
 
-## Plotting change in forest cover for the decade `2010` 
+## Plotting change in forest cover for the decade `2010`
+
 ```{r plotFor2010, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`2010` dataset created earlier as a data source
@@ -402,7 +421,8 @@ ggsave(plot_2010,
        dpi      = 120)
 ```
 
-## Plotting change in forest cover for the decade `2015` 
+## Plotting change in forest cover for the decade `2015`
+
 ```{r plotFor2015, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`2015` dataset created earlier as a data source
@@ -465,6 +485,7 @@ ggsave(plot_2015,
 ```
 
 ## Saving our Map Plots as GIFs using `image_animate`
+
 ```{r savingas_GIF, message=FALSE}
 # making gif using gganimate pacakge
 
@@ -491,15 +512,106 @@ forest_animation
 
 ### Introduction
 
-\<Q1 Introduction\>
-
 ### Approach
 
-\<Approach\>
+\<Approach\> Cleaning and processing of the dataset includes the following steps:
+
+Soybean production in Brazil:
+
+1.  Created a new column for calculating the total soybean production. Removing totals of countries whose total production is 0 using the `subset` function.
+2.  Filtering for Brazil under the `entity` column, and `year` between 1990 and 2013.
+
+Forest coverage in Brazil:
+
+1.  Filtering for `year` between 1990 and 2013 in the `forest_brazil` dataset.
+2.  There is a parameter 'World' which shows the overall forest coverage data. Filtering out `entity` as 'World' and `year` between 1990 and 2013, and grouping by year.
+3.  Using `left_join` we merge the two tables based on the `year` column.
+4.  Since we now have percentage data and total data per year, we can calculate the change in forest coverage for Brazil by doing `forest_area.x` \* `forest_area.y`.
+
+```{r q2_brazil_process,warning= FALSE, message=FALSE}
+
+#Making a new column to calculate the total soybean production
+soybean <- soybean_use |>
+  mutate(total = human_food + animal_feed + processed)
+#Some countries do not have production, and shows as 0. 
+#Removing the rows if total=0
+soybean <- subset(soybean, total != 0)
+
+# Filter data for Brazil
+soybean_brazil <- soybean |>
+  filter(entity == "Brazil", year>= 1990&year<=2013)
+
+# Filter data for Brazil forest: 
+forest_brazil <- forest_area |>
+  filter(entity == "Brazil",year>=1990&year<=2013)
+
+#Finding total forest coverage per year
+total_forest_world <- total_forest_cleaned |>
+  filter(year >= 1990, year <= 2013, entity == "World") |>
+  group_by(year)
+
+# Left join to add total world forest coverage to the forest_brazil dataset
+forest_brazil <- forest_brazil |>
+  left_join(total_forest_world, by = "year")
+ 
+#Finding actual total coverage for Brazil (percentage * total)
+forest_brazil <- forest_brazil|>
+  mutate(forest_area_brazil = forest_area.x * forest_area.y / 100)
+
+```
 
 ### Analysis
 
-\<Analysis\>
+\<Analysis\> Plotting the soybean data
+
+```{r q2_plot_soybean,warning= FALSE, message=FALSE}
+
+# Create a line plot for Brazil with points
+plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
+  geom_line(size = 2) +
+  geom_point(color = "black") +
+  labs(x = "Year", y = "Total (in lb)", title = "Total Soybean Usage Trend in Brazil", caption = "Jon Harmon | TidyTuesday") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) +
+  scale_color_manual(values = c("Brazil" = "cornsilk3")) +
+  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+plot_soybean_brazil
+
+ggsave(plot_soybean_brazil, 
+       filename = "images/q2/soybean_plot_brazil.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
+```
+
+Plotting the forest coverage in Brazil
+
+```{r q2_plot_forest,warning= FALSE, message=FALSE}
+
+# Create a line plot for Brazil with points
+plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil, color = "Brazil")) +
+  geom_line(size = 2) +
+  geom_point(color="blue") + 
+  labs(x = "Year", y = "Forest coverage (in hectares)", title = "Total forest cover trend in Brazil", caption= "Jon Harmon | TidyTuesday") +
+  theme_minimal() +
+  theme(legend.position = "none")+
+  scale_color_manual(values = c("Brazil" = "red3"))+
+  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+
+  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+plot_forest_brazil
+
+ggsave(plot_forest_brazil, 
+       filename = "images/q2/forest_plot_brazil.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
+```
 
 ### Discussion
 
