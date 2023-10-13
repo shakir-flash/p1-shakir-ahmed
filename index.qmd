@@ -92,8 +92,8 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 ### Approach
 
 \<Approach\>
-
-```{r word_data, message=FALSE, include=FALSE}
+## Fetching the world map using `maps` library
+```{r world_data, message=FALSE, include=FALSE}
 # World data from maps
 world <- map_data("world")
 
@@ -106,7 +106,7 @@ unique_countries <- world |>
 # Removing Antarctica from the world data
 world <- subset(world, region != "Antarctica")
 ```
-
+## Cleaning the `forest.csv` and processing data for plots
 ```{r process_forest_function, message=FALSE, include=FALSE}
 # function to pre process the forest dataset
 # input  : dataset - tibble
@@ -165,7 +165,7 @@ process_forest <- function (dataset, unique_countries) {
   return(filtered_data)
 }
 ```
-
+## Combining data in a decade format 
 ```{r split_forest_data, message=FALSE, include=FALSE}
 # Dividing data into tibbles based on year and it creates a list of tibbles
 forest_decades <- split(forest, f = forest$year)
@@ -176,7 +176,7 @@ filtered_forests <- lapply(forest_decades, function(forest_ds) {
   process_forest(forest_ds, unique_countries)
 })
 ```
-
+## Filtering countries with a Major change over past 4 decades
 ```{r highlightingCountriesWithmajorChange, message=FALSE, include=FALSE}
 # function to filter countries which are having noteworthy forest conversion
 # input  : dataset - tibble
