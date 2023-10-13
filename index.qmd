@@ -1,11 +1,63 @@
 ---
 title: "Visualizing the Forest Conversion"
 subtitle: "INFO 526 - Project 1"
-author: "The Plotting Pandas - Meghan, Shakir, Maria, Eshaan, Bharath"
-format: html
+author: 
+  - name: "The Plotting Pandas - Megan, Shakir, Maria, Eshaan, Bharath"
+    affiliations:
+      - name: "School of Information, University of Arizona"
+description: "Uncovering Global Deforestaion and Soy Bean Consumption - need to change"
+format:
+   html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
+    embed-resources: true
 editor: visual
+code-annotations: hover
 ---
 
 ## Abstract
 
-Add project abstract here.
+\<Abstract\>
+
+## Introduction
+
+\<Introduction\>
+
+## Question 1
+
+### Introduction
+
+\<Q1 Introduction\>
+
+### Approach
+
+\<Approach\>
+
+### Analysis
+
+\<Analysis\>
+
+### Discussion
+
+\<Discussion\>
+
+## Question 2
+
+### Introduction
+
+\<Q1 Introduction\>
+
+### Approach
+
+\<Approach\>
+
+### Analysis
+
+\<Analysis\>
+
+### Discussion
+
+\<Discussion\>
+
+## References

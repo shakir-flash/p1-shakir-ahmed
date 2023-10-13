@@ -21,7 +21,7 @@ website:
 
 format:
   html:
-    theme: default
+    theme: minty
     toc: true
 
 execute:
