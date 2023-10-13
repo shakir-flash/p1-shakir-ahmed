@@ -465,6 +465,7 @@ ggsave(plot_2015,
        dpi      = 120)
 ```
 
+## Saving our Map Plots as GIFs using `image_animate`
 ```{r savingas_GIF, message=FALSE}
 # making gif using gganimate pacakge
 
