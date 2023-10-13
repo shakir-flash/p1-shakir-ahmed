@@ -86,13 +86,12 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 ## Question 1
 
 ### Introduction
-
-\<Q1 Introduction\>
+The following plots show the change in forest cover from `1980 - 2015` using a map plot. We can observe a significant increase in forest cover  `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years. 
 
 ### Approach
 
 \<Approach\>
-## Fetching the world map using `maps` library
+Fetching the world map using `maps` library
 ```{r world_data, message=FALSE, include=FALSE}
 # World data from maps
 world <- map_data("world")
@@ -106,7 +105,7 @@ unique_countries <- world |>
 # Removing Antarctica from the world data
 world <- subset(world, region != "Antarctica")
 ```
-## Cleaning the `forest.csv` and processing data for plots
+Cleaning the `forest.csv` and processing data for plots
 ```{r process_forest_function, message=FALSE, include=FALSE}
 # function to pre process the forest dataset
 # input  : dataset - tibble
@@ -165,7 +164,7 @@ process_forest <- function (dataset, unique_countries) {
   return(filtered_data)
 }
 ```
-## Combining data in a decade format 
+Combining data in a decade format 
 ```{r split_forest_data, message=FALSE, include=FALSE}
 # Dividing data into tibbles based on year and it creates a list of tibbles
 forest_decades <- split(forest, f = forest$year)
@@ -196,7 +195,7 @@ highlight_filtered_data <- lapply(filtered_forests, function(forest_ds) {
   filter_countries(forest_ds, forest_ds$entity)
 })
 ```
-## Mapping colours based on the change in `forest cover area`
+Mapping colours based on the change in `forest cover area`
 ```{r colourMapping, message=FALSE, include=FALSE}
 # color mapping for different forest conversion categories
 color_mapping <-
@@ -215,7 +214,7 @@ color_mapping <-
 ### Analysis
 
 \<Analysis\>
-## Plotting change in forest cover for the decade `1990` 
+Plotting change in forest cover for the decade `1990` 
 ```{r plotFor1990, message=FALSE}
 # Creating the ggplot map plot
 # Using the filtered_forests$`1990` dataset created earlier as a data source
