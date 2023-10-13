@@ -14,7 +14,132 @@ format:
     embed-resources: true
 editor: visual
 code-annotations: hover
+execute:
+  warning: false
+  echo: false
 ---
+
+```{r load_packages, message=false, include=FALSE}
+# GETTING THE LIBRARIES
+if (!require(pacman))
+  install.packages(pacman)
+
+
+pacman::p_load(tidyverse,
+               gridExtra,
+               tidytuesdayR,
+               dplyr,
+               dlookr,        # Exploratory data analysis
+               here,          # Standardizes paths to data
+               formattable,
+               ggpubr,
+               maps,
+               plotly,
+               gganimate,
+               imager,
+               magick)
+```
+
+```{r ggplot_setup, message=false, include=FALSE}
+#| code-summary: "ggplot theme setup"
+# setting theme for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 14, base_family = "sans"))
+
+# setting width of code output
+options(width = 65)
+
+# setting figure parameters for knitr
+knitr::opts_chunk$set(
+  fig.width = 8,        # 8" width
+  fig.asp = 0.618,      # the golden ratio
+  fig.retina = 1,       # dpi multiplier for displaying HTML output on retina
+  fig.align = "center", # center align figures
+  dpi = 150             # higher dpi, sharper image
+)
+```
+
+```{r load_dataset, message=FALSE, include=FALSE}
+# Getting the Data using the tidytuesdayR package 
+deforestation_data <- tidytuesdayR::tt_load(2021, week = 15)
+
+# Getting all the underlying data in the dataset
+forest        <- deforestation_data$forest
+forest_area   <- deforestation_data$forest_area
+brazil_loss   <- deforestation_data$brazil_loss
+soybean_use   <- deforestation_data$soybean_use
+vegetable_oil <- deforestation_data$vegetable_oil
+
+# Data is read to deforestation_by_source from a raw csv file which is in github , as it is not being downloaded from the tidytuesdayR package.
+deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
+```
+
+```{r word_data, message=FALSE, include=FALSE}
+# World data from maps
+world <- map_data("world")
+
+# Extracting unique countries from the world dataset and storing them in a tibble
+unique_countries <- world |>
+  select(region) |>            # region is the column which is having country names info
+  unique() |>                  # getting unique country names
+  as_tibble()
+```
+
+```{r process_forest_function, message=FALSE, include=FALSE}
+# filter dataset functionality
+
+process_forest <- function (dataset, unique_countries) {
+  filtered_data <- dataset |>
+    select(entity, year, net_forest_conversion) |>
+    bind_rows(
+      anti_join(unique_countries, dataset, by = c("region" = "entity")) |>
+        mutate(year = dataset[1, "year"]$year, net_forest_conversion = NA)
+    ) |>
+    mutate(
+      entity = case_when(
+        entity == "United States" ~ "USA",
+        entity == "United Kingdom" ~ "UK",
+        TRUE ~ entity
+      )
+    ) |>
+    mutate(
+      entity = coalesce(entity, region),
+      forest_converstion = case_when(
+        net_forest_conversion < -400000 ~ "<-400k",
+        net_forest_conversion < -200000 ~ "-400k to -200k",
+        net_forest_conversion < -100000 ~ "-200k to -100k",
+        net_forest_conversion < 0 ~ "-100k to 0",
+        net_forest_conversion < 100000 ~ "0 to 100k",
+        net_forest_conversion < 200000 ~ "100k to 200k",
+        net_forest_conversion < 400000 ~ "200k to 400k",
+        is.na(net_forest_conversion) ~ NA_character_,
+        TRUE ~ ">400k"
+      )
+    ) |>
+    mutate(
+      forest_converstion = as_factor(forest_converstion) |>
+        fct_relevel(
+          "<-400k",
+          "-400k to -200k",
+          "-200k to -100k",
+          "-100k to 0",
+          "0 to 100k",
+          "100k to 200k",
+          "200k to 400k",
+          ">400k"
+        )
+    )
+  return(filtered_data)
+}
+```
+
+```{r split_forest_data, message=FALSE, include=FALSE}
+# Dividing data into tibbles based on year
+forest_decades <- split(forest, f = forest$year)
+
+filtered_forests <- lapply(forest_decades, function(forest_ds) {
+  process_forest(forest_ds, unique_countries)
+})
+```
 
 ## Abstract
 
