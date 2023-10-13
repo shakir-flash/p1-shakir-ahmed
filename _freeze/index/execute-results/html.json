@@ -1,0 +1,16 @@
+{
+  "hash": "85d502561b4c63892f41e9dccdd4f46a",
+  "result": {
+    "markdown": "---\ntitle: \"Visualizing the Forest Conversion\"\nsubtitle: \"INFO 526 - Project 1\"\nauthor: \n  - name: \"The Plotting Pandas - Megan, Shakir, Maria, Eshaan, Bharath\"\n    affiliations:\n      - name: \"School of Information, University of Arizona\"\ndescription: \"Uncovering Global Deforestaion and Soy Bean Consumption - need to change\"\nformat:\n   html:\n    code-tools: true\n    code-overflow: wrap\n    code-line-numbers: true\n    embed-resources: true\neditor: visual\ncode-annotations: hover\nexecute:\n  warning: false\n  echo: false\n---\n\n\n\n\n\n\n\n\n## Abstract\n\n\\<Abstract\\>\n\n## Introduction\n\n\\<Introduction\\>\n\n## Question 1\n\n### Introduction\n\n\\<Q1 Introduction\\>\n\n### Approach\n\n\\<Approach\\>\n\n\n\n\n\n\n\n\n\n\n\n\n\n### Analysis\n\n\\<Analysis\\>\n\n\n::: {.cell layout-align=\"center\"}\n\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](index_files/figure-html/plotFor2000-1.png){fig-align='center'}\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](index_files/figure-html/plotFor2010-1.png){fig-align='center'}\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](index_files/figure-html/savingas_GIF-1.gif){fig-align='center'}\n:::\n:::\n\n\n### Discussion\n\n\\<Discussion\\>\n\n## Question 2\n\n### Introduction\n\n\\<Q1 Introduction\\>\n\n### Approach\n\n\\<Approach\\>\n\n### Analysis\n\n\\<Analysis\\>\n\n### Discussion\n\n\\<Discussion\\>\n\n## References\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
