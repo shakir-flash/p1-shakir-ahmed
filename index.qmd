@@ -73,6 +73,16 @@ vegetable_oil <- deforestation_data$vegetable_oil
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
 ```
 
+## Abstract
+
+\<Abstract\>
+
+## Introduction
+
+\<Introduction\>
+
+## Question 1
+
 ```{r word_data, message=FALSE, include=FALSE}
 # World data from maps
 world <- map_data("world")
