@@ -83,27 +83,47 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 
 ## Question 1
 
+### Introduction
+
+\<Q1 Introduction\>
+
+### Approach
+
+\<Approach\>
+
 ```{r word_data, message=FALSE, include=FALSE}
 # World data from maps
 world <- map_data("world")
 
 # Extracting unique countries from the world dataset and storing them in a tibble
 unique_countries <- world |>
-  select(region) |>            # region is the column which is having country names info
-  unique() |>                  # getting unique country names
+  select(region) |>       # region is the column which is having country names info
+  unique() |>             # getting unique country names
   as_tibble()
+
+# Removing Antarctica from the world data
+world <- subset(world, region != "Antarctica")
 ```
 
 ```{r process_forest_function, message=FALSE, include=FALSE}
-# filter dataset functionality
+# function to pre process the forest dataset
+# input  : dataset - tibble
+#          unique_countries - tibble
+# output : filtered_data - tibble
 
 process_forest <- function (dataset, unique_countries) {
   filtered_data <- dataset |>
+    # filtering only entity, year and net_forest_conversion columns
     select(entity, year, net_forest_conversion) |>
+    # getting all the countires which are not present in forest dataset for a specific years
+    # bind_rows() is used combine combine rows of two data frames
     bind_rows(
+      # anti_join() is used to return only the rows from the first dataset that isn't having matching rows in the second dataset based on specified key columns
       anti_join(unique_countries, dataset, by = c("region" = "entity")) |>
+        # adding year and net_forest_conversion for that specific year as NA
         mutate(year = dataset[1, "year"]$year, net_forest_conversion = NA)
     ) |>
+    # renaming USA and UK so that both these countries are matching in world dataset and forest dataset
     mutate(
       entity = case_when(
         entity == "United States" ~ "USA",
@@ -111,6 +131,7 @@ process_forest <- function (dataset, unique_countries) {
         TRUE ~ entity
       )
     ) |>
+    # creating a categorical variable forest_converstion to group countries based on their forest conversion
     mutate(
       entity = coalesce(entity, region),
       forest_converstion = case_when(
@@ -125,6 +146,7 @@ process_forest <- function (dataset, unique_countries) {
         TRUE ~ ">400k"
       )
     ) |>
+    # ordering forest_converstion column using factors based on the created categories
     mutate(
       forest_converstion = as_factor(forest_converstion) |>
         fct_relevel(
@@ -143,70 +165,92 @@ process_forest <- function (dataset, unique_countries) {
 ```
 
 ```{r split_forest_data, message=FALSE, include=FALSE}
-# Dividing data into tibbles based on year
+# Dividing data into tibbles based on year and it creates a list of tibbles
 forest_decades <- split(forest, f = forest$year)
 
+# Implementing the pre processing function on top of the created split tibbles
+# lapply() is used for applying a function on top of any list
 filtered_forests <- lapply(forest_decades, function(forest_ds) {
   process_forest(forest_ds, unique_countries)
 })
 ```
+
 ```{r highlightingCountriesWithmajorChange, message=FALSE, include=FALSE}
-# filter highlighted countries
+# function to filter countries which are having noteworthy forest conversion
+# input  : dataset - tibble
+#          variable - column character
+# output : highlight_data - tibble
+
 filter_countries <- function (dataset, variable){
   highlight_data <- subset(dataset, variable %in% c("Brazil", "Tanzania", "China", "India", "Russia", "USA", "Australia"))
   return(highlight_data)
 }
-```
 
-```{r colourMapping, message=FALSE, include=FALSE}
-color_mapping <-
-  c(
-    "<-400k" = "#d73027",
-    "-400k to -200k" = "#f46d43",
-    "-200k to -100k" = "#fdae61",
-    "-100k to 0" = "#fee08b",
-    "0 to 100k" = "#d9ef8b",
-    "100k to 200k" = "#a6d96a",
-    "200k to 400k" = "#66bd63",
-    ">400k" = "#1a9850"
-  )
-
-world <- subset(world, region != "Antarctica")
-
+# filtering countries from world dataset using filter_countries
 highlight_world <- filter_countries(world, world$region)
 
+# filtering countries from filtered_forests dataset using filter_countries
 highlight_filtered_data <- lapply(filtered_forests, function(forest_ds) {
   filter_countries(forest_ds, forest_ds$entity)
 })
 ```
 
+```{r colourMapping, message=FALSE, include=FALSE}
+# color mapping for different forest conversion categories
+color_mapping <-
+  c(
+    "<-400k"         = "#d73027",
+    "-400k to -200k" = "#f46d43",
+    "-200k to -100k" = "#fdae61",
+    "-100k to 0"     = "#fee08b",
+    "0 to 100k"      = "#d9ef8b",
+    "100k to 200k"   = "#a6d96a",
+    "200k to 400k"   = "#66bd63",
+    ">400k"          = "#1a9850"
+  )
+```
+
+### Analysis
+
+\<Analysis\>
+
 ```{r plotFor1990, message=FALSE}
-# Create the ggplot map plot
+# Creating the ggplot map plot
+# Using the filtered_forests$`1990` dataset created earlier as a data source
+# using entity as map_id for first layer
+# using forest_convestion as fill aesthetic and word as map for second layer
+# using highlight_filtered_data$`1990` as another dataset for creating another map layer
+# using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
+
 plot_1990 <- ggplot(filtered_forests$`1990`, aes(map_id = entity)) +
   geom_map(
-    aes(fill = forest_converstion),
-    map = world,
-    color = "#B2BEB5",
+    aes(fill  = forest_converstion),
+    map       = world,
+    color     = "#B2BEB5",
     linewidth = 0.25,
-    linetype = "blank"
+    linetype  = "blank"
   ) +
-  geom_map(data = highlight_filtered_data$`1990`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  geom_map(data = highlight_filtered_data$`1990`, 
+           aes(map_id = entity, 
+               fill   = forest_converstion), 
+           map   = highlight_world, 
+           color = "#71797E", 
+           show.legend = F) +
   expand_limits(x = world$long, y = world$lat) +
   scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
   coord_fixed(ratio = 1) +
-  labs(title = "Net Forest Conversion by Country in 1990",
+  labs(title    = "Net Forest Conversion by Country in 1990",
        subtitle = "Net change in forest area measures forest expansion minus deforestation",
-       caption = "Data source: Our World in Data",
-       fill = "Net Forest Conversion (hectares)"
+       caption  = "Data source: Our World in Data",
+       fill     = "Net Forest Conversion (hectares)"
        ) +
   theme_void() +
   theme(
-    legend.position = "bottom",
+    legend.position  = "bottom",
     legend.direction = "horizontal",
-    legend.background = element_blank(),
-    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
-    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
-    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
+    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
+    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
   ) +
   guides(
     fill = guide_legend(
@@ -223,19 +267,37 @@ plot_1990 <- ggplot(filtered_forests$`1990`, aes(map_id = entity)) +
     ),
     color = guide_legend("No data", override.aes=list(fill="#F2F3F4"))
   )
+
+ggsave(plot_1990, 
+       filename = "images/q1/forest_plot_1990.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
 ```
 
 ```{r plotFor2000, message=FALSE}
-# Create the ggplot map plot
+# Creating the ggplot map plot
+# Using the filtered_forests$`2000` dataset created earlier as a data source
+# using entity as map_id for first layer
+# using forest_convestion as fill aesthetic and word as map for second layer
+# using highlight_filtered_data$`2000` as another dataset for creating another map layer
+# using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
+
 plot_2000 <- ggplot(filtered_forests$`2000`, aes(map_id = entity)) +
   geom_map(
-    aes(fill = forest_converstion),
-    map = world,
-    color = "#B2BEB5",
+    aes(fill  = forest_converstion),
+    map       = world,
+    color     = "#B2BEB5",
     linewidth = 0.25,
-    linetype = "blank"
+    linetype  = "blank"
   ) +
-  geom_map(data = highlight_filtered_data$`2000`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  geom_map(data = highlight_filtered_data$`2000`, 
+           aes(map_id = entity, 
+               fill   = forest_converstion), 
+           map   = highlight_world, 
+           color = "#71797E", 
+           show.legend = F) +
   expand_limits(x = world$long, y = world$lat) +
   scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
   coord_fixed(ratio = 1) +
@@ -246,11 +308,11 @@ plot_2000 <- ggplot(filtered_forests$`2000`, aes(map_id = entity)) +
        ) +
   theme_void() +
   theme(
-    legend.position = "bottom",
+    legend.position  = "bottom",
     legend.direction = "horizontal",
-    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
-    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
-    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
+    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
+    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
   ) +
   guides(
     fill = guide_legend(
@@ -266,19 +328,38 @@ plot_2000 <- ggplot(filtered_forests$`2000`, aes(map_id = entity)) +
       keyheight = 0.5,
     )
   )
+
+plot_2000
+ggsave(plot_2000, 
+       filename = "images/q1/forest_plot_2000.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
 ```
 
 ```{r plotFor2010, message=FALSE}
-# Create the ggplot map plot
+# Creating the ggplot map plot
+# Using the filtered_forests$`2010` dataset created earlier as a data source
+# using entity as map_id for first layer
+# using forest_convestion as fill aesthetic and word as map for second layer
+# using highlight_filtered_data$`2010` as another dataset for creating another map layer
+# using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
+
 plot_2010 <- ggplot(filtered_forests$`2010`, aes(map_id = entity)) +
   geom_map(
-    aes(fill = forest_converstion),
-    map = world,
-    color = "#B2BEB5",
+    aes(fill  = forest_converstion),
+    map       = world,
+    color     = "#B2BEB5",
     linewidth = 0.25,
-    linetype = "blank"
+    linetype  = "blank"
   ) +
-  geom_map(data = highlight_filtered_data$`2010`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  geom_map(data = highlight_filtered_data$`2010`, 
+           aes(map_id = entity, 
+               fill   = forest_converstion), 
+           map   = highlight_world, 
+           color = "#71797E", 
+           show.legend = F) +
   expand_limits(x = world$long, y = world$lat) +
   scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
   coord_fixed(ratio = 1) +
@@ -289,11 +370,11 @@ plot_2010 <- ggplot(filtered_forests$`2010`, aes(map_id = entity)) +
        ) +
   theme_void() +
   theme(
-    legend.position = "bottom",
-    legend.direction = "horizontal",
-    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
-    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
-    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+    legend.position   = "bottom",
+    legend.direction  = "horizontal",
+    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
+    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
+    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
   ) +
   guides(
     fill = guide_legend(
@@ -309,19 +390,38 @@ plot_2010 <- ggplot(filtered_forests$`2010`, aes(map_id = entity)) +
       keyheight = 0.5,
     )
   )
+
+plot_2010
+ggsave(plot_2010, 
+       filename = "images/q1/forest_plot_2010.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
 ```
 
 ```{r plotFor2015, message=FALSE}
-# Create the ggplot map plot
+# Creating the ggplot map plot
+# Using the filtered_forests$`2015` dataset created earlier as a data source
+# using entity as map_id for first layer
+# using forest_convestion as fill aesthetic and word as map for second layer
+# using highlight_filtered_data$`2015` as another dataset for creating another map layer
+# using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
+
 plot_2015 <- ggplot(filtered_forests$`2015`, aes(map_id = entity)) +
   geom_map(
-    aes(fill = forest_converstion),
-    map = world,
-    color = "#B2BEB5",
+    aes(fill  = forest_converstion),
+    map       = world,
+    color     = "#B2BEB5",
     linewidth = 0.25,
-    linetype = "blank"
+    linetype  = "blank"
   ) +
-  geom_map(data = highlight_filtered_data$`2015`, aes(map_id = entity, fill = forest_converstion), map = highlight_world, color = "#71797E", show.legend = F) +
+  geom_map(data = highlight_filtered_data$`2015`, 
+           aes(map_id = entity, 
+               fill   = forest_converstion), 
+           map   = highlight_world, 
+           color = "#71797E", 
+           show.legend = F) +
   expand_limits(x = world$long, y = world$lat) +
   scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
   coord_fixed(ratio = 1) +
@@ -332,11 +432,11 @@ plot_2015 <- ggplot(filtered_forests$`2015`, aes(map_id = entity)) +
        ) +
   theme_void() +
   theme(
-    legend.position = "bottom",
+    legend.position  = "bottom",
     legend.direction = "horizontal",
-    plot.title      = element_text(size = 20, face = "bold", hjust = 0.5),
-    plot.subtitle   = element_text(size = 16, color = "azure4", hjust = 0.5),
-    plot.caption    = element_text(size = 12, color = "azure4", hjust = 0.95)
+    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
+    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
+    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
   ) +
   guides(
     fill = guide_legend(
@@ -352,31 +452,32 @@ plot_2015 <- ggplot(filtered_forests$`2015`, aes(map_id = entity)) +
       keyheight = 0.5,
     )
   )
+
+ggsave(plot_2015, 
+       filename = "images/q1/forest_plot_2015.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
 ```
 
-```{r savingasGIF, message=FALSE, include=FALSE}
+```{r savingas_GIF, message=FALSE}
+# making gif using gganimate pacakge
+
+forest_plots <- list.files(path = "images/q1/", full.names = TRUE)
+forest_plot_list <- lapply(forest_plots, image_read)
+
+# joining all the saved images
+joined_plots <- image_join(forest_plot_list)
+
+# animating the images using image_animate() and restting the resolution
+# setting fps = 1
+forest_animation <- image_animate(image_scale(joined_plots, "3000x3000"), fps = 1)
+
+# saving image to gift
+image_write(image = forest_animation, path = "images/world_forestaion.gif")
+forest_animation
 ```
-## Abstract
-
-\<Abstract\>
-
-## Introduction
-
-\<Introduction\>
-
-## Question 1
-
-### Introduction
-
-\<Q1 Introduction\>
-
-### Approach
-
-\<Approach\>
-
-### Analysis
-
-\<Analysis\>
 
 ### Discussion
 
