@@ -530,17 +530,9 @@ The production of soybeans, a versatile and globally significant crop, is intric
 
 For this visualization, we used `soybean_use` data which was sourced from Our World in Data and performed data manipulation to obtain a new column showing the total production of soybean. The soyabean_use data, comprises of the columns (variables) `human_food` ,`animal_feed` and `processed`.
 
-Further, we used the `forest_area` data from the TidyTuesday repository and `total_forest` dataset from Our World in Data to obtain the total forest coverage trends in the world.
-
 ### Approach
 
-To address this question, we implemented a time series visualization highlighting the soybean production in the country of Brazil and the total forest coverage in Brazil and how it the production of soybean correlates to the deforestation trend. We began to scout the data for getting relevant information and noteworthy details. The whole approach can be categorized into Data Preparation, Data pre-processing, Visualizing the data and Animating the plots.
-
-**Data Preparation:**
-
-To generate a time series plot we obtained obtained all the details from the `soybean_use` dataset and cleaned the data from the `total_forest` dataset to standardize the data variables.
-
-**Data pre-processing:**
+Cleaning and processing of the dataset includes the following steps:
 
 Soybean production in Brazil:
 
@@ -554,41 +546,27 @@ Forest coverage in Brazil:
 3.  Using `left_join` we merge the two tables based on the `year` column.
 4.  Since we now have percentage data and total data per year, we can calculate the change in forest coverage for Brazil by doing `forest_area.x` \* `forest_area.y`.
 
-**Visualization the data:**
-
-We used `geom_line` and `geom_point` to visualize the total amount of soybean production in the country of Brazil.
-
-For the plotting of total forest coverage in Brazil and to discern the trends, we used `geom_line` and `geom_line` to visualize the deforestation rates in Brazil. From here, we can compare the plots of Brazil soybean production and how production has affected the deforestation / afforestation in Brazil.
-
-**Animating the plots**
-
-The time series visualization is compiled into an animated GIF using the `gganimate` package. The resulting GIF provides a dynamic overview of the soybean production and deforestation trends, emphasizing the transformations occurring over the years.
-
-### Analysis
-
-Cleaning and pre-processing of the datasets `soybean_use` and `total_forest` for plotting the soybean production and forest coverage details for the country of Brazil.
-
 ```{r q2_brazil_process, message=FALSE}
 
 #Cleaning total_forest table
 total_forest_cleaned <- clean_names(total_forest)
 
-#Making a new column to calculate the total soybean production in Brazil
+#Making a new column to calculate the total soybean production
 soybean <- soybean_use |>
   mutate(total = human_food + animal_feed + processed)
 #Some countries do not have production, and shows as 0. 
 #Removing the rows if total=0
 soybean <- subset(soybean, total != 0)
 
-# Filter data for Brazil for years 1990 to 2013
+# Filter data for Brazil
 soybean_brazil <- soybean |>
   filter(entity == "Brazil", year>= 1990&year<=2013)
 
-# Filter data for Brazil forest for years 1990 to 2013
+# Filter data for Brazil forest: 
 forest_brazil <- forest_area |>
   filter(entity == "Brazil",year>=1990&year<=2013)
 
-#Finding total world forest coverage
+#Finding total forest coverage per year
 total_forest_world <- total_forest_cleaned |>
   filter(year >= 1990, year <= 2013, entity == "World") |>
   group_by(year)
@@ -597,29 +575,32 @@ total_forest_world <- total_forest_cleaned |>
 forest_brazil <- forest_brazil |>
   left_join(total_forest_world, by = "year")
  
-#Finding actual total coverage for Brazil (percentage * total) (in hectares)
+#Finding actual total coverage for Brazil (percentage * total)
 forest_brazil <- forest_brazil|>
   mutate(forest_area_brazil = forest_area.x * forest_area.y / 100)
+
 ```
 
-**Plotting the soybean production for the years 1990 to 2013**
+### Analysis
+
+\<Analysis\> Plotting the soybean data
 
 ```{r q2_plot_soybean, message=FALSE}
 
-# Create a line plot for Brazil soybean usage
+# Create a line plot for Brazil soybean production
 plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
   geom_line(size = 2) +
-  geom_point(color = "black") +
-  labs(x = "\nYear", y = "Total (in lb)\n", title = "Total Soybean production in Brazil\n", caption = "Jon Harmon | TidyTuesday") +
+  geom_point(color = "#6E8B3D") +
+  labs(x = "Year", y = "Total (in lb)", title = "Total Soybean Usage Trend in Brazil", caption = "Jon Harmon | TidyTuesday") +
   theme_minimal() +
   theme(legend.position = "none") +
-  scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) + #Convert large numbers
-  scale_color_manual(values = c("Brazil" = "cornsilk3")) +
+  scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) +
+  scale_color_manual(values = c("Brazil" = "#a6d96a")) +
   scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 plot_soybean_brazil
 
-ggsave(plot_soybean_brazil, #Used to save image as png file
+ggsave(plot_soybean_brazil, 
        filename = "images/q2/plot_soybean_brazil.jpg", 
        height   = 8, 
        width    = 15, 
@@ -627,7 +608,7 @@ ggsave(plot_soybean_brazil, #Used to save image as png file
        dpi      = 120)
 ```
 
-**Animating the soybean production graph to show the trends per year**
+Animating the soybean production graph to show the trends:
 
 ```{r q2_plot_soybean_anim, message=FALSE}
 
@@ -642,24 +623,25 @@ brazil_soybean_animation <- image_read("soybean_brazil_animation.gif")
 
 # Display the animation
 brazil_soybean_animation |>
-  image_animate(fps = 25)
+  image_animate(fps = 25) |>
+  image_scale("600x400") # Adjust the dimensions as needed
 
 # saving image to git
 image_write(image = brazil_soybean_animation, path = "images/soybean_brazil_animation.gif")
 ```
 
-**Plotting the forest coverage in Brazil for years 1990- 2013**
+Plotting the forest coverage in Brazil
 
 ```{r q2_plot_forest, message=FALSE}
 
 # Create a line plot for Brazil with points
 plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil, color = "Brazil")) +
   geom_line(size = 2) +
-  geom_point(color="blue") + 
+  geom_point(color="#fdae61") + 
   labs(x = "Year", y = "Forest coverage (in hectares)", title = "Total forest cover trend in Brazil", caption= "Jon Harmon | TidyTuesday") +
   theme_minimal() +
   theme(legend.position = "none")+
-  scale_color_manual(values = c("Brazil" = "red3"))+
+  scale_color_manual(values = c("Brazil" = "#fee08b"))+
   scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+
   scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
@@ -674,8 +656,6 @@ ggsave(plot_forest_brazil,
        dpi      = 120)
 ```
 
-**Animating the forest coverage graph to show the trends per year**
-
 ```{r q2_plot_forest_anim, message=FALSE}
 
 # Animate the plot
@@ -689,7 +669,8 @@ brazil_forest_animation <- image_read("forest_brazil_animation.gif")
 
 # Display the animation
 brazil_forest_animation |>
-  image_animate(fps = 25) 
+  image_animate(fps = 25) |>
+  image_scale("600x400") # Adjust the dimensions as needed
 
 # saving image to gift
 image_write(image = brazil_forest_animation, path = "images/forest_brazil_animation.gif")
@@ -697,21 +678,6 @@ image_write(image = brazil_forest_animation, path = "images/forest_brazil_animat
 
 ### Discussion
 
-\
-The discussion on the relationship between soybean production and environmental changes in Brazil is of paramount importance, given the global significance of soybeans as a versatile crop ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)). The intricate link between land use changes and soybean production highlights the need for a comprehensive understanding of the dynamics at play. By examining the historical evolution of soybean production in Brazil, this study sheds light on the potential implications for afforestation and deforestation rates in this key agricultural region. It becomes evident that the expansion of soybean production has had a notable impact on land use in Brazil.
-
-The utilization of time series visualization techniques, including geom_line and geom_point, has allowed for a comprehensive overview of the trends over time. These visualizations provide a clear depiction of the steady increase in soybean production in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth in soybean production over this period ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)).
-
-Moreover, the decrease in forest coverage during this period is stark. The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact of increased soybean production in the country ([Song et al.)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.).
-
-The correlation between rising soybean production and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts. As the global demand for soybeans continues to grow, this study's findings, supported by the data, serve as a valuable resource for policymakers and stakeholders in the region ([Valdez](https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/)). It underscores the importance of considering the environmental consequences of agricultural expansion and the need for measures to mitigate deforestation. This research contributes to the broader understanding of the complex interplay between agriculture and environmental changes, making it a pivotal step towards more informed and sustainable land management practices in Brazil.
+\<Discussion\>
 
 ## References
-
-Hannah Ritchie (2021) - "Forest area". Published online at OurWorldInData.org. Retrieved from: '[https://ourworldindata.org/forest-area'](https://ourworldindata.org/forest-area') \[Online Resource\]
-
-Valdez, C. (2022). Brazil\'s Momentum as a Global Agricultural Supplier Faces Headwinds. Published online at ers.usda.gov. Retrieved from: https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/
-
-Pagano, M. & Miransari, M. (2016). "The importance of soybean production worldwide." Retrieved from: https://www.sciencedirect.com/science/article/pii/B9780128015360000013
-
-Song et al., (2021). "Massive soybean expansion in South America since 2000 and implications for conservation." Retrieved from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:\~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.

@@ -176,14 +176,14 @@ Then we will us the obtained data-set to plot the map plot using `geom_polygon()
 
 ### Approach for question 2
 
-We intend to illustrate the trend in the production of soybean over the years in Brazil in this plot. To calculate the entire production, three different soybean consumption are combined together. To perform this task, we are going to use the `TidyTuesday` data-set which was sourced from `Our World in Data` and perform data manipulation to obtain a new column showing the total production of soybean. We will be primarily focusing on the `soyabean_use`data, which is comprised of the columns (variables) `human_food` ,`animal_feed` and `processed`. Utilizing dplyr, we will filter data in the column entity to exclude data from outside the continent of Brazil as the variable includes various countries and continents. Similar to our approach for Question 1, data cleaning and preparation will be performed in order to account for missing data.
+We intend to illustrate the trend in the production of soybean over the years in Brazil in this plot. To calculate the entire production, three different soybean consumption are combined together. To perform this task, we are going to use the `TidyTuesday` data-set which was sourced from `Our World in Data` and perform data manipulation to obtain a new column showing the total production of soybean. We will be primarily focusing on the `soyabean_use` data, which is comprised of the columns (variables) `human_food` ,`animal_feed` and `processed`. Utilizing dplyr, we will filter data in the column entity to exclude data from outside the continent of Brazil as the variable includes various countries and continents. Similar to our approach for Question 1, data cleaning and preparation will be performed in order to account for missing data.
 
 The rate of change in production will then be visualized using ggplot's `geom_line()` and `geom_point()` methods to construct a time series plot (line and point graph). To evaluate the overall trend in both, we will also compare and correlate changes in soybean production with rates of deforestation and afforestation. The 1990--2013 period will be used for this data comparison as the data-set provides an abundance of useful insights. We also might use other data present in the data-set to get some correlation. In order to correlate the output of soyabean and forest area, we may also utilize bubble plot to observe how the forest area changed specifically in Brazil.
 
 **Variables of focus for both questions:**
 
 | Variable              | Description                                                  | Source Data-set                 |
-|-----------------------|--------------------------------------------------------------|---------------------------------|
+|------------------|-----------------------------------|-------------------|
 | entity                | Country                                                      | forest, forest_area and soybean |
 | code                  | Country Code                                                 | forest, forest_area and soybean |
 | year                  | Year                                                         | forest, forest_area and soybean |
