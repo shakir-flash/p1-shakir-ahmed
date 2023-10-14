@@ -40,8 +40,7 @@ pacman::p_load(tidyverse,
                plotly,
                gganimate,
                imager,
-               magick
-               )
+               magick)
 ```
 
 ## Setup
@@ -499,7 +498,7 @@ joined_plots <- image_join(forest_plot_list)
 # setting fps = 1
 forest_animation <- image_animate(image_scale(joined_plots, "3000x3000"), fps = 1)
 
-# saving image to gift
+# saving image to git
 image_write(image = forest_animation, path = "images/world_forestaion.gif")
 forest_animation
 ```
@@ -608,9 +607,8 @@ brazil_soybean_animation |>
   image_animate(fps = 25) |>
   image_scale("600x400") # Adjust the dimensions as needed
 
-# saving image to gift
+# saving image to git
 image_write(image = brazil_soybean_animation, path = "images/soybean_brazil_animation.gif")
-brazil_soybean_animation
 ```
 
 Plotting the forest coverage in Brazil
@@ -657,7 +655,6 @@ brazil_forest_animation |>
 
 # saving image to gift
 image_write(image = brazil_forest_animation, path = "images/forest_brazil_animation.gif")
-brazil_forest_animation
 ```
 
 ### Discussion
