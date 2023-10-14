@@ -19,8 +19,6 @@ execute:
   echo: false
 ---
 
-## Installing necessary libraries
-
 ```{r load_packages, message=FALSE, include=FALSE}
 # GETTING THE LIBRARIES
 if (!require(pacman))
@@ -40,10 +38,9 @@ pacman::p_load(tidyverse,
                plotly,
                gganimate,
                imager,
-               magick)
+               magick,
+               gifski)
 ```
-
-## Setup
 
 ```{r ggplot_setup, message=FALSE, include=FALSE}
 #| code-summary: "ggplot theme setup"
@@ -59,11 +56,9 @@ knitr::opts_chunk$set(
   fig.asp = 0.618,      # the golden ratio
   fig.retina = 1,       # dpi multiplier for displaying HTML output on retina
   fig.align = "center", # center align figures
-  dpi = 150             # higher dpi, sharper image
+  dpi = 140             # higher dpi, sharper image
 )
 ```
-
-## Pulling data from the `tidytuesday` github repository
 
 ```{r load_dataset, message=FALSE, include=FALSE}
 # Getting the Data using the tidytuesdayR package 
@@ -89,15 +84,35 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 
 \<Introduction\>
 
-## Question 1
+## Question 1: What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
 ### Introduction
 
-The following plots show the change in forest cover from `1980 - 2015` using a map plot. We can observe a significant increase in forest cover `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years.
+In the face of global climate change, It is important to understand the dynamics of forest cover conversion. The first question delves into the net forest conversion data from 1990 to 2015, examining the changes decade-wise for various countries across the world. Utilizing data from [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06) and Our World in Data, this study explores the dynamics of forest cover alteration over four crucial decades. By visualizing and analyzing the net forest conversion rates from 1990 to 2015, this study aims to shed light on the evolving state of the world's forests and highlight countries with notable trends in forest expansion and deforestation.
+
+For this visualization we focused on the `forest` dataset provided by Our World in Data. We utilized the `net_forest_converstion` variable as it gave us a significant information on how forest conversion has been over the years.
 
 ### Approach
 
-\<Approach\> Fetching the world map using `maps` library
+To address this question, we implemented a choropleth map visulization highlighitng the forest conversion for specific decades. We began to scout the data for getting relevant information and noteworthy details. The whole approach can be categorized into Data Preparation, Data pre-processing, Visualizing the data and Animating the plots.
+
+#### **Data Preparation**
+
+To generate a map plot we needed geographical information which is not present in the dataset, which was achieved by utilizing the `maps` package in R. From this `world` data we retrieved all the unique countries for further process and also filtered out Antarctica from the data.
+
+#### **Data pre-processing**
+
+A custom function, `process_forest()`, is developed to handle the pre-processing of the forest conversion dataset. This function is used filter countries, ensuring all entities present in the map data are included. It also used to categorize countries based on their `net forest conversion` rates, grouping them into distinct categories. The processed forest conversion data is split into subsets for each decade (1990, 2000, 2010, and 2015). The `split()` function in R is employed to divide the data based on the 'year' column.
+
+A custom function, `filter_countries()`, is created to identify and extract specific countries of interest. These countries are singled out due to their significant forest conversion.
+
+#### **Visualization the data**
+
+The `ggplot2` package in R is utilized to create detailed visualizations for each decade. For each year, a map is generated where countries are color-coded according to their forest conversion categories. The `geom_map()` function is employed to plot the world map, and additional layers are added to highlight the noteworthy countries, ensuring they stand out in the visual representation.
+
+####  Animating the plots
+
+The individual plots for each decade are compiled into an animated GIF using the `gganimate` package. The resulting GIF provides a dynamic overview of the global forest conversion patterns, emphasizing the transformations occurring over the specified decades.
 
 ```{r world_data, message=FALSE, include=FALSE}
 # World data from maps
@@ -112,8 +127,6 @@ unique_countries <- world |>
 # Removing Antarctica from the world data
 world <- subset(world, region != "Antarctica")
 ```
-
-Cleaning the `forest.csv` and processing data for plots
 
 ```{r process_forest_function, message=FALSE, include=FALSE}
 # function to pre process the forest dataset
@@ -174,8 +187,6 @@ process_forest <- function (dataset, unique_countries) {
 }
 ```
 
-Combining data in a decade format
-
 ```{r split_forest_data, message=FALSE, include=FALSE}
 # Dividing data into tibbles based on year and it creates a list of tibbles
 forest_decades <- split(forest, f = forest$year)
@@ -186,8 +197,6 @@ filtered_forests <- lapply(forest_decades, function(forest_ds) {
   process_forest(forest_ds, unique_countries)
 })
 ```
-
-## Filtering countries with a Major change over past `four` decades
 
 ```{r highlightingCountriesWithmajorChange, message=FALSE, include=FALSE}
 # function to filter countries which are having noteworthy forest conversion
@@ -209,8 +218,6 @@ highlight_filtered_data <- lapply(filtered_forests, function(forest_ds) {
 })
 ```
 
-Mapping colours based on the change in `forest cover area`
-
 ```{r colourMapping, message=FALSE, include=FALSE}
 # color mapping for different forest conversion categories
 color_mapping <-
@@ -228,7 +235,7 @@ color_mapping <-
 
 ### Analysis
 
-\<Analysis\> Plotting change in forest cover for the decade `1990`
+#### Plotting change in forest cover for the decade `1990`
 
 ```{r plotFor1990, message=FALSE}
 # Creating the ggplot map plot
@@ -284,6 +291,7 @@ plot_1990 <- ggplot(filtered_forests$`1990`, aes(map_id = entity)) +
     color = guide_legend("No data", override.aes=list(fill="#F2F3F4"))
   )
 
+plot_1990
 ggsave(plot_1990, 
        filename = "images/q1/forest_plot_1990.jpg", 
        height   = 8, 
@@ -292,7 +300,7 @@ ggsave(plot_1990,
        dpi      = 120)
 ```
 
-## Plotting change in forest cover for the decade `2000`
+#### Plotting change in forest cover for the decade `2000`
 
 ```{r plotFor2000, message=FALSE}
 # Creating the ggplot map plot
@@ -356,7 +364,7 @@ ggsave(plot_2000,
        dpi      = 120)
 ```
 
-## Plotting change in forest cover for the decade `2010`
+#### Plotting change in forest cover for the decade `2010`
 
 ```{r plotFor2010, message=FALSE}
 # Creating the ggplot map plot
@@ -420,7 +428,7 @@ ggsave(plot_2010,
        dpi      = 120)
 ```
 
-## Plotting change in forest cover for the decade `2015`
+#### Plotting change in forest cover for the decade `2015`
 
 ```{r plotFor2015, message=FALSE}
 # Creating the ggplot map plot
@@ -475,6 +483,7 @@ plot_2015 <- ggplot(filtered_forests$`2015`, aes(map_id = entity)) +
     )
   )
 
+plot_2015
 ggsave(plot_2015, 
        filename = "images/q1/forest_plot_2015.jpg", 
        height   = 8, 
@@ -482,8 +491,6 @@ ggsave(plot_2015,
        unit     = "in", 
        dpi      = 120)
 ```
-
-## Saving our Map Plots as GIFs using `image_animate`
 
 ```{r savingas_GIF, message=FALSE}
 # making gif using gganimate pacakge
@@ -496,7 +503,7 @@ joined_plots <- image_join(forest_plot_list)
 
 # animating the images using image_animate() and restting the resolution
 # setting fps = 1
-forest_animation <- image_animate(image_scale(joined_plots, "3000x3000"), fps = 1)
+forest_animation <- image_animate(image_scale(joined_plots, "5000x4000"), fps = 1)
 
 # saving image to git
 image_write(image = forest_animation, path = "images/world_forestaion.gif")
@@ -505,15 +512,15 @@ forest_animation
 
 ### Discussion
 
-\<Discussion\>
+We can observe a significant increase in forest cover `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years.
 
-## Question 2
+## Question 2: How has the production of Soybean in Africa changed over time, and how does it impact the afforestation or deforestation rates?
 
 ### Introduction
 
 ### Approach
 
-\<Approach\> Cleaning and processing of the dataset includes the following steps:
+Cleaning and processing of the dataset includes the following steps:
 
 Soybean production in Brazil:
 
@@ -527,7 +534,7 @@ Forest coverage in Brazil:
 3.  Using `left_join` we merge the two tables based on the `year` column.
 4.  Since we now have percentage data and total data per year, we can calculate the change in forest coverage for Brazil by doing `forest_area.x` \* `forest_area.y`.
 
-```{r q2_brazil_process,warning= FALSE, message=FALSE}
+```{r q2_brazil_process, message=FALSE}
 
 #Cleaning total_forest table
 total_forest_cleaned <- clean_names(total_forest)
@@ -566,7 +573,7 @@ forest_brazil <- forest_brazil|>
 
 \<Analysis\> Plotting the soybean data
 
-```{r q2_plot_soybean,warning= FALSE, message=FALSE}
+```{r q2_plot_soybean, message=FALSE}
 
 # Create a line plot for Brazil soybean production
 plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
@@ -591,7 +598,7 @@ ggsave(plot_soybean_brazil,
 
 Animating the soybean production graph to show the trends:
 
-```{r q2_plot_soybean_anim,warning= FALSE, message=FALSE}
+```{r q2_plot_soybean_anim, message=FALSE}
 
 # Animate the plot
 anim_plot_soybean <- plot_soybean_brazil + transition_reveal(year)
@@ -613,7 +620,7 @@ image_write(image = brazil_soybean_animation, path = "images/soybean_brazil_anim
 
 Plotting the forest coverage in Brazil
 
-```{r q2_plot_forest,warning= FALSE, message=FALSE}
+```{r q2_plot_forest, message=FALSE}
 
 # Create a line plot for Brazil with points
 plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil, color = "Brazil")) +
@@ -637,7 +644,7 @@ ggsave(plot_forest_brazil,
        dpi      = 120)
 ```
 
-```{r q2_plot_forest_anim,warning= FALSE, message=FALSE}
+```{r q2_plot_forest_anim, message=FALSE}
 
 # Animate the plot
 anim_plot_forest <- plot_forest_brazil + transition_reveal(year)

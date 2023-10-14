@@ -158,7 +158,7 @@ The richness of the data-set provides many opportunities to create effective dat
 
 The two questions to be answered are:
 
-**Question 1:** What does the global forest area look like over past 3 decades, highlighting the trends of forest area conversion?
+**Question 1:** What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
 **Question 2:** How has the production of Soybean in Africa changed over time, and how does it impact the afforestation or deforestation rates?
 
