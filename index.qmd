@@ -80,9 +80,9 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 
 This project delves into two crucial aspects of global environmental dynamics using the "Global Deforestation" dataset, a comprehensive resource published by Hannah Ritchie and Max Roser in the "Our World in Data" journal in 2021. The dataset encompasses a wide array of attributes related to global forest cover, deforestation rates, and associated factors. Two distinct questions guide our exploration.
 
-With a focus on identifying the patterns in forest area conversion, the first question seeks to comprehend how the world's forest cover has changed over the previous three decades. With the help of a choropleth map, we meticulously prepare, clean, and visualize the data in order to clearly depict net forest conversion across the globe. We use the strengths of ggplot and plotly to build an interesting, interactive map that sheds light on the dynamics of forests around the world.
+With a focus on identifying the patterns in forest area conversion, the first question seeks to comprehend how the world's forest cover has changed over the previous three decades. With the help of a choropleth map, we meticulously prepare, clean, and visualize the data in order to clearly depict net forest conversion across the globe. We use the strengths of ggplot and gganimate to build an interesting, dynamic map that sheds light on the dynamics of forests around the world.
 
-The second question investigates the trajectory of soybean production in Brazil and its potential impact on afforestation and deforestation rates. We use the extensive data in the "Global Deforestation" dataset to address this, concentrating on Brazilian soybean output trends. Through data manipulation, we calculate total soybean production, revealing the crop's evolution over time. Employing ggplot, we construct time series plots to showcase soybean production trends and assess their correlation with afforestation and deforestation rates. The period from 1990 to 2013 becomes our focal point, with the possibility of additional insights from the dataset. A bubble plot may also be employed to uncover the nuanced relationship between soybean production and forest changes in Brazil.
+The second question investigates the trajectory of soybean production in Brazil and its potential impact on afforestation and deforestation rates. We use the extensive data in the "Global Deforestation" dataset to address this, concentrating on Brazilian soybean output trends. Through data manipulation, we calculate total soybean production, revealing the crop's evolution over time. Employing ggplot, we construct time series plots to showcase soybean production trends and assess their correlation with afforestation and deforestation rates. The period from 1990 to 2013 becomes our focal point, with the possibility of additional insights from the dataset.
 
 ## Introduction
 
@@ -102,23 +102,19 @@ For this visualization we focused on the `forest` dataset provided by Our World 
 
 ### Approach
 
-To address this question, we implemented a choropleth map visulization highlighitng the forest conversion for specific decades. We began to scout the data for getting relevant information and noteworthy details. The whole approach can be categorized into Data Preparation, Data pre-processing, Visualizing the data and Animating the plots.
+To address this question, we implemented a choropleth map visualization highlighting the forest conversion for specific decades and spotlighting few countries with extensive forest conversion. We began to scout the data for getting relevant information and noteworthy details. The whole approach can be categorized into Data Preparation and Pre-processing, Visualizing the data and Animating the plots.
 
-**Data Preparation**
+**Data Preparation and Pre-processing**
 
 To generate a map plot we needed geographical information which is not present in the dataset, which was achieved by utilizing the `maps` package in R. From this `world` data we retrieved all the unique countries for further process and also filtered out Antarctica from the data.
-
-**Data pre-processing**
 
 A custom function, `process_forest()`, is developed to handle the pre-processing of the forest conversion dataset. This function is used filter countries, ensuring all entities present in the map data are included. It also used to categorize countries based on their `net forest conversion` rates, grouping them into distinct categories. The processed forest conversion data is split into subsets for each decade (1990, 2000, 2010, and 2015). The `split()` function in R is employed to divide the data based on the 'year' column.
 
 A custom function, `filter_countries()`, is created to identify and extract specific countries of interest. These countries are singled out due to their significant forest conversion.
 
-**Visualization the data**
+**Visualization the data and Animating the plots**
 
-The `ggplot2` package in R is utilized to create detailed visualizations for each decade. For each year, a map is generated where countries are color-coded according to their forest conversion categories. The `geom_map()` function is employed to plot the world map, and additional layers are added to highlight the noteworthy countries, ensuring they stand out in the visual representation.
-
-**Animating the plots**
+The `ggplot2` package in R is utilized to create detailed visualizations for each decade. For each decade, a map is generated where countries are color-coded according to their forest conversion categories. The `geom_map()` function is employed to plot the world map, and additional layers are added to highlight the noteworthy countries, ensuring they stand out in the visual representation.
 
 The individual plots for each decade are compiled into an animated GIF using the `gganimate` package. The resulting GIF provides a dynamic overview of the global forest conversion patterns, emphasizing the transformations occurring over the specified decades.
 
@@ -243,7 +239,7 @@ color_mapping <-
 
 ### Analysis
 
-#### Plotting change in forest cover for the decade `1990`
+We concentrated our visual analysis on the decades of `2000` and `2010`, as these periods exhibited significant forest conversion, particularly in the countries under focus. And data availability for few countries is also a reason to choose `2000` and `2010`. However, it's important to note that the animation incorporates data from all decades, providing a comprehensive overview of the entire timeline and the evolving patterns in forest cover across different years.
 
 ```{r plotFor1990, message=FALSE}
 # Creating the ggplot map plot
@@ -298,17 +294,9 @@ plot_1990 <- ggplot(filtered_forests$`1990`, aes(map_id = entity)) +
     ),
     color = guide_legend("No data", override.aes=list(fill="#F2F3F4"))
   )
-
-plot_1990
-ggsave(plot_1990, 
-       filename = "images/q1/forest_plot_1990.jpg", 
-       height   = 8, 
-       width    = 15, 
-       unit     = "in", 
-       dpi      = 120)
 ```
 
-#### Plotting change in forest cover for the decade `2000`
+**Change in forest cover for the decade `2000`**
 
 ```{r plotFor2000, message=FALSE}
 # Creating the ggplot map plot
@@ -364,15 +352,9 @@ plot_2000 <- ggplot(filtered_forests$`2000`, aes(map_id = entity)) +
   )
 
 plot_2000
-ggsave(plot_2000, 
-       filename = "images/q1/forest_plot_2000.jpg", 
-       height   = 8, 
-       width    = 15, 
-       unit     = "in", 
-       dpi      = 120)
 ```
 
-#### Plotting change in forest cover for the decade `2010`
+**Change in forest cover for the decade `2010`**
 
 ```{r plotFor2010, message=FALSE}
 # Creating the ggplot map plot
@@ -428,15 +410,7 @@ plot_2010 <- ggplot(filtered_forests$`2010`, aes(map_id = entity)) +
   )
 
 plot_2010
-ggsave(plot_2010, 
-       filename = "images/q1/forest_plot_2010.jpg", 
-       height   = 8, 
-       width    = 15, 
-       unit     = "in", 
-       dpi      = 120)
 ```
-
-#### Plotting change in forest cover for the decade `2015`
 
 ```{r plotFor2015, message=FALSE}
 # Creating the ggplot map plot
@@ -490,15 +464,79 @@ plot_2015 <- ggplot(filtered_forests$`2015`, aes(map_id = entity)) +
       keyheight = 0.5,
     )
   )
+```
 
-plot_2015
-ggsave(plot_2015, 
+```{r saving_plots, message=FALSE, include=FALSE}
+save_plot_1990 <- plot_1990 +
+  theme(
+    plot.title    = element_text(size = 22),
+    plot.subtitle = element_text(size = 17),
+    plot.caption  = element_text(size = 14),
+    legend.key.size = unit(2, "lines"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 14, face = "bold")
+  )
+
+save_plot_2000 <- plot_2000 +
+  theme(
+    plot.title    = element_text(size = 22),
+    plot.subtitle = element_text(size = 17),
+    plot.caption  = element_text(size = 14),
+    legend.key.size = unit(2, "lines"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 14, face = "bold")
+  )
+
+save_plot_2010 <- plot_2010 +
+  theme(
+    plot.title    = element_text(size = 22),
+    plot.subtitle = element_text(size = 17),
+    plot.caption  = element_text(size = 14),
+    legend.key.size = unit(2, "lines"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 14, face = "bold")
+  )
+
+save_plot_2015 <- plot_2015 +
+  theme(
+    plot.title    = element_text(size = 22),
+    plot.subtitle = element_text(size = 17),
+    plot.caption  = element_text(size = 14),
+    legend.key.size = unit(2, "lines"),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 14, face = "bold")
+  )
+
+ggsave(save_plot_1990, 
+       filename = "images/q1/forest_plot_1990.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
+
+ggsave(save_plot_2000, 
+       filename = "images/q1/forest_plot_2000.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
+
+ggsave(save_plot_2010, 
+       filename = "images/q1/forest_plot_2010.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
+
+ggsave(save_plot_2015, 
        filename = "images/q1/forest_plot_2015.jpg", 
        height   = 8, 
        width    = 15, 
        unit     = "in", 
        dpi      = 120)
 ```
+
+**Dynamic display of forest conversion across the countries over the past decades**
 
 ```{r savingas_GIF, message=FALSE}
 # making gif using gganimate pacakge
@@ -520,7 +558,7 @@ forest_animation
 
 ### Discussion
 
-We can observe a significant increase in forest cover `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years.
+The visualizations highlight the dynamic nature of global forest conversion over the years. We can observe a significant increase in forest cover `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years.
 
 ## Question 2: How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?
 
@@ -678,6 +716,26 @@ image_write(image = brazil_forest_animation, path = "images/forest_brazil_animat
 
 ### Discussion
 
+<<<<<<< HEAD
 \<Discussion\>
 
 ## References
+=======
+The discussion on the relationship between soybean production and environmental changes in Brazil is of paramount importance, given the global significance of soybeans as a versatile crop ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)). The intricate link between land use changes and soybean production highlights the need for a comprehensive understanding of the dynamics at play. By examining the historical evolution of soybean production in Brazil, this study sheds light on the potential implications for afforestation and deforestation rates in this key agricultural region. It becomes evident that the expansion of soybean production has had a notable impact on land use in Brazil.
+
+The utilization of time series visualization techniques, including geom_line and geom_point, has allowed for a comprehensive overview of the trends over time. These visualizations provide a clear depiction of the steady increase in soybean production in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth in soybean production over this period ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)).
+
+Moreover, the decrease in forest coverage during this period is stark. The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact of increased soybean production in the country ([Song et al.)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.).
+
+The correlation between rising soybean production and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts. As the global demand for soybeans continues to grow, this study's findings, supported by the data, serve as a valuable resource for policymakers and stakeholders in the region ([Valdez](https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/)). It underscores the importance of considering the environmental consequences of agricultural expansion and the need for measures to mitigate deforestation. This research contributes to the broader understanding of the complex interplay between agriculture and environmental changes, making it a pivotal step towards more informed and sustainable land management practices in Brazil.
+
+## References
+
+Hannah Ritchie (2021) - "Forest area". Published online at OurWorldInData.org. Retrieved from: '[https://ourworldindata.org/forest-area'](https://ourworldindata.org/forest-area') \[Online Resource\]
+
+Valdez, C. (2022). Brazil's Momentum as a Global Agricultural Supplier Faces Headwinds. Published online at ers.usda.gov. Retrieved from: https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/
+
+Pagano, M. & Miransari, M. (2016). "The importance of soybean production worldwide." Retrieved from: https://www.sciencedirect.com/science/article/pii/B9780128015360000013
+
+Song et al., (2021). "Massive soybean expansion in South America since 2000 and implications for conservation." Retrieved from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:\~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.
+>>>>>>> f4e5b6382d68db5a8771543e876f50e6a7a892b4
