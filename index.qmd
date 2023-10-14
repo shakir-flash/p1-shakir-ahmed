@@ -689,8 +689,7 @@ brazil_forest_animation <- image_read("forest_brazil_animation.gif")
 
 # Display the animation
 brazil_forest_animation |>
-  image_animate(fps = 25) |>
-  image_scale("600x400") # Adjust the dimensions as needed
+  image_animate(fps = 25)
 
 # saving image to gift
 image_write(image = brazil_forest_animation, path = "images/forest_brazil_animation.gif")
