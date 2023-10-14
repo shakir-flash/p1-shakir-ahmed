@@ -697,10 +697,21 @@ image_write(image = brazil_forest_animation, path = "images/forest_brazil_animat
 
 ### Discussion
 
-From the above graphs, we can correlate that there has been a steady increase in the production of soybean in the country of Brazil. It started off from about 16.4 Million pounds of soybean in 1990 to a staggering 36.87 Million pounds in 2013.
+\
+The discussion on the relationship between soybean production and environmental changes in Brazil is of paramount importance, given the global significance of soybeans as a versatile crop ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)). The intricate link between land use changes and soybean production highlights the need for a comprehensive understanding of the dynamics at play. By examining the historical evolution of soybean production in Brazil, this study sheds light on the potential implications for afforestation and deforestation rates in this key agricultural region. It becomes evident that the expansion of soybean production has had a notable impact on land use in Brazil.
 
-We can also correlate that there has been an almost linear drop in the forest coverage from 1990 to 2013, starting with 588 Million hectares of forest to 507 Million hectares, showing a drop of 81 Million hectares of forest land during this time.
+The utilization of time series visualization techniques, including geom_line and geom_point, has allowed for a comprehensive overview of the trends over time. These visualizations provide a clear depiction of the steady increase in soybean production in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth in soybean production over this period ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)).
+
+Moreover, the decrease in forest coverage during this period is stark. The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact of increased soybean production in the country ([Song et al.)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.).
+
+The correlation between rising soybean production and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts. As the global demand for soybeans continues to grow, this study's findings, supported by the data, serve as a valuable resource for policymakers and stakeholders in the region ([Valdez](https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/)). It underscores the importance of considering the environmental consequences of agricultural expansion and the need for measures to mitigate deforestation. This research contributes to the broader understanding of the complex interplay between agriculture and environmental changes, making it a pivotal step towards more informed and sustainable land management practices in Brazil.
 
 ## References
 
 Hannah Ritchie (2021) - "Forest area". Published online at OurWorldInData.org. Retrieved from: '[https://ourworldindata.org/forest-area'](https://ourworldindata.org/forest-area') \[Online Resource\]
+
+Valdez, C. (2022). Brazil\'s Momentum as a Global Agricultural Supplier Faces Headwinds. Published online at ers.usda.gov. Retrieved from: https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/
+
+Pagano, M. & Miransari, M. (2016). "The importance of soybean production worldwide." Retrieved from: https://www.sciencedirect.com/science/article/pii/B9780128015360000013
+
+Song et al., (2021). "Massive soybean expansion in South America since 2000 and implications for conservation." Retrieved from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:\~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.
