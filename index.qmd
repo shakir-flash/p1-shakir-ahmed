@@ -309,10 +309,10 @@ generateForestConversionPlot <- function(year) {
 
 ```{r allDecades_plot, message=FALSE}
 # Generating plots for different decades
-plot_1990 <- generate_forest_conversion_plot(1990)
-plot_2000 <- generate_forest_conversion_plot(2000)
-plot_2010 <- generate_forest_conversion_plot(2010)
-plot_2015 <- generate_forest_conversion_plot(2015)
+plot_1990 <- generateForestConversionPlot(1990)
+plot_2000 <- generateForestConversionPlot(2000)
+plot_2010 <- generateForestConversionPlot(2010)
+plot_2015 <- generateForestConversionPlot(2015)
 ```
 
 ```{r plot_1990, message=FALSE, eval=FALSE}
