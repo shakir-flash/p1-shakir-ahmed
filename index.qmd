@@ -474,9 +474,9 @@ Plotting the soybean data
 plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
   geom_line(linewidth = 2) +
   geom_point(color = "#6E8B3D") +
-  labs(x = "Year", y = "Total (in lb)", title = "Total Soybean Usage Trend in Brazil", caption = "Jon Harmon | TidyTuesday") +
+  labs(x = "Year", y = "Total (in lb)", title = "Total Soybean Usage Trend in Brazil\n", caption = "Jon Harmon | TidyTuesday") +
   theme_minimal() +
-  theme(legend.position = "none", plot.title = element_text(size = 10)) +
+  theme(legend.position = "none", plot.title = element_text(size = 15)) +
   scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) +
   scale_color_manual(values = c("Brazil" = "#a6d96a")) +
   scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2)) +
@@ -524,7 +524,7 @@ plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil
   geom_point(color="#fdae61") + 
   labs(x = "Year", y = "Forest coverage (in hectares)", title = "Total forest cover trend in Brazil", caption= "Jon Harmon | TidyTuesday") +
   theme_minimal() +
-  theme(legend.position = "none")+
+  theme(legend.position = "none", plot.title = element_text(size = 15)) +
   scale_color_manual(values = c("Brazil" = "#fee08b"))+
   scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+
   scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +
