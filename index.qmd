@@ -342,7 +342,7 @@ plot_2015
 
 generatePlotforAnimation <- function(world_forest_plot, file_path) {
   # generating the plot
-  plot_generated <- world_forest_plot +
+  updated_world_plot <- world_forest_plot +
     theme(
       plot.title    = element_text(size = 24),
       plot.subtitle = element_text(size = 18),
@@ -353,7 +353,7 @@ generatePlotforAnimation <- function(world_forest_plot, file_path) {
     )
   
   # saving the plot as an image file
-  ggsave(save_plot_2015, 
+  ggsave(updated_world_plot, 
        filename = file_path,
        height   = 8, 
        width    = 15, 
