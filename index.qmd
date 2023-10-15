@@ -132,7 +132,10 @@ unique_countries <- world |>
 world <- subset(world, region != "Antarctica")
 ```
 
-```{r process_forest_function, message=FALSE, include=FALSE}
+```{r process_forest_function, message=FALSE, echo=TRUE}
+#| code-fold: true
+#| code-summary: "process_forest Function"
+
 # function to pre process the forest dataset
 # input  : dataset - tibble
 #          unique_countries - tibble
@@ -241,270 +244,130 @@ color_mapping <-
 
 We concentrated our visual analysis on the decades of `2000` and `2010`, as these periods exhibited significant forest conversion, particularly in the countries under focus. And data availability for few countries is also a reason to choose `2000` and `2010`. However, it's important to note that the animation incorporates data from all decades, providing a comprehensive overview of the entire timeline and the evolving patterns in forest cover across different years.
 
-```{r plotFor1990, message=FALSE}
-# Creating the ggplot map plot
-# Using the filtered_forests$`1990` dataset created earlier as a data source
-# using entity as map_id for first layer
-# using forest_convestion as fill aesthetic and word as map for second layer
-# using highlight_filtered_data$`1990` as another dataset for creating another map layer
-# using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
+```{r world_plot_function, message=FALSE, echo=TRUE}
+#| code-fold: true
+#| code-summary: "Function to generate the plot"
 
-plot_1990 <- ggplot(filtered_forests$`1990`, aes(map_id = entity)) +
-  geom_map(
-    aes(fill  = forest_converstion),
-    map       = world,
-    color     = "#B2BEB5",
-    linewidth = 0.25,
-    linetype  = "blank"
-  ) +
-  geom_map(data = highlight_filtered_data$`1990`, 
-           aes(map_id = entity, 
-               fill   = forest_converstion), 
-           map   = highlight_world, 
-           color = "#71797E", 
-           show.legend = F) +
-  expand_limits(x = world$long, y = world$lat) +
-  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
-  coord_fixed(ratio = 1) +
-  labs(title    = "Net Forest Conversion by Country in 1990",
-       subtitle = "Net change in forest area measures forest expansion minus deforestation",
-       caption  = "Data source: Our World in Data",
-       fill     = "Net Forest Conversion (hectares)"
-       ) +
-  theme_void() +
-  theme(
-    legend.position  = "bottom",
-    legend.direction = "horizontal",
-    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
-    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
-    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
-  ) +
-  guides(
-    fill = guide_legend(
-      nrow = 1,
-      direction = "horizontal",
-      title.position = "top",
-      title.hjust = 0.5,
-      label.position = "bottom",
-      label.hjust = 1,
-      label.vjust = 1,
-      label.theme = element_text(lineheight = 0.25, size = 9),
-      keywidth = 1,
-      keyheight = 0.5
-    ),
-    color = guide_legend("No data", override.aes=list(fill="#F2F3F4"))
-  )
-```
-
-**Change in forest cover for the decade `2000`**
-
-```{r plotFor2000, message=FALSE}
-# Creating the ggplot map plot
+# Function for creating the ggplot map plot
 # Using the filtered_forests$`2000` dataset created earlier as a data source
 # using entity as map_id for first layer
 # using forest_convestion as fill aesthetic and word as map for second layer
 # using highlight_filtered_data$`2000` as another dataset for creating another map layer
 # using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
 
-plot_2000 <- ggplot(filtered_forests$`2000`, aes(map_id = entity)) +
-  geom_map(
-    aes(fill  = forest_converstion),
-    map       = world,
-    color     = "#B2BEB5",
-    linewidth = 0.25,
-    linetype  = "blank"
-  ) +
-  geom_map(data = highlight_filtered_data$`2000`, 
-           aes(map_id = entity, 
-               fill   = forest_converstion), 
-           map   = highlight_world, 
-           color = "#71797E", 
-           show.legend = F) +
-  expand_limits(x = world$long, y = world$lat) +
-  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
-  coord_fixed(ratio = 1) +
-  labs(title = "Net Forest Conversion by Country in 2000",
-       subtitle = "Net change in forest area measures forest expansion minus deforestation",
-       caption = "Data source: Our World in Data",
-       fill = "Net Forest Conversion (hectares)"
-       ) +
-  theme_void() +
-  theme(
-    legend.position  = "bottom",
-    legend.direction = "horizontal",
-    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
-    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
-    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
-  ) +
-  guides(
-    fill = guide_legend(
-      nrow = 1,
-      direction = "horizontal",
-      title.position = "top",
-      title.hjust = 0.5,
-      label.position = "bottom",
-      label.hjust = 1,
-      label.vjust = 1,
-      label.theme = element_text(lineheight = 0.25, size = 9),
-      keywidth = 1,
-      keyheight = 0.5,
-    )
-  )
+# input  : year - integer
+# output : world_plot - plot object
 
+generate_forest_conversion_plot <- function(year) {
+  world_plot <- ggplot(filtered_forests[[as.character(year)]], aes(map_id = entity)) +
+    geom_map(
+      aes(fill = forest_converstion),
+      map   = world,
+      color = "#B2BEB5",
+      linewidth = 0.25,
+      linetype  = "blank"
+    ) +
+    geom_map(
+      data = highlight_filtered_data[[as.character(year)]],
+      aes(map_id = entity, fill = forest_converstion),
+      map   = highlight_world,
+      color = "#71797E",
+      show.legend = F
+    ) +
+    expand_limits(x = world$long, y = world$lat) +
+    scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
+    coord_fixed(ratio = 1) +
+    labs(
+      title = paste("Net Forest Conversion by Country in", year),
+      subtitle = "Net change in forest area measures forest expansion minus deforestation",
+      caption = "Data source: Our World in Data",
+      fill = "Net Forest Conversion (hectares)"
+    ) +
+    theme_void() +
+    theme(
+      legend.position = "bottom",
+      legend.direction = "horizontal",
+      plot.title = element_text(size = 19, face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(size = 15, color = "azure4", hjust = 0.5),
+      plot.caption = element_text(size = 12, color = "azure4", hjust = 0.95)
+    ) +
+    guides(
+      fill = guide_legend(
+        nrow = 1,
+        direction = "horizontal",
+        title.position = "top",
+        title.hjust = 0.5,
+        label.position = "bottom",
+        label.hjust = 1,
+        label.vjust = 1,
+        label.theme = element_text(lineheight = 0.25, size = 9),
+        keywidth = 1,
+        keyheight = 0.5
+      )
+    )
+  return(world_plot)
+}
+```
+
+```{r allDecades_plot, message=FALSE}
+# Generating plots for different years
+plot_1990 <- generate_forest_conversion_plot(1990)
+plot_2000 <- generate_forest_conversion_plot(2000)
+plot_2010 <- generate_forest_conversion_plot(2010)
+plot_2015 <- generate_forest_conversion_plot(2015)
+```
+
+**Change in forest cover for the decade `2000`**
+
+```{r plot_2000, message=FALSE}
 plot_2000
 ```
 
 **Change in forest cover for the decade `2010`**
 
-```{r plotFor2010, message=FALSE}
-# Creating the ggplot map plot
-# Using the filtered_forests$`2010` dataset created earlier as a data source
-# using entity as map_id for first layer
-# using forest_convestion as fill aesthetic and word as map for second layer
-# using highlight_filtered_data$`2010` as another dataset for creating another map layer
-# using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
-
-plot_2010 <- ggplot(filtered_forests$`2010`, aes(map_id = entity)) +
-  geom_map(
-    aes(fill  = forest_converstion),
-    map       = world,
-    color     = "#B2BEB5",
-    linewidth = 0.25,
-    linetype  = "blank"
-  ) +
-  geom_map(data = highlight_filtered_data$`2010`, 
-           aes(map_id = entity, 
-               fill   = forest_converstion), 
-           map   = highlight_world, 
-           color = "#71797E", 
-           show.legend = F) +
-  expand_limits(x = world$long, y = world$lat) +
-  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
-  coord_fixed(ratio = 1) +
-  labs(title = "Net Forest Conversion by Country in 2010",
-       subtitle = "Net change in forest area measures forest expansion minus deforestation",
-       caption = "Data source: Our World in Data",
-       fill = "Net Forest Conversion (hectares)"
-       ) +
-  theme_void() +
-  theme(
-    legend.position   = "bottom",
-    legend.direction  = "horizontal",
-    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
-    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
-    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
-  ) +
-  guides(
-    fill = guide_legend(
-      nrow = 1,
-      direction = "horizontal",
-      title.position = "top",
-      title.hjust = 0.5,
-      label.position = "bottom",
-      label.hjust = 1,
-      label.vjust = 1,
-      label.theme = element_text(lineheight = 0.25, size = 9),
-      keywidth = 1,
-      keyheight = 0.5,
-    )
-  )
-
+```{r plot_2010, message=FALSE}
 plot_2010
-```
-
-```{r plotFor2015, message=FALSE}
-# Creating the ggplot map plot
-# Using the filtered_forests$`2015` dataset created earlier as a data source
-# using entity as map_id for first layer
-# using forest_convestion as fill aesthetic and word as map for second layer
-# using highlight_filtered_data$`2015` as another dataset for creating another map layer
-# using entity as map_id,forest_convestion as fill aesthetic and highlight_world as map for third layer
-
-plot_2015 <- ggplot(filtered_forests$`2015`, aes(map_id = entity)) +
-  geom_map(
-    aes(fill  = forest_converstion),
-    map       = world,
-    color     = "#B2BEB5",
-    linewidth = 0.25,
-    linetype  = "blank"
-  ) +
-  geom_map(data = highlight_filtered_data$`2015`, 
-           aes(map_id = entity, 
-               fill   = forest_converstion), 
-           map   = highlight_world, 
-           color = "#71797E", 
-           show.legend = F) +
-  expand_limits(x = world$long, y = world$lat) +
-  scale_fill_manual(values = color_mapping, na.value = "#F2F3F4") +
-  coord_fixed(ratio = 1) +
-  labs(title = "Net Forest Conversion by Country in 2015",
-       subtitle = "Net change in forest area measures forest expansion minus deforestation",
-       caption = "Data source: Our World in Data",
-       fill = "Net Forest Conversion (hectares)"
-       ) +
-  theme_void() +
-  theme(
-    legend.position  = "bottom",
-    legend.direction = "horizontal",
-    plot.title       = element_text(size = 19, face = "bold", hjust = 0.5),
-    plot.subtitle    = element_text(size = 15, color = "azure4", hjust = 0.5),
-    plot.caption     = element_text(size = 12, color = "azure4", hjust = 0.95)
-  ) +
-  guides(
-    fill = guide_legend(
-      nrow = 1,
-      direction = "horizontal",
-      title.position = "top",
-      title.hjust = 0.5,
-      label.position = "bottom",
-      label.hjust = 1,
-      label.vjust = 1,
-      label.theme = element_text(lineheight = 0.25, size = 9),
-      keywidth = 1,
-      keyheight = 0.5,
-    )
-  )
 ```
 
 ```{r saving_plots, message=FALSE, include=FALSE}
 save_plot_1990 <- plot_1990 +
   theme(
-    plot.title    = element_text(size = 22),
-    plot.subtitle = element_text(size = 17),
-    plot.caption  = element_text(size = 14),
+    plot.title    = element_text(size = 24),
+    plot.subtitle = element_text(size = 18),
+    plot.caption  = element_text(size = 15),
     legend.key.size = unit(2, "lines"),
-    legend.text = element_text(size = 12),
-    legend.title = element_text(size = 14, face = "bold")
+    legend.text = element_text(size = 14),
+    legend.title = element_text(size = 16, face = "bold")
   )
 
 save_plot_2000 <- plot_2000 +
   theme(
-    plot.title    = element_text(size = 22),
-    plot.subtitle = element_text(size = 17),
-    plot.caption  = element_text(size = 14),
+    plot.title    = element_text(size = 24),
+    plot.subtitle = element_text(size = 18),
+    plot.caption  = element_text(size = 15),
     legend.key.size = unit(2, "lines"),
-    legend.text = element_text(size = 12),
-    legend.title = element_text(size = 14, face = "bold")
+    legend.text = element_text(size = 14),
+    legend.title = element_text(size = 16, face = "bold")
   )
 
 save_plot_2010 <- plot_2010 +
   theme(
-    plot.title    = element_text(size = 22),
-    plot.subtitle = element_text(size = 17),
-    plot.caption  = element_text(size = 14),
+    plot.title    = element_text(size = 24),
+    plot.subtitle = element_text(size = 18),
+    plot.caption  = element_text(size = 15),
     legend.key.size = unit(2, "lines"),
-    legend.text = element_text(size = 12),
-    legend.title = element_text(size = 14, face = "bold")
+    legend.text = element_text(size = 14),
+    legend.title = element_text(size = 16, face = "bold")
   )
 
 save_plot_2015 <- plot_2015 +
   theme(
-    plot.title    = element_text(size = 22),
-    plot.subtitle = element_text(size = 17),
-    plot.caption  = element_text(size = 14),
+    plot.title    = element_text(size = 24),
+    plot.subtitle = element_text(size = 18),
+    plot.caption  = element_text(size = 15),
     legend.key.size = unit(2, "lines"),
-    legend.text = element_text(size = 12),
-    legend.title = element_text(size = 14, face = "bold")
+    legend.text = element_text(size = 14),
+    legend.title = element_text(size = 16, face = "bold")
   )
 
 ggsave(save_plot_1990, 
@@ -549,7 +412,7 @@ joined_plots <- image_join(forest_plot_list)
 
 # animating the images using image_animate() and restting the resolution
 # setting fps = 1
-forest_animation <- image_animate(image_scale(joined_plots, "5000x4000"), fps = 1)
+forest_animation <- image_animate(image_scale(joined_plots, "6000x4000"), fps = 1)
 
 # saving image to git
 image_write(image = forest_animation, path = "images/world_forestaion.gif")
@@ -621,7 +484,7 @@ forest_brazil <- forest_brazil|>
 
 ### Analysis
 
-\<Analysis\> Plotting the soybean data
+Plotting the soybean data
 
 ```{r q2_plot_soybean, message=FALSE}
 
@@ -716,11 +579,6 @@ image_write(image = brazil_forest_animation, path = "images/forest_brazil_animat
 
 ### Discussion
 
-<<<<<<< HEAD
-\<Discussion\>
-
-## References
-=======
 The discussion on the relationship between soybean production and environmental changes in Brazil is of paramount importance, given the global significance of soybeans as a versatile crop ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)). The intricate link between land use changes and soybean production highlights the need for a comprehensive understanding of the dynamics at play. By examining the historical evolution of soybean production in Brazil, this study sheds light on the potential implications for afforestation and deforestation rates in this key agricultural region. It becomes evident that the expansion of soybean production has had a notable impact on land use in Brazil.
 
 The utilization of time series visualization techniques, including geom_line and geom_point, has allowed for a comprehensive overview of the trends over time. These visualizations provide a clear depiction of the steady increase in soybean production in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth in soybean production over this period ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)).
@@ -733,9 +591,8 @@ The correlation between rising soybean production and decreasing forest coverage
 
 Hannah Ritchie (2021) - "Forest area". Published online at OurWorldInData.org. Retrieved from: '[https://ourworldindata.org/forest-area'](https://ourworldindata.org/forest-area') \[Online Resource\]
 
-Valdez, C. (2022). Brazil's Momentum as a Global Agricultural Supplier Faces Headwinds. Published online at ers.usda.gov. Retrieved from: https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/
+Valdez, C. (2022). Brazil's Momentum as a Global Agricultural Supplier Faces Headwinds. Published online at ers.usda.gov. Retrieved from: [Economic Research Service](https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/)
 
-Pagano, M. & Miransari, M. (2016). "The importance of soybean production worldwide." Retrieved from: https://www.sciencedirect.com/science/article/pii/B9780128015360000013
+Pagano, M. & Miransari, M. (2016). "The importance of soybean production worldwide." Retrieved from: [Science Direct](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)
 
-Song et al., (2021). "Massive soybean expansion in South America since 2000 and implications for conservation." Retrieved from: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:\~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.
->>>>>>> f4e5b6382d68db5a8771543e876f50e6a7a892b4
+Song et al., (2021). "Massive soybean expansion in South America since 2000 and implications for conservation." Retrieved from: [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.)
