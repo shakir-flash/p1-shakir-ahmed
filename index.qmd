@@ -41,7 +41,6 @@ pacman::p_load(tidyverse,
 ```
 
 ```{r ggplot_setup, message=FALSE, include=FALSE}
-#| code-summary: "ggplot theme setup"
 # setting theme for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 14, base_family = "sans"))
 
@@ -94,9 +93,9 @@ To summarize, our project uses data analysis and visualization to tackle these c
 
 ### Introduction
 
-In the face of global climate change, It is important to understand the dynamics of forest cover conversion. The first question delves into the net forest conversion data from 1990 to 2015, examining the changes decade-wise for various countries across the world. Utilizing data from [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06) which was sourced from *Our World in Data*, this study explores the dynamics of forest cover alteration over four crucial decades. By visualizing and analyzing the net forest conversion rates from 1990 to 2015, this study aims to shed light on the evolving state of the world's forests and highlight countries with notable trends in forest expansion and deforestation.
+In the face of global climate change, It is important to understand the dynamics of forest cover conversion. The first question delves into the net forest conversion data from 1990 to 2015, examining the changes decade-wise for various countries across the world. Utilizing data from [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06) which was sourced from *Our World in Data*, this study explores the dynamics of forest cover alteration over four decades. By visualizing and analyzing the net forest conversion rates from 1990 to 2015, this study aims to shed light on the evolving state of the world's forests and highlight countries with notable trends in forest expansion and deforestation.
 
-For this visualization we focused on the `forest` dataset provided by Our World in Data. We utilized the `net_forest_converstion` variable as it gave us a significant information on how forest conversion has been over the years.
+For this visualization we focused on the `forest` dataset provided by Our World in Data. We utilized the `net_forest_converstion` variable as it gave us a significant information on how forest conversion has been over the years. In the main plot, our attention was directed towards the specific periods of 1990, 2000 and 2010. However, in the animated compilation, we incorporated visualizations from all decades.
 
 ### Approach
 
@@ -104,9 +103,9 @@ To address this question, we implemented a choropleth map visualization highligh
 
 **Data Preparation and Pre-processing**
 
-To generate a map plot we needed geographical information which is not present in the dataset, which was achieved by utilizing the `maps` package in R. From this `world` data we retrieved all the unique countries for further process and also filtered out Antarctica from the data.
+To generate a map plot we needed geographical information which is not present in the dataset and was achieved by utilizing the `maps` package in R. From this `world` data we retrieved all the unique countries for further processing and also filtered out Antarctica from the data.
 
-A custom function, `processForest()`, is developed to handle the pre-processing of the forest conversion dataset. This function is used filter countries, ensuring all entities present in the map data are included. It also used to categorize countries based on their `net forest conversion` rates, grouping them into distinct categories. The processed forest conversion data is split into subsets for each decade (1990, 2000, 2010, and 2015). The `split()` function in R is employed to divide the data based on the 'year' column.
+A custom function, `processForest()`, is developed to handle the pre-processing of the forest conversion dataset. This function is used filter countries, ensuring all entities present in the map data are included. It also used to categorize countries based on their `net forest conversion` rates, grouping them into distinct categories. The processed forest conversion data is split into subsets for each decade (1990, 2000, 2010, and 2015). The `split()` function in R is employed to divide the data based on the `year` column.
 
 ```{r world_data, message=FALSE, include=FALSE}
 # World data from maps
@@ -124,7 +123,7 @@ world <- subset(world, region != "Antarctica")
 
 ```{r process_forest_function, message=FALSE, echo=TRUE}
 #| code-fold: true
-#| code-summary: "processForest Function"
+#| code-summary: "Glimpse of processForest Function"
 
 # function to pre process the forest dataset
 # input  : dataset - tibble
@@ -240,7 +239,7 @@ We also developed a function called `generatePlotforAnimation()`, designed speci
 
 ### Analysis
 
-We concentrated our visual analysis on the decades of `2000` and `2010`, as these periods exhibited significant forest conversion, particularly in the countries under focus. And data availability for few countries is also a reason to choose `2000` and `2010`. However, it's important to note that the animation incorporates data from all decades, providing a comprehensive overview of the entire timeline and the evolving patterns in forest cover across different years.
+We concentrated our visual analysis on the decades of `1990`, `2000`, `2010`. As some countries like `USA`, `Russia` and `Australia` are not having any data to visualize for `2015`. It is important to note that the animated plots incorporates data from all decades, providing a comprehensive overview of the entire timeline and the evolving patterns in forest cover across different years.
 
 ```{r world_plot_function, message=FALSE, echo=TRUE}
 #| code-fold: true
@@ -315,11 +314,17 @@ plot_2010 <- generateForestConversionPlot(2010)
 plot_2015 <- generateForestConversionPlot(2015)
 ```
 
-```{r plot_1990, message=FALSE, eval=FALSE}
+**Change in forest cover for the decade `1990`**
+
+In the 1990 map, the initial phase of global forest conversion is illustrated. Countries are visually distinguished through color codes representing their net forest conversion rates. Particularly, `Brazil` stands out with significant deforestation during this period, in contrast to countries such as `China`, `India` and `USA` which showcase notable forest expansion.
+
+```{r plot_1990, message=FALSE}
 plot_1990
 ```
 
 **Change in forest cover for the decade `2000`**
+
+Moving to the year 2000, the map reveals how forest conversion patterns have evolved. Several countries have altered their trajectory. Countries such as `Russia`, `China` and `USA` has shown increase in their forestation. While `Brazil` still continues to be in the state of deforestation. Compared to previous decade `India`'s forest conversion rate reduced even though they are moving towards reforestation.
 
 ```{r plot_2000, message=FALSE}
 plot_2000
@@ -327,11 +332,13 @@ plot_2000
 
 **Change in forest cover for the decade `2010`**
 
+By 2010, global efforts to combat deforestation are visible. The forest conversion has shifted its tides in some countries like `Russia` and `Australia`. But, `Brazil` still continues to be in the state of deforestation.
+
 ```{r plot_2010, message=FALSE}
 plot_2010
 ```
 
-```{r plot_2015, message=FALSE, eval=FALSE}
+```{r plot_2015, message=FALSE}
 plot_2015
 ```
 
@@ -393,17 +400,11 @@ forest_animation
 
 ### Discussion
 
-\<Paragraph 1\> What is there in the plot and how our over data visualization is interpretable?
+The visualizations offer a vivid depiction of the evolving global forest conversion patterns between `1990 and 2015`. Through color-coded maps, complex net forest conversion rates are presented in an easily understandable manner, facilitating the immediate recognition of trends. Darker shades representing significant deforestation or expansion immediately draw attention, guiding viewers to focus on countries undergoing substantial environmental changes. The animated visualizations highlight the dynamic nature of global forest conversion over the years across different countries.
 
-The plot shows that there is a significant amount of change in the forest cover over the past few decades, but in certain countries we can see a rise in forest coverage. This was actually surprising, since we initially created a plot for the year `1990` which showed tremendous amount of reduction in forest cover but that changed over the years.
+The plot reveals significant changes in forest cover over recent decades, with unexpected rises observed in specific countries. Notable positive shifts occurred in the `2000s` and `2010s`, particularly in countries like the `USA`, `Russia`, `Australia`, `China`, and `India`. These improvements might be attributed to global deforestation awareness campaigns, leading to increased forest coverage in these nations. However, a significant portion of *South America* and *Africa* continues to bear the brunt of deforestation, with no signs of slowing down, particularly in countries like `Brazil` and `Tanzania`. Economically developed continents seem to prioritize reforestation initiatives, contrasting with less economically advantaged regions where such efforts receive comparatively less focus.
 
-\<Paragraph 2\> Specific decades 2000 and 2010 discussion highlighting few countries.
-
-Certain countries in the decades 2000 and 2010 have shown a positive impact and showed a growth in the area covered by forests over time. Some notable changes were seen in `United States`, `Russia`, `Australia`, `China`, and `India` which showed a growth in forest cover over a dedcade and this could be due to the multiple deforestation awareness movements that took place all around the globe.
-
-\<Paragraph 3\> Conclusion on the visualization and how this can be used citing some reference from an online source.
-
-The visualizations highlight the dynamic nature of global forest conversion over the years. We can observe a significant increase in forest cover `China`, `India`, `Russia`, `USA`, and `Australia` over the past 20 years whereas `Brazil`, `Tanzania` have lost more forest covered area over the past 35 years.
+In conclusion, this visualization offers a compelling narrative of global environmental change, highlighting both challenges and successes in forest conservation efforts. It serves as a valuable tool for policymakers and environmentalists providing actionable insights into regional and global trends. Such visualizations can aid in targeted policy formulation, focusing resources where they are most needed, and fostering international collaborations to combat deforestation.
 
 ## Question 2: How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?
 
