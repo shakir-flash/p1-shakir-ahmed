@@ -394,8 +394,10 @@ forest_animation
 ### Discussion
 
 \<Paragraph 1\> What is there in the plot and how our over data visualization is interpretable?
+The plot shows that there is a significant amount of change in the forest cover over the past few decades, but in certain countries we can see a rise in forest coverage. This was actually surprising, since we initially created a plot for the year `1990` which showed tremendous amount of reduction in forest cover but that changed over the years.
 
 \<Paragraph 2\> Specific decades 2000 and 2010 discussion highlighting few countries.
+Certain countries in the decades 2000 and 2010 have shown a positive impact and showed a growth in the area covered by forests over time. Some notable changes were seen in `United States`, `Russia`, `Australia`, `China`, and `India` which showed a growth in forest cover over a dedcade and this could be due to the multiple deforestation awareness movements that took place all around the globe.
 
 \<Paragraph 3\> Conclusion on the visualization and how this can be used citing some reference from an online source.
 
