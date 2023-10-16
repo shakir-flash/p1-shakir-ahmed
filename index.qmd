@@ -430,7 +430,7 @@ Forest coverage in Brazil:
 3.  Using `left_join` we merge the two tables based on the `year` column.
 4.  Since we now have percentage data and total data per year, we can calculate the change in forest coverage for Brazil by doing `forest_area.x` \* `forest_area.y`.
 
-```{r q2_brazil_process, message=FALSE}
+```{r q2_brazil_process, message=FALSE, echo=TRUE}
 #| code-fold: true
 #| code-summary: "Pre-processing of soybean and forest data"
 #Function to pre-process the total_forest, soybean_use and forest_area datasets
@@ -478,7 +478,7 @@ forest_brazil <- forest_brazil|>
 
 Plotting the soybean data
 
-```{r q2_plot_soybean, message=FALSE}
+```{r q2_plot_soybean, message=FALSE, echo=TRUE}
 #| code-fold: true
 #| code-summary: "Plotting of soybean consumption in Brazil"
 #Code for creating the time series plot
@@ -518,9 +518,9 @@ ggsave(plot_soybean_brazil,
 
 Animating the soybean graph to show the trends:
 
-```{r q2_plot_soybean_anim, message=FALSE}
+```{r q2_plot_soybean_anim, message=FALSE, echo=TRUE}
 #| code-fold: true
-#| code-summary: "Animation"
+#| code-summary: "Animation of soybean usage"
 #Code to animate the plot using gganimate package
 
 # Animate the plot
@@ -542,7 +542,7 @@ image_write(image = brazil_soybean_animation, path = "images/soybean_brazil_anim
 
 Plotting the forest coverage in Brazil
 
-```{r q2_plot_forest, message=FALSE}
+```{r q2_plot_forest, message=FALSE, echo=TRUE}
 #| code-fold: true
 #| code-summary: "Plotting of forest coverage in Brazil"
 #Code for creating the time series plot
@@ -572,16 +572,16 @@ plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil
 plot_forest_brazil
 
 ggsave(plot_forest_brazil, 
-       filename = "images/q2/forest_plot_brazil.jpg", 
+       filename = "images/q2/plot_forest_brazil.jpg", 
        height   = 8, 
        width    = 15, 
        unit     = "in", 
        dpi      = 120)
 ```
 
-```{r q2_plot_forest_anim, message=FALSE}
+```{r q2_plot_forest_anim, message=FALSE, echo=TRUE}
 #| code-fold: true
-#| code-summary: "Animation"
+#| code-summary: "Animation of forest coverage"
 #Animation of plot using gganimate package
 
 # Animate the plot
