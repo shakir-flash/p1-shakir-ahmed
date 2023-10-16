@@ -326,7 +326,7 @@ plot_1990
 :::
 
 ::: {.column width="80%"}
-```{r plot_2000, warning=FALSE, fig.width8}
+```{r plot_2000, warning=FALSE, fig.width=8}
 plot_2000
 ```
 :::
