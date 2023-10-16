@@ -73,9 +73,8 @@ total_forest <- read.csv ("https://raw.githubusercontent.com/INFO526-DataViz/pro
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
 ```
 
-##  {auto-animate="true"}
+## Introduction{auto-animate="true"}
 
-## Introduction
 
 -   \<info on our project\>
 
@@ -91,11 +90,7 @@ or in two columns
 :::
 :::
 
-[^1]: And add footnotes
-
-##  {auto-animate="true"}
-
-## Introduction
+## Introduction{auto-animate="true"}
 
 ![](images/presentation/groot.gif){fig-align="right" width="200"}
 
@@ -103,9 +98,8 @@ or in two columns
 
 -   What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
-```{=html}
-<!-- -->
-```
+[^1]: And add footnotes
+
 -   like
 
 -   this
@@ -279,8 +273,7 @@ generateForestConversionPlot <- function(year) {
       legend.direction = "horizontal",
       plot.title = element_text(size = 19, face = "bold", hjust = 0.5),
       plot.subtitle = element_text(size = 15, color = "azure4", hjust = 0.5),
-      plot.caption = element_text(size = 12, color = "azure4", hjust = 0.95),
-      panel.background = element_rect(fill = "#f2f2f2")
+      plot.caption = element_text(size = 12, color = "azure4", hjust = 0.95)
     ) +
     guides(
       fill = guide_legend(
@@ -308,39 +301,54 @@ plot_2010 <- generateForestConversionPlot(2010)
 plot_2015 <- generateForestConversionPlot(2015)
 ```
 
-##  {auto-animate="true"}
-
-## Plots
-
-```{r plot_2000, message=FALSE}
-plot_2000
-```
-
-## Plots
-
-```{r plot_2010, message=FALSE}
-plot_2010
-```
-
-## Plot and text
+## Plot and text {auto-animate="true"}
 
 ::: columns
-::: {.column width="30%"}
+::: {.column width="20%"}
 -   Some text
 
 -   goes here
 :::
 
-::: {.column width="70%"}
-```{r plot_2015, warning=FALSE, fig.width=7}
+::: {.column width="80%"}
+```{r plot_1990, warning=FALSE, fig.width=8}
+plot_1990
+```
+:::
+:::
+
+## Plot and text {auto-animate="true"}
+::: columns
+::: {.column width="20%"}
+-   Some text
+
+-   goes here
+:::
+
+::: {.column width="80%"}
+```{r plot_2000, warning=FALSE, fig.width8}
+plot_2000
+```
+:::
+:::
+## Plot and text {auto-animate="true"}
+
+::: columns
+::: {.column width="20%"}
+-   Some text
+
+-   goes here
+:::
+
+::: {.column width="80%"}
+```{r plot_2015, warning=FALSE, fig.width=8}
 plot_2015
 ```
 :::
 :::
 
 ## Animation of the plots
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+GIF of the world forest conversion
 
 ```{r saving_plots, message=FALSE, include=FALSE}
 # Function for saving plot for animation
@@ -389,7 +397,7 @@ joined_plots <- image_join(forest_plot_list)
 
 # animating the images using image_animate() and restting the resolution
 # setting fps = 1
-forest_animation <- image_animate(image_scale(joined_plots, "6000x4000"), fps = 0.25)
+forest_animation <- image_animate(image_scale(joined_plots, "6000x4000"), fps = 0.5)
 
 forest_animation
 ```
