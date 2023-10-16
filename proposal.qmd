@@ -1,5 +1,5 @@
 ---
-title: "Visualizing the Forest Conversion"
+title: "Forests in Transition: Visualizing Global Deforestation"
 subtitle: "Proposal"
 format:
   html:

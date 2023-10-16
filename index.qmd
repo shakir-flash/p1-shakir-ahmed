@@ -1,11 +1,11 @@
 ---
-title: "Visualizing the Forest Conversion"
+title: "Forests in Transition: Visualizing Global Deforestation"
 subtitle: "INFO 526 - Project 1"
 author: 
   - name: "The Plotting Pandas - Megan, Shakir, Maria, Eshaan, Bharath"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Uncovering Global Deforestation and Soy Bean Consumption - need to change"
+description: "Uncovering Global Deforestation and Soy Bean Consumption"
 format:
    html:
     code-tools: true
@@ -243,7 +243,7 @@ We concentrated our visual analysis on the decades of `1990`, `2000`, `2010`. As
 
 ```{r world_plot_function, message=FALSE, echo=TRUE}
 #| code-fold: true
-#| code-summary: "Function to generate the plot"
+#| code-summary: "Function used to generate the plot"
 
 # Function for creating the ggplot map plot
 # Using the filtered_forests$`2000` dataset created earlier as a data source
@@ -338,7 +338,7 @@ By 2010, global efforts to combat deforestation are visible. The forest conversi
 plot_2010
 ```
 
-```{r plot_2015, message=FALSE}
+```{r plot_2015, message=FALSE, eval=FALSE}
 plot_2015
 ```
 
