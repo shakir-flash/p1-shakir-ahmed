@@ -13,8 +13,7 @@ format:
     transition: slide
     background-transition: fade
     logo: images\pandas_logo.png
-    footer: "[🔗ThePlottingPandas](https://info526-dataviz.github.io/project-01-The-Plotting-Pandas/)"
-    smaller: true
+    footer: "[🐼 The Plotting Pandas](https://info526-dataviz.github.io/project-01-The-Plotting-Pandas/)"
     scrollable: true
 
 editor: visual
@@ -91,11 +90,11 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 ## Our Dataset {auto-animate="true"}
 
 ::: columns
-::: {.column width="60%"}
+::: {.column width="70%"}
 **Aim:** Provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
 :::
 
-::: {.column width="40%"}
+::: {.column width="30%"}
 ![](images/presentation/groot.gif){fig-align="right" width="450"}
 :::
 :::
@@ -112,7 +111,7 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 
 -   International efforts, such as the `United Nations REDD+` program, aim to reduce deforestation and promote sustainable forest management to combat its adverse impacts on a global scale.
 
-## Approach
+## Approach {.smaller}
 
 ```{r world_data, message=FALSE, include=FALSE}
 # World data from maps
@@ -128,11 +127,11 @@ unique_countries <- world |>
 world <- subset(world, region != "Antarctica")
 ```
 
-Roots of the approach
+-   Roots of the approach
 
 ```{r process_forest_function, message=FALSE, echo=TRUE}
 #| code-fold: true
-#| code-summary: "Glimpse of processForest Function"
+#| code-summary: "Pre-processing Function"
 
 # function to pre process the forest dataset
 # input  : dataset - tibble
@@ -238,7 +237,7 @@ color_mapping <-
   )
 ```
 
-Branches of the approach
+-   Branches of the approach
 
 ```{r world_plot_function, message=FALSE, echo=TRUE}
 #| code-fold: true
@@ -305,6 +304,8 @@ generateForestConversionPlot <- function(year) {
 }
 ```
 
+-   Challenges faced
+
 ```{r allDecades_plot, message=FALSE}
 # Generating plots for different decades
 plot_1990 <- generateForestConversionPlot(1990)
@@ -313,23 +314,17 @@ plot_2010 <- generateForestConversionPlot(2010)
 plot_2015 <- generateForestConversionPlot(2015)
 ```
 
-## Outcome of the Approach {auto-animate="true"}
+## Outcome of the Approach {.smaller auto-animate="true"}
 
-::: columns
-::: {.column width="20%"}
 -   Forest conversion across the world in `2000` decade
-:::
 
-::: {.column width="80%"}
 ```{r plot_2000, warning=FALSE, fig.width=8}
 plot_2000
 ```
-:::
-:::
 
-## Outcome of the Approach {auto-animate="true"}
+## Outcome of the Approach {.smaller auto-animate="true"}
 
-GIF of the world forest conversion
+-   Dynamic display of forest conversion across the countries over the past decades
 
 ```{r saving_plots, message=FALSE, include=FALSE}
 # Function for saving plot for animation
@@ -364,7 +359,7 @@ generatePlotforAnimation(plot_2010, "images/presentation/q1/forest_plot_2010.jpg
 generatePlotforAnimation(plot_2015, "images/presentation/q1/forest_plot_2015.jpg")
 ```
 
-```{r savingas_GIF, message=FALSE, echo=TRUE}
+```{r savingas_GIF, message=FALSE}
 #| code-fold: true
 #| code-summary: "Animation of the plots"
 
@@ -383,7 +378,7 @@ forest_animation <- image_animate(image_scale(joined_plots, "6000x4000"), fps = 
 forest_animation
 ```
 
-## Question 2
+## Question 2 {.smaller}
 
 **How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?**
 
@@ -393,7 +388,7 @@ forest_animation
 
 -   These plots provide a dynamic illustration of the trends in soybean production in Brazil, shedding light on the growth and fluctuations in this vital agricultural sector.
 
-## Code
+## Code {.smaller}
 
 ```{r q2brazil_process, message=FALSE, echo=TRUE}
 #| code-fold: true
@@ -481,7 +476,7 @@ plot_soybean_brazil
 
 ## Animation of the plots
 
-```{r q2plot_forest_anim, message=FALSE, echo=TRUE}
+```{r q2plot_forest_anim, message=FALSE}
 #| code-fold: true
 #| code-summary: "Animation of forest coverage"
 #Code to animate the plot using gganimate package
@@ -544,7 +539,7 @@ plot_forest_brazil
 
 ## Animation of the plot
 
-```{r q2plot_brazil_anim, message=FALSE, echo=TRUE}
+```{r q2plot_brazil_anim, message=FALSE}
 #| code-fold: true
 #| code-summary: "Animation of forest coverage"
 #Animation of plot using gganimate package
@@ -564,7 +559,7 @@ brazil_forest_animation |>
 
 ```
 
-## Analysis
+## Analysis {.smaller}
 
 -   The visualizations provide a clear depiction of the steady increase in soybean consumption in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth over this period.
 
