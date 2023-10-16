@@ -95,7 +95,7 @@ deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 :::
 :::
 
-## Question 1
+## Question 1 {.smaller}
 
 **What does the global forest area look like over past decades?**
 
@@ -105,7 +105,7 @@ deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 
 -   While certain countries show an increase in forest cover, we are still losing our battle against deforestation.
 
--   International efforts, such as the `United Nations REDD+` program, aim to reduce deforestation and promote sustainable forest management to combat its adverse impacts on a global scale.
+-   International efforts, such as the `United Nations REDD+` program, aim to reduce deforestation.
 
 ## Approach {.smaller}
 
@@ -314,7 +314,7 @@ plot_2015 <- generateForestConversionPlot(2015)
 
 ## Forest Conversion Analysis {.smaller auto-animate="true"}
 
--   Notable positive shifts occurred in the `2000s` and `2010s`, particularly in countries like the `USA`, `Russia`, `Australia`, `China`, and `India`.
+-   Notable positive shifts occurred in the 2000s and 2010s in particular countries.
 -   Significant portion of *South America* and *Africa* continues to bear the brunt of deforestation.
 
 ```{r saving_plots, message=FALSE, include=FALSE}
@@ -576,7 +576,6 @@ brazil_forest_animation |>
 ## I am Groot!?
 
 ::: columns
-::: {.column width="50%"}
 ::: {.column width="50%"}
 [**Thank you!**]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
 
