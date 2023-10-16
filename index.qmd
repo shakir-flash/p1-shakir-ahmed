@@ -79,15 +79,13 @@ This project delves into two crucial aspects of global environmental dynamics us
 
 With a focus on identifying the patterns in forest area conversion, the first question seeks to comprehend how the world's forest cover has changed over the previous three decades. With the help of a choropleth map, we meticulously prepare, clean, and visualize the data in order to clearly depict net forest conversion across the globe. We use the strengths of `ggplot` and `gganimate` to build an interesting, dynamic map that sheds light on the dynamics of forests around the world.
 
-The second question investigates the trajectory of soybean consumption in Brazil and its potential impact on afforestation and deforestation rates. We use the extensive data in the **Global Deforestation** dataset to address this. Through data manipulation, we calculate total soybean consumption, revealing the crop's evolution over time. Employing ggplot, we construct time series plots to showcase soybean consumption trends and assess their correlation with afforestation and deforestation rates. The period from 1990 to 2013 becomes our focal point, with the possibility of additional insights from the dataset.
+The second question investigates the trajectory of soybean consumption in Brazil and its potential impact on afforestation and deforestation rates. Through data manipulation, we calculate total soybean consumption, revealing the crop's evolution over time. Employing ggplot, we construct time series plots to showcase soybean consumption trends and assess their correlation of soybean consumption with afforestation and deforestation rates. The period from 1990 to 2013 becomes our focal point.
 
 ## Introduction
 
 The global environment is undergoing profound changes, driven by factors ranging from climate shifts to land use transformations. Within this complex web of interconnected challenges, the fate of the world's forests and the dynamics of soybean consumption stand as two pivotal and interrelated aspects of environmental change. These subjects are the focus of our investigation, guided by the rich and detailed "Global Deforestation" dataset, a comprehensive resource provided by Hannah Ritchie and Max Roser in the "Our World in Data" journal in 2021.
 
 The dataset offers an extensive repository of data, comprising variables such as net forest conversion, year, entity (providing country and continent information), and soybean consumption statistics. This dataset proves invaluable for analyzing the complex interplay between land use changes, soybean consumption, and broader conservation efforts. By leveraging advanced data analysis and visualization techniques, this project aims to provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
-
-To summarize, our project uses data analysis and visualization to tackle these crucial environmental issues. We contribute to a deeper knowledge of the fundamental environmental conservation and sustainable land management techniques necessary in our changing world by offering insights into the constantly changing dynamics of global forests and the impact of soybean consumption.
 
 ## Question 1: What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
@@ -496,14 +494,13 @@ plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "
   geom_point(color = "#6E8B3D") +  #Plotting points for clarity
   labs(x = "\nYear", 
        y = "Total (in lb)\n", 
-       title = "Total soybean consumption trend in Brazil\n", 
+       title = "Soybean consumption in Brazil\n", 
        caption = "Jon Harmon | TidyTuesday") +
   theme_minimal() +
   theme(legend.position = "none", plot.title = element_text(size = 15)) +
   scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) + #Cleaning long numbers
   scale_color_manual(values = c("Brazil" = "#a6d96a")) +
-  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2)) +   #Defining year range
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))            #Rotating x axis labels
+  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))    #Defining year range
 
 plot_soybean_brazil
 
@@ -560,14 +557,13 @@ plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil
   geom_point(color="#fdae61") +   #Plotting points for clarity
   labs(x = "\nYear", 
        y = "Forest coverage (in hectares)\n", 
-       title = "Total forest cover trend in Brazil\n", 
+       title = "Forest coverage in Brazil\n", 
        caption= "Jon Harmon | TidyTuesday") +
   theme_minimal() +
   theme(legend.position = "none", plot.title = element_text(size = 15)) +
   scale_color_manual(values = c("Brazil" = "#fee08b"))+
   scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+    #Defining year range
-  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +  #Cleaning long numbers
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))            #Rotating x axis labels
+  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M"))    #Cleaning long numbers
 
 plot_forest_brazil
 
