@@ -43,9 +43,9 @@ We also developed a function called generatePlotforAnimation(), designed specifi
 
 ## Dynamic display of soybean consumption and forest conversion in Brazil
 
-<div align=”center”>![Soybean](https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/soybean_brazil_animation.gif)
+![Soybean](https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/soybean_brazil_animation.gif) 
 
-![Brazil](https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/forest_brazil_animation.gif)</div>
+![Brazil](https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/forest_brazil_animation.gif)
 
 
 ## Primary Dataset used
