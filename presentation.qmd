@@ -376,7 +376,7 @@ forest_plot_list <- lapply(forest_plots, image_read)
 # joining all the saved images
 joined_plots <- image_join(forest_plot_list)
 
-# animating the images using image_animate() and restting the resolution
+# animating the images using image_animate() and resetting the resolution
 # setting fps = 1
 forest_animation <- image_animate(image_scale(joined_plots, "6000x4000"), fps = 0.5)
 
@@ -385,7 +385,7 @@ forest_animation
 
 ## Question 2
 
-How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?
+**How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?**
 
 -   Our central question revolves around the historical evolution of soybean consumption and its potential implications for afforestation and deforestation rates in this vital agricultural region.
 
