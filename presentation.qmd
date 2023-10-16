@@ -99,11 +99,11 @@ deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 
 **What does the global forest area look like over past decades?**
 
--   Why do we want to know?
+-   The primary goal of this presentation is to demonstrate changes in forest cover from 1990 to 2015.
 
-    -   Decrease in forest cover over the past few decades.
+-   Decrease in forest cover over the past few decades.
 
-    -   While certain countries show an increase in forest cover, we are still losing our battle against deforestation.
+-   While certain countries show an increase in forest cover, we are still losing our battle against deforestation.
 
 -   International efforts, such as the `United Nations REDD+` program, aim to reduce deforestation and promote sustainable forest management to combat its adverse impacts on a global scale.
 
