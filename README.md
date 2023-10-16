@@ -1,7 +1,7 @@
 # Forests in Transition: Visualizing Global Deforestation
-## Project 1 repo for INFO 526 - Fall 2023
 Uncovering Global Deforestation and Soy Bean Consumption  \
-Authors: Megan, Shakir, Maria, Eshaan, Bharath   \
+This project was developed by The Plotting Pandas for INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. \
+*Authors: Megan, Shakir, Maria, Eshaan, Bharath*   \
 Affiliation: School of Information, University of Arizona  
 
 ## Overview
@@ -9,20 +9,6 @@ This project delves into two crucial aspects of global environmental dynamics us
 
 ## Question 1: What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 To address this question, we implemented a choropleth map visualization highlighting the forest conversion for specific decades and spotlighting few countries with extensive forest conversion. We began to scout the data for getting relevant information and noteworthy details. The whole approach can be categorized into Data Preparation and Pre-processing, Visualizing the data and Animating the plots.
-
-*Data Preparation and Pre-processing*
-
-To generate a map plot we needed geographical information which is not present in the dataset and was achieved by utilizing the maps package in R. From this world data we retrieved all the unique countries for further processing and also filtered out Antarctica from the data.
-
-A custom function, `processForest()`, is developed to handle the pre-processing of the forest conversion dataset. This function is used filter countries, ensuring all entities present in the map data are included. It also used to categorize countries based on their net forest conversion rates, grouping them into distinct categories. The processed forest conversion data is split into subsets for each decade (1990, 2000, 2010, and 2015). The split() function in R is employed to divide the data based on the year column.
-
-A custom function, `filterCountries()`, is created to identify and extract specific countries of interest. These countries are singled out due to their significant forest conversion.
-
-*Visualization the data and Animating the plots*
-
-The ggplot2 package in R is utilized to create detailed visualizations for each decade. For each decade, a map is generated where countries are color-coded according to their forest conversion categories. The geom_map() function is employed to plot the world map, and additional layers are added to highlight the noteworthy countries, ensuring they stand out in the visual representation.We’ve encapsulated the common plotting logic for all decades within a function called generateForestConversionPlot(). This function streamlines the process of generating plots for each specific decade.
-
-We also developed a function called generatePlotforAnimation(), designed specifically to adjust text sizes in the original plot to enhance clarity during animation and save the resulting plots. The individual plots for each decade are compiled into an animated GIF using the gganimate package. The resulting GIF provides a dynamic overview of the global forest conversion patterns, emphasizing the transformations occurring over the specified decades.
 
 ## Dynamic display of forest conversion across the countries over the past decades
 
@@ -44,11 +30,11 @@ We also developed a function called generatePlotforAnimation(), designed specifi
 - Since we now have percentage data and total data per year, we can calculate the change in forest coverage for Brazil by doing `forest_area.x` * `forest_area.y`.
 
 ## Dynamic display of soybean consumption and forest conversion in Brazil
+<div id="header" align="center">
+  <img src="https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/soybean_brazil_animation.gif"/>
 
-![Soybean](https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/soybean_brazil_animation.gif) 
-
-![Brazil](https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/forest_brazil_animation.gif)
-
+  <img src="https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/soybean_brazil_animation.gif"/>
+</div>
 
 ## Primary Dataset used
 
