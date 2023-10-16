@@ -61,19 +61,15 @@ knitr::opts_chunk$set(
 ```
 
 ```{r load_dataset, message=FALSE, include=FALSE}
-# Getting the Data using the tidytuesdayR package 
-deforestation_data <- tidytuesdayR::tt_load(2021, week = 15)
 
 # Getting all the underlying data in the dataset
-forest        <- deforestation_data$forest
-forest_area   <- deforestation_data$forest_area
-brazil_loss   <- deforestation_data$brazil_loss
-soybean_use   <- deforestation_data$soybean_use
-vegetable_oil <- deforestation_data$vegetable_oil
-total_forest <- read.csv ("https://raw.githubusercontent.com/INFO526-DataViz/project-01-The-Plotting-Pandas/main/data/forest-area-km.csv")
-
-# Data is read to deforestation_by_source from a raw csv file which is in github , as it is not being downloaded from the tidytuesdayR package.
-deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
+forest        <- read.csv(here("data", "forest.csv"))
+forest_area   <- read.csv(here("data", "forest_area.csv"))
+brazil_loss   <- read.csv(here("data", "brazil_loss.csv"))
+soybean_use   <- read.csv(here("data", "soybean_use.csv"))
+vegetable_oil <- read.csv(here("data", "vegetable_oil.csv"))
+total_forest  <- read.csv(here("data", "forest-area-km.csv"))
+deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 ```
 
 ## Our Dataset {auto-animate="true"}
@@ -126,7 +122,7 @@ unique_countries <- world |>
 # Removing Antarctica from the world data
 world <- subset(world, region != "Antarctica")
 ```
-
+-   Getting geographical data from `maps` package
 -   Roots of the approach
 
 ```{r process_forest_function, message=FALSE, echo=TRUE}
@@ -237,6 +233,7 @@ color_mapping <-
   )
 ```
 
+-   Leveraging `geom_map()` from ggplot
 -   Branches of the approach
 
 ```{r world_plot_function, message=FALSE, echo=TRUE}
@@ -304,7 +301,7 @@ generateForestConversionPlot <- function(year) {
 }
 ```
 
--   Challenges faced
+-   Creating an animation of the generated plots
 
 ```{r allDecades_plot, message=FALSE}
 # Generating plots for different decades
@@ -314,17 +311,17 @@ plot_2010 <- generateForestConversionPlot(2010)
 plot_2015 <- generateForestConversionPlot(2015)
 ```
 
-## Outcome of the Approach {.smaller auto-animate="true"}
+## Analysis of the outcome {.smaller auto-animate="true"}
 
--   Forest conversion across the world in `2000` decade
+Forest conversion across the world in `2000` decade
 
 ```{r plot_2000, warning=FALSE, fig.width=8}
 plot_2000
 ```
 
-## Outcome of the Approach {.smaller auto-animate="true"}
+## Analysis of the outcome {.smaller auto-animate="true"}
 
--   Dynamic display of forest conversion across the countries over the past decades
+Dynamic display of forest conversion across the countries over the past decades
 
 ```{r saving_plots, message=FALSE, include=FALSE}
 # Function for saving plot for animation
@@ -359,6 +356,7 @@ generatePlotforAnimation(plot_2010, "images/presentation/q1/forest_plot_2010.jpg
 generatePlotforAnimation(plot_2015, "images/presentation/q1/forest_plot_2015.jpg")
 ```
 
+
 ```{r savingas_GIF, message=FALSE}
 #| code-fold: true
 #| code-summary: "Animation of the plots"
@@ -378,13 +376,20 @@ forest_animation <- image_animate(image_scale(joined_plots, "6000x4000"), fps = 
 forest_animation
 ```
 
+## Challenges faced {auto-animate="true"}
+
+- Lack of geographical data in the dataset
+- Handling `NA` data and countries with no data
+- Getting the legend right!
+- Rendering issue due to too much `ink` being used on the plot
+
 ## Question 2 {.smaller}
 
 **How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?**
 
 -   Our central question revolves around the historical evolution of soybean consumption and its potential implications for afforestation and deforestation rates in this vital agricultural region.
 
--   Our visual representation of this data employs the versatility of ggplot, particularly using geom_line() and geom_point() methods to construct time series plots.
+-   Our visual representation of this data employs the versatility of ggplot, particularly using `geom_line()` and `geom_point()` methods to construct time series plots.
 
 -   These plots provide a dynamic illustration of the trends in soybean production in Brazil, shedding light on the growth and fluctuations in this vital agricultural sector.
 
@@ -567,18 +572,18 @@ brazil_forest_animation |>
 
 -   The correlation between rising soybean consumption and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts.
 
-## I am Groot!? {auto-animate="true"}
+## I am Groot!?
 
 ::: columns
 ::: {.column width="50%"}
-[Thank You!]{style="font-size: 32px; color: #546747; font-weight: bold;text-align: center;"}
+[Thank You!]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
 
-![](images/presentation/groot_hi.gif){fig-align="center" width="300"}
+![](images/presentation/groot_hi.gif){fig-align="center" width="350"}
 :::
 
 ::: {.column width="50%"}
-[Any Questions?]{style="font-size: 32px; color: #546747; font-weight: bold;text-align: center;"}
+[Any Questions?]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
 
-![](images/presentation/groot_focused.gif){fig-align="center" width="400"}
+![](images/presentation/groot_focused.gif){fig-align="center" width="450"}
 :::
 :::

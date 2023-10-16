@@ -58,19 +58,15 @@ knitr::opts_chunk$set(
 ```
 
 ```{r load_dataset, message=FALSE, include=FALSE}
-# Getting the Data using the tidytuesdayR package 
-deforestation_data <- tidytuesdayR::tt_load(2021, week = 15)
 
 # Getting all the underlying data in the dataset
-forest        <- deforestation_data$forest
-forest_area   <- deforestation_data$forest_area
-brazil_loss   <- deforestation_data$brazil_loss
-soybean_use   <- deforestation_data$soybean_use
-vegetable_oil <- deforestation_data$vegetable_oil
-total_forest <- read.csv ("https://raw.githubusercontent.com/INFO526-DataViz/project-01-The-Plotting-Pandas/main/data/forest-area-km.csv")
-
-# Data is read to deforestation_by_source from a raw csv file which is in github , as it is not being downloaded from the tidytuesdayR package.
-deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
+forest        <- read.csv(here("data", "forest.csv"))
+forest_area   <- read.csv(here("data", "forest_area.csv"))
+brazil_loss   <- read.csv(here("data", "brazil_loss.csv"))
+soybean_use   <- read.csv(here("data", "soybean_use.csv"))
+vegetable_oil <- read.csv(here("data", "vegetable_oil.csv"))
+total_forest  <- read.csv(here("data", "forest-area-km.csv"))
+deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 ```
 
 ## Abstract
