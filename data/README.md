@@ -68,6 +68,17 @@ Vegetable oil production by crop type and year.
 |crop_oil   |character | Crop that was used to produce vegetable oil |
 |production |double    | Oil production in tonnes |
 
+# `forest-area-km.csv`
+
+Change in global forest area of global forest area.
+
+|variable    |class     |description |
+|:-----------|:---------|:-----------|
+|entity      |character | Country|
+|code        |character | Country Code |
+|year        |integer   | Year |
+|forest_area |double    | Percent of global forest area |
+
 # Codebook for the Dataset
 ```{r}
 # GETTING THE LIBRARIES
