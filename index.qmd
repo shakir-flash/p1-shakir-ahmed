@@ -79,15 +79,15 @@ This project delves into two crucial aspects of global environmental dynamics us
 
 With a focus on identifying the patterns in forest area conversion, the first question seeks to comprehend how the world's forest cover has changed over the previous three decades. With the help of a choropleth map, we meticulously prepare, clean, and visualize the data in order to clearly depict net forest conversion across the globe. We use the strengths of `ggplot` and `gganimate` to build an interesting, dynamic map that sheds light on the dynamics of forests around the world.
 
-The second question investigates the trajectory of soybean production in Brazil and its potential impact on afforestation and deforestation rates. We use the extensive data in the **Global Deforestation** dataset to address this, concentrating on Brazilian soybean output trends. Through data manipulation, we calculate total soybean production, revealing the crop's evolution over time. Employing ggplot, we construct time series plots to showcase soybean production trends and assess their correlation with afforestation and deforestation rates. The period from 1990 to 2013 becomes our focal point, with the possibility of additional insights from the dataset.
+The second question investigates the trajectory of soybean consumption in Brazil and its potential impact on afforestation and deforestation rates. We use the extensive data in the **Global Deforestation** dataset to address this. Through data manipulation, we calculate total soybean consumption, revealing the crop's evolution over time. Employing ggplot, we construct time series plots to showcase soybean consumption trends and assess their correlation with afforestation and deforestation rates. The period from 1990 to 2013 becomes our focal point, with the possibility of additional insights from the dataset.
 
 ## Introduction
 
-The global environment is undergoing profound changes, driven by factors ranging from climate shifts to land use transformations. Within this complex web of interconnected challenges, the fate of the world's forests and the dynamics of soybean production stand as two pivotal and interrelated aspects of environmental change. These subjects are the focus of our investigation, guided by the rich and detailed "Global Deforestation" dataset, a comprehensive resource provided by Hannah Ritchie and Max Roser in the "Our World in Data" journal in 2021.
+The global environment is undergoing profound changes, driven by factors ranging from climate shifts to land use transformations. Within this complex web of interconnected challenges, the fate of the world's forests and the dynamics of soybean consumption stand as two pivotal and interrelated aspects of environmental change. These subjects are the focus of our investigation, guided by the rich and detailed "Global Deforestation" dataset, a comprehensive resource provided by Hannah Ritchie and Max Roser in the "Our World in Data" journal in 2021.
 
-The dataset offers an extensive repository of data, comprising variables such as net forest conversion, year, entity (providing country and continent information), and soybean production statistics. This dataset proves invaluable for analyzing the complex interplay between land use changes, soybean production, and broader conservation efforts. By leveraging advanced data analysis and visualization techniques, this project aims to provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean production, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
+The dataset offers an extensive repository of data, comprising variables such as net forest conversion, year, entity (providing country and continent information), and soybean consumption statistics. This dataset proves invaluable for analyzing the complex interplay between land use changes, soybean consumption, and broader conservation efforts. By leveraging advanced data analysis and visualization techniques, this project aims to provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
 
-To summarize, our project uses data analysis and visualization to tackle these crucial environmental issues. We contribute to a deeper knowledge of the fundamental environmental conservation and sustainable land management techniques necessary in our changing world by offering insights into the constantly changing dynamics of global forests and the impact of soybean production.
+To summarize, our project uses data analysis and visualization to tackle these crucial environmental issues. We contribute to a deeper knowledge of the fundamental environmental conservation and sustainable land management techniques necessary in our changing world by offering insights into the constantly changing dynamics of global forests and the impact of soybean consumption.
 
 ## Question 1: What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
@@ -406,21 +406,21 @@ The plot reveals significant changes in forest cover over recent decades, with u
 
 In conclusion, this visualization offers a compelling narrative of global environmental change, highlighting both challenges and successes in forest conservation efforts. It serves as a valuable tool for policymakers and environmentalists providing actionable insights into regional and global trends. Such visualizations can aid in targeted policy formulation, focusing resources where they are most needed, and fostering international collaborations to combat deforestation.
 
-## Question 2: How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?
+## Question 2: How has the consumption of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?
 
 ### Introduction
 
-The production of soybeans, a versatile and globally significant crop, is intricately linked with land use changes, often impacting regions far beyond agricultural fields. In the second question, we focus on the dynamic story of soybean production in Brazil. Our central question revolves around the historical evolution of soybean production and its potential implications for afforestation and deforestation rates in this vital agricultural region. This analysis aims to unveil the intricate relationship between soybean production and environmental changes in Brazil. The findings will contribute to a deeper understanding of how agricultural practices in this key region influence land use, afforestation, and deforestation. This knowledge is invaluable for making informed decisions regarding sustainable land management and conservation practices in this dynamic agricultural landscape.
+The consumption of soybeans, a versatile and globally significant crop, is intricately linked with land use changes, often impacting regions far beyond agricultural fields. In the second question, we focus on the dynamic story of soybean consumption in Brazil. Our central question revolves around the historical evolution of soybean consumption and its potential implications for afforestation and deforestation rates in this vital agricultural region. This analysis aims to unveil the intricate relationship between soybean consumption and environmental changes in Brazil. The findings will contribute to a deeper understanding of how agricultural practices in this key region influence land use, afforestation, and deforestation. This knowledge is invaluable for making informed decisions regarding sustainable land management and conservation practices in this dynamic agricultural landscape.
 
-For this visualization, we used `soybean_use` data which was sourced from Our World in Data and performed data manipulation to obtain a new column showing the total production of soybean. The soyabean_use data, comprises of the columns (variables) `human_food` ,`animal_feed` and `processed`.
+For this visualization, we used `soybean_use` data which was sourced from Our World in Data and performed data manipulation to obtain a new column showing the total consumption of soybean. The soyabean_use data, comprises of the columns (variables) `human_food` ,`animal_feed` and `processed`.
 
 ### Approach
 
 Cleaning and processing of the dataset includes the following steps:
 
-Soybean production in Brazil:
+Soybean consumption in Brazil:
 
-1.  Created a new column for calculating the total soybean production. Removing totals of countries whose total production is 0 using the `subset` function.
+1.  Created a new column for calculating the total soybean consumption. Removing totals of countries whose total consumption is 0 using the `subset` function.
 2.  Filtering for Brazil under the `entity` column, and `year` between 1990 and 2013.
 
 Forest coverage in Brazil:
@@ -444,10 +444,10 @@ Forest coverage in Brazil:
 #Cleaning total_forest table
 total_forest_cleaned <- clean_names(total_forest)
 
-#Making a new column to calculate the total soybean production
+#Making a new column to calculate the total soybean consumption
 soybean <- soybean_use |>
   mutate(total = human_food + animal_feed + processed)
-#Some countries do not have production, and shows as 0. 
+#Some countries do not have consumption, and shows as 0. 
 #Removing the rows if total=0
 soybean <- subset(soybean, total != 0)
 
@@ -480,7 +480,7 @@ Plotting the soybean data
 
 ```{r q2_plot_soybean, message=FALSE}
 #| code-fold: true
-#| code-summary: "Plotting of soybean production in Brazil"
+#| code-summary: "Plotting of soybean consumption in Brazil"
 #Code for creating the time series plot
 #Used the soybean_brazil dataset created earlier as a data source
 #using year and total as x and y axis for first layer
@@ -490,13 +490,13 @@ Plotting the soybean data
 #Output: plot_soybean_brazil- plot object
 
 
-# Create a line plot for Brazil soybean production
+# Create a line plot for Brazil soybean consumption
 plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
   geom_line(linewidth = 2) +    #Plotting line plot of series
   geom_point(color = "#6E8B3D") +  #Plotting points for clarity
   labs(x = "\nYear", 
        y = "Total (in lb)\n", 
-       title = "Total soybean production trend in Brazil\n", 
+       title = "Total soybean consumption trend in Brazil\n", 
        caption = "Jon Harmon | TidyTuesday") +
   theme_minimal() +
   theme(legend.position = "none", plot.title = element_text(size = 15)) +
@@ -516,7 +516,7 @@ ggsave(plot_soybean_brazil,
        dpi      = 120)
 ```
 
-Animating the soybean production graph to show the trends:
+Animating the soybean graph to show the trends:
 
 ```{r q2_plot_soybean_anim, message=FALSE}
 #| code-fold: true
@@ -603,13 +603,13 @@ image_write(image = brazil_forest_animation, path = "images/forest_brazil_animat
 
 ### Discussion
 
-The discussion on the relationship between soybean production and environmental changes in Brazil is of paramount importance, given the global significance of soybeans as a versatile crop ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)). The intricate link between land use changes and soybean production highlights the need for a comprehensive understanding of the dynamics at play. By examining the historical evolution of soybean production in Brazil, this study sheds light on the potential implications for afforestation and deforestation rates in this key agricultural region. It becomes evident that the expansion of soybean production has had a notable impact on land use in Brazil.
+The discussion on the relationship between soybean consumption and environmental changes in Brazil is of paramount importance, given the global significance of soybeans as a versatile crop ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)). The intricate link between land use changes and soybean consumption highlights the need for a comprehensive understanding of the dynamics at play. By examining the historical evolution of soybean consumption in Brazil, this study sheds light on the potential implications for afforestation and deforestation rates in this key agricultural region. It becomes evident that the this had a notable impact on land use in Brazil.
 
-The utilization of time series visualization techniques, including geom_line and geom_point, has allowed for a comprehensive overview of the trends over time. These visualizations provide a clear depiction of the steady increase in soybean production in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth in soybean production over this period ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)).
+The utilization of time series visualization techniques, including geom_line and geom_point, has allowed for a comprehensive overview of the trends over time. These visualizations provide a clear depiction of the steady increase in soybean consumption in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth over this period ([Pagano & Miransari](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)).
 
-Moreover, the decrease in forest coverage during this period is stark. The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact of increased soybean production in the country ([Song et al.)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.).
+Moreover, the decrease in forest coverage during this period is stark. The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact in Brazil ([Song et al.)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.).
 
-The correlation between rising soybean production and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts. As the global demand for soybeans continues to grow, this study's findings, supported by the data, serve as a valuable resource for policymakers and stakeholders in the region ([Valdez](https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/)). It underscores the importance of considering the environmental consequences of agricultural expansion and the need for measures to mitigate deforestation. This research contributes to the broader understanding of the complex interplay between agriculture and environmental changes, making it a pivotal step towards more informed and sustainable land management practices in Brazil.
+The correlation between rising soybean consumption and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts. As the global demand for soybeans continues to grow, this study's findings, supported by the data, serve as a valuable resource for policymakers and stakeholders in the region ([Valdez](https://www.ers.usda.gov/amber-waves/2022/september/brazil-s-momentum-as-a-global-agricultural-supplier-faces-headwinds/)). It underscores the importance of considering the environmental consequences of agricultural expansion and the need for measures to mitigate deforestation. This research contributes to the broader understanding of the complex interplay between agriculture and environmental changes, making it a pivotal step towards more informed and sustainable land management practices in Brazil.
 
 ## References
 
