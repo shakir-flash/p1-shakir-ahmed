@@ -73,21 +73,29 @@ total_forest <- read.csv ("https://raw.githubusercontent.com/INFO526-DataViz/pro
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
 ```
 
-## Introduction {auto-animate="true"}
+## Our Dataset {auto-animate="true"}
 
 -   "Global Deforestation" dataset from "Our World in Data", [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06)
 -   Data looks at global deforestation trends and soybean production in Brazil
 -   Our Data:
     -   `forest` dataset: forest coverage trends over four decades
     -   `soybean_use` data: soybean consumption trends for human use, animal feed, and processed goods
--   Aim: provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
 
-## Introduction {auto-animate="true"}
+## Our Dataset {auto-animate="true"}
 
+::: columns
+::: {.column width="50%"}
+Aim: provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
+:::
+
+::: {.column width="50%"}
 ![](images/presentation/groot.gif){fig-align="right" width="200"}
+:::
+:::
 
 ## Question 1
 
+<<<<<<< HEAD
 -   What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
 <!-- -->
@@ -95,6 +103,12 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 -   like
 
 -   this
+=======
+-   Decrease in forest cover over the past few decades.
+-   Forests play a vital role in regulating water cycles and preventing soil erosion, and their destruction can lead to environmental imbalances and reduced water quality.
+-   While certain countries show an increase in forest cover, we are still losing our battle against deforestation.
+-   International efforts, such as the `United Nations REDD+` program, aim to reduce deforestation and promote sustainable forest management to combat its adverse impacts on a global scale.
+>>>>>>> d5b4e9ae0548ff9763fcab9fbc2f18ee37d159ca
 
 ## Code
 
