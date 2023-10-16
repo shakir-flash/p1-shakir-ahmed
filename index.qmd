@@ -502,8 +502,6 @@ plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "
   scale_color_manual(values = c("Brazil" = "#a6d96a")) +
   scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))    #Defining year range
 
-plot_soybean_brazil
-
 #Saving plot to location, and defining custom width
 ggsave(plot_soybean_brazil, 
        filename = "images/q2/plot_soybean_brazil.jpg", 
@@ -511,6 +509,8 @@ ggsave(plot_soybean_brazil,
        width    = 15, 
        unit     = "in", 
        dpi      = 120)
+
+plot_soybean_brazil
 ```
 
 Animating the soybean graph to show the trends:
@@ -532,9 +532,6 @@ brazil_soybean_animation <- image_read("soybean_brazil_animation.gif")
 # Display the animation
 brazil_soybean_animation |>
   image_animate(fps = 25)
-
-# saving image to custom filepath
-image_write(image = brazil_soybean_animation, path = "images/soybean_brazil_animation.gif")
 ```
 
 Plotting the forest coverage in Brazil
@@ -565,14 +562,14 @@ plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil
   scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+    #Defining year range
   scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M"))    #Cleaning long numbers
 
-plot_forest_brazil
-
 ggsave(plot_forest_brazil, 
        filename = "images/q2/plot_forest_brazil.jpg", 
        height   = 8, 
        width    = 15, 
        unit     = "in", 
        dpi      = 120)
+
+plot_forest_brazil
 ```
 
 ```{r q2_plot_forest_anim, message=FALSE, echo=TRUE}
@@ -592,9 +589,6 @@ brazil_forest_animation <- image_read("forest_brazil_animation.gif")
 # Display the animation
 brazil_forest_animation |>
   image_animate(fps = 25)
-
-# saving image to custom path
-image_write(image = brazil_forest_animation, path = "images/forest_brazil_animation.gif")
 ```
 
 ### Discussion
