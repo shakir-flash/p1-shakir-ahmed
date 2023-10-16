@@ -388,7 +388,7 @@ forest_animation
 
 -   These plots provide a dynamic illustration of the trends in soybean production in Brazil, shedding light on the growth and fluctuations in this vital agricultural sector.
 
-## Code {.smaller}
+## Approach {.smaller}
 
 ```{r q2brazil_process, message=FALSE, echo=TRUE}
 #| code-fold: true
@@ -470,33 +470,9 @@ ggsave(plot_soybean_brazil,
        unit     = "in", 
        dpi      = 120)
 
-plot_soybean_brazil
+
 
 ```
-
-## Animation of the plots
-
-```{r q2plot_forest_anim, message=FALSE}
-#| code-fold: true
-#| code-summary: "Animation of forest coverage"
-#Code to animate the plot using gganimate package
-
-# Animate the plot
-anim_plot_soybean <- plot_soybean_brazil + transition_reveal(year)
-
-# Save as an animated GIF
-anim_save("soybean_brazil_animation.gif", anim_plot_soybean, renderer = gifski_renderer())
-
-# Load the animated GIF
-brazil_soybean_animation <- image_read("soybean_brazil_animation.gif")
-
-# Display the animation
-brazil_soybean_animation |>
-  image_animate(fps = 25)
-
-```
-
-## Code
 
 ```{r q2plot_forest, message=FALSE, echo=TRUE}
 #| code-fold: true
@@ -532,12 +508,37 @@ ggsave(plot_forest_brazil,
        unit     = "in", 
        dpi      = 120)
 
-plot_forest_brazil
 
 
 ```
 
-## Animation of the plot
+## Outcome of the Approach {.smaller auto-animate="true"}
+
+-   Animation of soybean usage
+
+```{r q2plot_forest_anim, message=FALSE}
+#| code-fold: true
+#| code-summary: "Animation of soybean usage"
+#Code to animate the plot using gganimate package
+
+# Animate the plot
+anim_plot_soybean <- plot_soybean_brazil + transition_reveal(year)
+
+# Save as an animated GIF
+anim_save("soybean_brazil_animation.gif", anim_plot_soybean, renderer = gifski_renderer())
+
+# Load the animated GIF
+brazil_soybean_animation <- image_read("soybean_brazil_animation.gif")
+
+# Display the animation
+brazil_soybean_animation |>
+  image_animate(fps = 25)
+
+```
+
+## Outcome of the Approach {.smaller auto-animate="true"}
+
+-   Animation of forest coverage
 
 ```{r q2plot_brazil_anim, message=FALSE}
 #| code-fold: true
@@ -561,9 +562,13 @@ brazil_forest_animation |>
 
 ## Analysis {.smaller}
 
--   The visualizations provide a clear depiction of the steady increase in soybean consumption in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth over this period.
+-   The visualizations provide a clear depiction of the steady increase in soybean consumption in Brazil.
 
--   The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact in Brazil.
+-   The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013.
+
+-   The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time.
+
+-   This reduction in forest area is indicative of the environmental impact in Brazil.
 
 -   The correlation between rising soybean consumption and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts.
 
