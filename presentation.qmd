@@ -511,7 +511,7 @@ ggsave(plot_forest_brazil,
 
 ```
 
-## Outcome of the Approach {.smaller auto-animate="true"}
+## Outcome {.smaller auto-animate="true"}
 
 -   Animation of soybean usage
 
@@ -535,7 +535,7 @@ brazil_soybean_animation |>
 
 ```
 
-## Outcome of the Approach {.smaller auto-animate="true"}
+## Outcome {.smaller auto-animate="true"}
 
 -   Animation of forest coverage
 
