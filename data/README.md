@@ -68,7 +68,7 @@ Vegetable oil production by crop type and year.
 |crop_oil   |character | Crop that was used to produce vegetable oil |
 |production |double    | Oil production in tonnes |
 
-# Codebook for [chosen] Dataset
+# Codebook for the Dataset
 ```{r}
 # GETTING THE LIBRARIES
 if (!require(pacman))
