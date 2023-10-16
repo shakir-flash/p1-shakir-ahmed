@@ -183,7 +183,7 @@ The rate of change in production will then be visualized using ggplot's `geom_li
 **Variables of focus for both questions:**
 
 | Variable              | Description                                                  | Source Data-set                 |
-|------------------|-----------------------------------|-------------------|
+|-----------------------|--------------------------------------------------------------|---------------------------------|
 | entity                | Country                                                      | forest, forest_area and soybean |
 | code                  | Country Code                                                 | forest, forest_area and soybean |
 | year                  | Year                                                         | forest, forest_area and soybean |

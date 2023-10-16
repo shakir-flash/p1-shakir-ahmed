@@ -90,9 +90,8 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 
 -   What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
-```{=html}
 <!-- -->
-```
+
 -   like
 
 -   this
@@ -397,3 +396,194 @@ forest_animation <- image_animate(image_scale(joined_plots, "6000x4000"), fps = 
 
 forest_animation
 ```
+
+## Question 2
+
+How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?
+
+<!-- -->
+
+-    Our central question revolves around the historical evolution of soybean consumption and its potential implications for afforestation and deforestation rates in this vital agricultural region. 
+
+-   Our visual representation of this data employs the versatility of ggplot, particularly using geom_line() and geom_point() methods to construct time series plots.
+
+-   These plots provide a dynamic illustration of the trends in soybean production in Brazil, shedding light on the growth and fluctuations in this vital agricultural sector.
+
+## Code
+
+```{r q2brazil_process, message=FALSE, echo=TRUE}
+#| code-fold: true
+#| code-summary: "Pre-processing of soybean and forest data"
+#Function to pre-process the total_forest, soybean_use and forest_area datasets
+#Input : total_forest- tibble
+#        soybean_use- tibble
+#        forest_area- tibble
+#Output: soybean_brazil- tibble
+#        forest_brazil- tibble
+
+
+#Cleaning total_forest table
+total_forest_cleaned <- clean_names(total_forest)
+
+#Making a new column to calculate the total soybean consumption
+soybean <- soybean_use |>
+  mutate(total = human_food + animal_feed + processed)
+#Some countries do not have consumption, and shows as 0. 
+#Removing the rows if total=0
+soybean <- subset(soybean, total != 0)
+
+# Filter data for Brazil
+soybean_brazil <- soybean |>
+  filter(entity == "Brazil", year>= 1990&year<=2013)
+
+# Filter data for Brazil forest: 
+forest_brazil <- forest_area |>
+  filter(entity == "Brazil",year>=1990&year<=2013)
+
+#Finding total forest coverage per year
+total_forest_world <- total_forest_cleaned |>
+  filter(year >= 1990, year <= 2013, entity == "World") |>
+  group_by(year)
+
+# Left join to add total world forest coverage to the forest_brazil dataset
+forest_brazil <- forest_brazil |>
+  left_join(total_forest_world, by = "year")
+ 
+#Finding actual total coverage for Brazil (percentage * total)
+forest_brazil <- forest_brazil|>
+  mutate(forest_area_brazil = forest_area.x * forest_area.y / 100)
+
+
+
+```
+
+```{r q2plot_soybean, message=FALSE, echo=TRUE}
+#| code-fold: true
+#| code-summary: "Plotting of soybean consumption in Brazil"
+#Code for creating the time series plot
+#Used the soybean_brazil dataset created earlier as a data source
+#using year and total as x and y axis for first layer
+#Plotting points over line to increase visibility as second layer
+#Manual fill to show trend as positive
+#Input: year and total- numeric
+#Output: plot_soybean_brazil- plot object
+
+
+# Create a line plot for Brazil soybean consumption
+plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
+  geom_line(linewidth = 2) +    #Plotting line plot of series
+  geom_point(color = "#6E8B3D") +  #Plotting points for clarity
+  labs(x = "\nYear", 
+       y = "Total (in lb)\n", 
+       title = "Soybean consumption in Brazil\n", 
+       caption = "Jon Harmon | TidyTuesday") +
+  theme_minimal() +
+  theme(legend.position = "none", plot.title = element_text(size = 15)) +
+  scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) + #Cleaning long numbers
+  scale_color_manual(values = c("Brazil" = "#a6d96a")) +
+  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))    #Defining year range
+
+#Saving plot to location, and defining custom width
+ggsave(plot_soybean_brazil, 
+       filename = "images/q2/plot_soybean_brazil.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
+
+plot_soybean_brazil
+
+```
+
+## Animation of the plots
+
+```{r q2plot_forest_anim, message=FALSE, echo=TRUE}
+#| code-fold: true
+#| code-summary: "Animation of forest coverage"
+#Code to animate the plot using gganimate package
+
+# Animate the plot
+anim_plot_soybean <- plot_soybean_brazil + transition_reveal(year)
+
+# Save as an animated GIF
+anim_save("soybean_brazil_animation.gif", anim_plot_soybean, renderer = gifski_renderer())
+
+# Load the animated GIF
+brazil_soybean_animation <- image_read("soybean_brazil_animation.gif")
+
+# Display the animation
+brazil_soybean_animation |>
+  image_animate(fps = 25)
+
+```
+
+## Code
+
+```{r q2plot_forest, message=FALSE, echo=TRUE}
+#| code-fold: true
+#| code-summary: "Plotting of forest coverage in Brazil"
+
+#Code for creating the time series plot
+#Used the forest_brazil dataset created earlier as a data source
+#using year and total as x and y axis for first layer for line plot
+#Plotting points over line to increase visibility as second layer
+#Manual fill to show trend as negative
+#Input: year and forest_area_brazil- numeric
+#Output: plot_soybean_brazil- plot object
+
+
+# Create a line plot for Brazil with points
+plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil, color = "Brazil")) +
+  geom_line(linewidth = 2) +      #Plotting line plot of series
+  geom_point(color="#fdae61") +   #Plotting points for clarity
+  labs(x = "\nYear", 
+       y = "Forest coverage (in hectares)\n", 
+       title = "Forest coverage in Brazil\n", 
+       caption= "Jon Harmon | TidyTuesday") +
+  theme_minimal() +
+  theme(legend.position = "none", plot.title = element_text(size = 15)) +
+  scale_color_manual(values = c("Brazil" = "#fee08b"))+
+  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+    #Defining year range
+  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M"))    #Cleaning long numbers
+
+ggsave(plot_forest_brazil, 
+       filename = "images/q2/plot_forest_brazil.jpg", 
+       height   = 8, 
+       width    = 15, 
+       unit     = "in", 
+       dpi      = 120)
+
+plot_forest_brazil
+
+
+```
+
+## Animation of the plot
+
+```{r q2plot_brazil_anim, message=FALSE, echo=TRUE}
+#| code-fold: true
+#| code-summary: "Animation of forest coverage"
+#Animation of plot using gganimate package
+
+# Animate the plot
+anim_plot_forest <- plot_forest_brazil + transition_reveal(year)
+
+# Save as an animated GIF
+anim_save("forest_brazil_animation.gif", anim_plot_forest, renderer = gifski_renderer())
+
+# Load the animated GIF
+brazil_forest_animation <- image_read("forest_brazil_animation.gif")
+
+# Display the animation
+brazil_forest_animation |>
+  image_animate(fps = 25)
+
+```
+
+## Analysis
+
+-   The visualizations provide a clear depiction of the steady increase in soybean consumption in Brazil. The data shows a remarkable increase, from approximately 16.4 million pounds of soybeans in 1990 to a staggering 36.87 million pounds in 2013. This indicates a substantial growth over this period.
+
+-   The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact in Brazil.
+
+-   The correlation between rising soybean consumption and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts.
