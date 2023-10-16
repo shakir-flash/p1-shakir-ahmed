@@ -381,7 +381,7 @@ generatePlotforAnimation(plot_2015, "images/q1/forest_plot_2015.jpg")
 #| code-fold: true
 #| code-summary: "Animation of the plots"
 
-# making gif using gganimate pacakge
+# making gif using gganimate package
 
 forest_plots <- list.files(path = "images/q1/", full.names = TRUE)
 forest_plot_list <- lapply(forest_plots, image_read)
@@ -431,6 +431,15 @@ Forest coverage in Brazil:
 4.  Since we now have percentage data and total data per year, we can calculate the change in forest coverage for Brazil by doing `forest_area.x` \* `forest_area.y`.
 
 ```{r q2_brazil_process, message=FALSE}
+#| code-fold: true
+#| code-summary: "Pre-processing of soybean and forest data"
+#Function to pre-process the total_forest, soybean_use and forest_area datasets
+#Input : total_forest- tibble
+#        soybean_use- tibble
+#        forest_area- tibble
+#Output: soybean_brazil- tibble
+#        forest_brazil- tibble
+
 
 #Cleaning total_forest table
 total_forest_cleaned <- clean_names(total_forest)
@@ -470,33 +479,49 @@ forest_brazil <- forest_brazil|>
 Plotting the soybean data
 
 ```{r q2_plot_soybean, message=FALSE}
+#| code-fold: true
+#| code-summary: "Plotting of soybean production in Brazil"
+#Code for creating the time series plot
+#Used the soybean_brazil dataset created earlier as a data source
+#using year and total as x and y axis for first layer
+#Plotting points over line to increase visibility as second layer
+#Manual fill to show trend as positive
+#Input: year and total- numeric
+#Output: plot_soybean_brazil- plot object
+
 
 # Create a line plot for Brazil soybean production
 plot_soybean_brazil <- ggplot(soybean_brazil, aes(x = year, y = total, color = "Brazil")) +
-  geom_line(linewidth = 2) +
-  geom_point(color = "#6E8B3D") +
-  labs(x = "Year", y = "Total (in lb)", title = "Total Soybean Usage Trend in Brazil\n", caption = "Jon Harmon | TidyTuesday") +
+  geom_line(linewidth = 2) +    #Plotting line plot of series
+  geom_point(color = "#6E8B3D") +  #Plotting points for clarity
+  labs(x = "\nYear", 
+       y = "Total (in lb)\n", 
+       title = "Total soybean production trend in Brazil\n", 
+       caption = "Jon Harmon | TidyTuesday") +
   theme_minimal() +
   theme(legend.position = "none", plot.title = element_text(size = 15)) +
-  scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) +
+  scale_y_continuous(labels = scales::label_number(scale = 1e-06, suffix = "M")) + #Cleaning long numbers
   scale_color_manual(values = c("Brazil" = "#a6d96a")) +
-  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2)) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2)) +   #Defining year range
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))            #Rotating x axis labels
 
 plot_soybean_brazil
 
+#Saving plot to location, and defining custom width
 ggsave(plot_soybean_brazil, 
        filename = "images/q2/plot_soybean_brazil.jpg", 
        height   = 8, 
        width    = 15, 
        unit     = "in", 
        dpi      = 120)
-
 ```
 
 Animating the soybean production graph to show the trends:
 
 ```{r q2_plot_soybean_anim, message=FALSE}
+#| code-fold: true
+#| code-summary: "Animation"
+#Code to animate the plot using gganimate package
 
 # Animate the plot
 anim_plot_soybean <- plot_soybean_brazil + transition_reveal(year)
@@ -511,25 +536,38 @@ brazil_soybean_animation <- image_read("soybean_brazil_animation.gif")
 brazil_soybean_animation |>
   image_animate(fps = 25)
 
-# saving image to git
+# saving image to custom filepath
 image_write(image = brazil_soybean_animation, path = "images/soybean_brazil_animation.gif")
 ```
 
 Plotting the forest coverage in Brazil
 
 ```{r q2_plot_forest, message=FALSE}
+#| code-fold: true
+#| code-summary: "Plotting of forest coverage in Brazil"
+#Code for creating the time series plot
+#Used the forest_brazil dataset created earlier as a data source
+#using year and total as x and y axis for first layer for line plot
+#Plotting points over line to increase visibility as second layer
+#Manual fill to show trend as negative
+#Input: year and forest_area_brazil- numeric
+#Output: plot_soybean_brazil- plot object
+
 
 # Create a line plot for Brazil with points
 plot_forest_brazil <- ggplot(forest_brazil, aes(x = year, y = forest_area_brazil, color = "Brazil")) +
-  geom_line(linewidth = 2) +
-  geom_point(color="#fdae61") + 
-  labs(x = "Year", y = "Forest coverage (in hectares)", title = "Total forest cover trend in Brazil", caption= "Jon Harmon | TidyTuesday") +
+  geom_line(linewidth = 2) +      #Plotting line plot of series
+  geom_point(color="#fdae61") +   #Plotting points for clarity
+  labs(x = "\nYear", 
+       y = "Forest coverage (in hectares)\n", 
+       title = "Total forest cover trend in Brazil\n", 
+       caption= "Jon Harmon | TidyTuesday") +
   theme_minimal() +
   theme(legend.position = "none", plot.title = element_text(size = 15)) +
   scale_color_manual(values = c("Brazil" = "#fee08b"))+
-  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+
-  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+  scale_x_continuous(limits = c(1990, 2013), breaks = seq(1990, 2013, by = 2))+    #Defining year range
+  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +  #Cleaning long numbers
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))            #Rotating x axis labels
 
 plot_forest_brazil
 
@@ -542,6 +580,9 @@ ggsave(plot_forest_brazil,
 ```
 
 ```{r q2_plot_forest_anim, message=FALSE}
+#| code-fold: true
+#| code-summary: "Animation"
+#Animation of plot using gganimate package
 
 # Animate the plot
 anim_plot_forest <- plot_forest_brazil + transition_reveal(year)
@@ -556,7 +597,7 @@ brazil_forest_animation <- image_read("forest_brazil_animation.gif")
 brazil_forest_animation |>
   image_animate(fps = 25)
 
-# saving image to gift
+# saving image to custom path
 image_write(image = brazil_forest_animation, path = "images/forest_brazil_animation.gif")
 ```
 
