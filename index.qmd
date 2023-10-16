@@ -134,7 +134,7 @@ processForest <- function (dataset, unique_countries) {
       # anti_join() is used to return only the rows from the first dataset that isn't having matching rows in the second dataset based on specified key columns
       anti_join(unique_countries, dataset, by = c("region" = "entity")) |>
         # adding year and net_forest_conversion for that specific year as NA
-        mutate(year = dataset[1, "year"]$year, net_forest_conversion = NA)
+        mutate(year = dataset[1, "year"], net_forest_conversion = NA)
     ) |>
     # renaming USA and UK so that both these countries are matching in world dataset and forest dataset
     mutate(
@@ -606,3 +606,9 @@ Valdez, C. (2022). Brazil's Momentum as a Global Agricultural Supplier Faces Hea
 Pagano, M. & Miransari, M. (2016). "The importance of soybean production worldwide." Retrieved from: [Science Direct](https://www.sciencedirect.com/science/article/pii/B9780128015360000013)
 
 Song et al., (2021). "Massive soybean expansion in South America since 2000 and implications for conservation." Retrieved from: [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8350977/#:~:text=Direct%20soybean%2Ddriven%20deforestation%20reached,forest%20loss%20during%20this%20period.)
+
+Quarto, For documentation and presentation - [Quarto](https://quarto.org/docs/reference/formats/html.html)
+
+ggplot, For understanding of different plot - [ggplot](https://ggplot2.tidyverse.org/reference/index.html)
+
+Logo, The logo used in the webiste - [Online](https://pngtree.com/so/pandas)
