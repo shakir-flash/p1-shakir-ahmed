@@ -12,7 +12,11 @@ format:
     theme:  ['data/customtheming.scss']
     transition: slide
     background-transition: fade
-  
+    logo: images\pandas_logo.png
+    footer: "[🔗ThePlottingPandas](https://info526-dataviz.github.io/project-01-The-Plotting-Pandas/)"
+    smaller: true
+    scrollable: true
+
 editor: visual
 execute:
   warning: false
@@ -76,41 +80,39 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 ## Our Dataset {auto-animate="true"}
 
 -   "Global Deforestation" dataset from "Our World in Data", [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06)
+
 -   Data looks at global deforestation trends and soybean production in Brazil
+
 -   Our Data:
-    -   `forest` dataset: forest coverage trends over four decades
-    -   `soybean_use` data: soybean consumption trends for human use, animal feed, and processed goods
+
+    -   `forest` dataset
+    -   `soybean_use` data
 
 ## Our Dataset {auto-animate="true"}
 
 ::: columns
-::: {.column width="50%"}
-Aim: provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
+::: {.column width="60%"}
+**Aim:** Provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
 :::
 
-::: {.column width="50%"}
-![](images/presentation/groot.gif){fig-align="right" width="200"}
+::: {.column width="40%"}
+![](images/presentation/groot.gif){fig-align="right" width="450"}
 :::
 :::
 
 ## Question 1
 
-<<<<<<< HEAD
--   What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
+**What does the global forest area look like over past decades?**
 
-<!-- -->
+-   Why do we want to know?
 
--   like
+    -   Decrease in forest cover over the past few decades.
 
--   this
-=======
--   Decrease in forest cover over the past few decades.
--   Forests play a vital role in regulating water cycles and preventing soil erosion, and their destruction can lead to environmental imbalances and reduced water quality.
--   While certain countries show an increase in forest cover, we are still losing our battle against deforestation.
+    -   While certain countries show an increase in forest cover, we are still losing our battle against deforestation.
+
 -   International efforts, such as the `United Nations REDD+` program, aim to reduce deforestation and promote sustainable forest management to combat its adverse impacts on a global scale.
->>>>>>> d5b4e9ae0548ff9763fcab9fbc2f18ee37d159ca
 
-## Code
+## Approach
 
 ```{r world_data, message=FALSE, include=FALSE}
 # World data from maps
@@ -125,6 +127,8 @@ unique_countries <- world |>
 # Removing Antarctica from the world data
 world <- subset(world, region != "Antarctica")
 ```
+
+Roots of the approach
 
 ```{r process_forest_function, message=FALSE, echo=TRUE}
 #| code-fold: true
@@ -234,6 +238,8 @@ color_mapping <-
   )
 ```
 
+Branches of the approach
+
 ```{r world_plot_function, message=FALSE, echo=TRUE}
 #| code-fold: true
 #| code-summary: "Function used to generate the plot"
@@ -307,29 +313,11 @@ plot_2010 <- generateForestConversionPlot(2010)
 plot_2015 <- generateForestConversionPlot(2015)
 ```
 
-## Plot and text {auto-animate="true"}
+## Outcome of the Approach {auto-animate="true"}
 
 ::: columns
 ::: {.column width="20%"}
--   Some text
-
--   goes here
-:::
-
-::: {.column width="80%"}
-```{r plot_1990, warning=FALSE, fig.width=8}
-plot_1990
-```
-:::
-:::
-
-## Plot and text {auto-animate="true"}
-
-::: columns
-::: {.column width="20%"}
--   Some text
-
--   goes here
+-   Forest conversion across the world in `2000` decade
 :::
 
 ::: {.column width="80%"}
@@ -339,23 +327,7 @@ plot_2000
 :::
 :::
 
-## Plot and text {auto-animate="true"}
-
-::: columns
-::: {.column width="20%"}
--   Some text
-
--   goes here
-:::
-
-::: {.column width="80%"}
-```{r plot_2015, warning=FALSE, fig.width=8}
-plot_2015
-```
-:::
-:::
-
-## Animation of the plots
+## Outcome of the Approach {auto-animate="true"}
 
 GIF of the world forest conversion
 
@@ -415,9 +387,7 @@ forest_animation
 
 How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?
 
-<!-- -->
-
--    Our central question revolves around the historical evolution of soybean consumption and its potential implications for afforestation and deforestation rates in this vital agricultural region. 
+-   Our central question revolves around the historical evolution of soybean consumption and its potential implications for afforestation and deforestation rates in this vital agricultural region.
 
 -   Our visual representation of this data employs the versatility of ggplot, particularly using geom_line() and geom_point() methods to construct time series plots.
 
@@ -601,3 +571,19 @@ brazil_forest_animation |>
 -   The forest coverage in Brazil dropped from 588 million hectares in 1990 to 507 million hectares in 2013, representing a significant loss of 81 million hectares of forest land during this time. This reduction in forest area is indicative of the environmental impact in Brazil.
 
 -   The correlation between rising soybean consumption and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts.
+
+## I am Groot!? {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+[Thank You!]{style="font-size: 32px; color: #546747; font-weight: bold;text-align: center;"}
+
+![](images/presentation/groot_hi.gif){fig-align="center" width="300"}
+:::
+
+::: {.column width="50%"}
+[Any Questions?]{style="font-size: 32px; color: #546747; font-weight: bold;text-align: center;"}
+
+![](images/presentation/groot_focused.gif){fig-align="center" width="400"}
+:::
+:::
