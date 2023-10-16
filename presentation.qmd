@@ -91,7 +91,7 @@ deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 :::
 
 ::: {.column width="30%"}
-![Source: https://gifer.com](images/presentation/groot.gif){fig-align="right" width="450"}
+![](images/presentation/groot.gif){fig-align="right" width="450"}
 :::
 :::
 
@@ -312,11 +312,10 @@ plot_2010 <- generateForestConversionPlot(2010)
 plot_2015 <- generateForestConversionPlot(2015)
 ```
 
-## Dynamic display of forest conversion across the countries over the past decades {.smaller auto-animate="true"}
+## Forest Conversion Analysis {.smaller auto-animate="true"}
 
 -   Notable positive shifts occurred in the `2000s` and `2010s`, particularly in countries like the `USA`, `Russia`, `Australia`, `China`, and `India`.
-
--   Significant portion of *South America* and *Africa* continues to bear the brunt of deforestation, with no signs of slowing down
+-   Significant portion of *South America* and *Africa* continues to bear the brunt of deforestation.
 
 ```{r saving_plots, message=FALSE, include=FALSE}
 # Function for saving plot for animation
@@ -373,8 +372,11 @@ forest_animation
 ## Challenges faced {auto-animate="true"}
 
 -   Lack of geographical data in the dataset
+
 -   Handling `NA` data and countries with no data
+
 -   Getting the legend right!
+
 -   Rendering issue due to too much `ink` being used on the plot
 
 ## Question 2 {.smaller}
@@ -575,14 +577,15 @@ brazil_forest_animation |>
 
 ::: columns
 ::: {.column width="50%"}
-[**Thank You!**]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
+::: {.column width="50%"}
+[**Thank you!**]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
 
-![Source: https://gifer.com/en/2rci](images/presentation/groot_hi.gif){fig-align="center" width="350"}
+![](images/presentation/groot_hi.gif){fig-align="center" width="350"}
 :::
 
 ::: {.column width="50%"}
 [**Any Questions?**]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
 
-![Source: https://gifer.com](images/presentation/groot_focused.gif){fig-align="center" width="450"}
+![Groot Source: https://gifer.com](images/presentation/groot_focused.gif){fig-align="center" width="450"}
 :::
 :::
