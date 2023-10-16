@@ -88,14 +88,10 @@ deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rf
 
 ## Question 1
 
--   What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
-
-```{=html}
-<!-- -->
-```
--   like
-
--   this
+-   Decrease in forest cover over the past few decades.
+-   Forests play a vital role in regulating water cycles and preventing soil erosion, and their destruction can lead to environmental imbalances and reduced water quality.
+-   While certain countries show an increase in forest cover, we are still losing our battle against deforestation.
+-   International efforts, such as the `United Nations REDD+` program, aim to reduce deforestation and promote sustainable forest management to combat its adverse impacts on a global scale.
 
 ## Code
 
