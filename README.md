@@ -33,7 +33,7 @@ To address this question, we implemented a choropleth map visualization highligh
 <div id="header" align="center">
   <img src="https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/soybean_brazil_animation.gif"/>
 
-  <img src="https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/soybean_brazil_animation.gif"/>
+  <img src="https://github.com/INFO526-DataViz/project-01-The-Plotting-Pandas/blob/main/images/forest_brazil_animation.gif"/>
 </div>
 
 ## Primary Dataset used
