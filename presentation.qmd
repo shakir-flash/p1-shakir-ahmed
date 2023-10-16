@@ -122,6 +122,7 @@ unique_countries <- world |>
 # Removing Antarctica from the world data
 world <- subset(world, region != "Antarctica")
 ```
+
 -   Getting geographical data from `maps` package
 -   Roots of the approach
 
@@ -356,7 +357,6 @@ generatePlotforAnimation(plot_2010, "images/presentation/q1/forest_plot_2010.jpg
 generatePlotforAnimation(plot_2015, "images/presentation/q1/forest_plot_2015.jpg")
 ```
 
-
 ```{r savingas_GIF, message=FALSE}
 #| code-fold: true
 #| code-summary: "Animation of the plots"
@@ -378,10 +378,10 @@ forest_animation
 
 ## Challenges faced {auto-animate="true"}
 
-- Lack of geographical data in the dataset
-- Handling `NA` data and countries with no data
-- Getting the legend right!
-- Rendering issue due to too much `ink` being used on the plot
+-   Lack of geographical data in the dataset
+-   Handling `NA` data and countries with no data
+-   Getting the legend right!
+-   Rendering issue due to too much `ink` being used on the plot
 
 ## Question 2 {.smaller}
 
