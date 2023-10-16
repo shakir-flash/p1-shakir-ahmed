@@ -91,7 +91,7 @@ deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 :::
 
 ::: {.column width="30%"}
-![](images/presentation/groot.gif){fig-align="right" width="450"}
+![Source: https://gifer.com](images/presentation/groot.gif){fig-align="right" width="450"}
 :::
 :::
 
@@ -145,7 +145,7 @@ processForest <- function (dataset, unique_countries) {
       # anti_join() is used to return only the rows from the first dataset that isn't having matching rows in the second dataset based on specified key columns
       anti_join(unique_countries, dataset, by = c("region" = "entity")) |>
         # adding year and net_forest_conversion for that specific year as NA
-        mutate(year = dataset[1, "year"]$year, net_forest_conversion = NA)
+        mutate(year = dataset[1, "year"], net_forest_conversion = NA)
     ) |>
     # renaming USA and UK so that both these countries are matching in world dataset and forest dataset
     mutate(
@@ -312,17 +312,11 @@ plot_2010 <- generateForestConversionPlot(2010)
 plot_2015 <- generateForestConversionPlot(2015)
 ```
 
-## Analysis of the outcome {.smaller auto-animate="true"}
+## Dynamic display of forest conversion across the countries over the past decades {.smaller auto-animate="true"}
 
-Forest conversion across the world in `2000` decade
+-   Notable positive shifts occurred in the `2000s` and `2010s`, particularly in countries like the `USA`, `Russia`, `Australia`, `China`, and `India`.
 
-```{r plot_2000, warning=FALSE, fig.width=8}
-plot_2000
-```
-
-## Analysis of the outcome {.smaller auto-animate="true"}
-
-Dynamic display of forest conversion across the countries over the past decades
+-   Significant portion of *South America* and *Africa* continues to bear the brunt of deforestation, with no signs of slowing down
 
 ```{r saving_plots, message=FALSE, include=FALSE}
 # Function for saving plot for animation
@@ -581,14 +575,14 @@ brazil_forest_animation |>
 
 ::: columns
 ::: {.column width="50%"}
-[Thank You!]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
+[**Thank You!**]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
 
-![](images/presentation/groot_hi.gif){fig-align="center" width="350"}
+![Source: https://gifer.com/en/2rci](images/presentation/groot_hi.gif){fig-align="center" width="350"}
 :::
 
 ::: {.column width="50%"}
-[Any Questions?]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
+[**Any Questions?**]{style="font-size: 46px; color: #546747; font-weight: bold;text-align: center"}
 
-![](images/presentation/groot_focused.gif){fig-align="center" width="450"}
+![Source: https://gifer.com](images/presentation/groot_focused.gif){fig-align="center" width="450"}
 :::
 :::
