@@ -74,9 +74,9 @@ deforestation_by_source <- read.csv(here("data", "deforestation_by_source.csv"))
 
 ## Our Dataset {auto-animate="true"}
 
--   "Global Deforestation" dataset from "Our World in Data", [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06)
+-   "Global Deforestation" dataset from "Our World in Data", [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06).
 
--   Data looks at global deforestation trends and soybean production in Brazil
+-   Data looks at global deforestation trends and soybean production in Brazil.
 
 -   Our Data:
 
@@ -371,13 +371,13 @@ forest_animation
 
 ## Challenges faced {auto-animate="true"}
 
--   Lack of geographical data in the dataset
+-   Lack of geographical data in the dataset.
 
--   Handling `NA` data and countries with no data
+-   Handling `NA` data and countries with no data.
 
 -   Getting the legend right!
 
--   Rendering issue due to too much `ink` being used on the plot
+-   Rendering issue due to too much `ink` being used on the plot.
 
 ## Question 2 {.smaller}
 
@@ -572,6 +572,14 @@ brazil_forest_animation |>
 -   This reduction in forest area is indicative of the environmental impact in Brazil.
 
 -   The correlation between rising soybean consumption and decreasing forest coverage in Brazil underscores the need for sustainable agricultural practices and conservation efforts.
+
+## Challenges faced {.smaller}
+
+-   Lack of total forest coverage for the world.
+
+-   Animation and frame rate selection.
+
+-   Error in data type and rendering method selection of gif during animation.
 
 ## I am Groot!?
 
