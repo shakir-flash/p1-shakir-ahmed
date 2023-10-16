@@ -73,24 +73,16 @@ total_forest <- read.csv ("https://raw.githubusercontent.com/INFO526-DataViz/pro
 deforestation_by_source <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-06/deforestation_by_source.csv')
 ```
 
-## Introduction{auto-animate="true"}
+## Introduction {auto-animate="true"}
 
+-   "Global Deforestation" dataset from "Our World in Data", [tidytuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-04-06)
+-   Data looks at global deforestation trends and soybean production in Brazil
+-   Our Data:
+    -   `forest` dataset: forest coverage trends over four decades
+    -   `soybean_use` data: soybean consumption trends for human use, animal feed, and processed goods
+-   Aim: provide critical insights into the ever-evolving dynamics of global forests and the influence of soybean consumption, contributing to a better understanding of essential environmental conservation and sustainable land management practices.
 
--   \<info on our project\>
-
-You can use plain text
-
-::: columns
-::: {.column width="40%"}
--   or bullet points[^1]
-:::
-
-::: {.column width="60%"}
-or in two columns
-:::
-:::
-
-## Introduction{auto-animate="true"}
+## Introduction {auto-animate="true"}
 
 ![](images/presentation/groot.gif){fig-align="right" width="200"}
 
@@ -98,8 +90,9 @@ or in two columns
 
 -   What does the global forest area look like over past decades, highlighting the trends of forest area conversion?
 
-[^1]: And add footnotes
-
+```{=html}
+<!-- -->
+```
 -   like
 
 -   this
@@ -318,6 +311,7 @@ plot_1990
 :::
 
 ## Plot and text {auto-animate="true"}
+
 ::: columns
 ::: {.column width="20%"}
 -   Some text
@@ -331,6 +325,7 @@ plot_2000
 ```
 :::
 :::
+
 ## Plot and text {auto-animate="true"}
 
 ::: columns
@@ -348,6 +343,7 @@ plot_2015
 :::
 
 ## Animation of the plots
+
 GIF of the world forest conversion
 
 ```{r saving_plots, message=FALSE, include=FALSE}
