@@ -381,7 +381,7 @@ forest_animation
 
 ## Question 2 {.smaller}
 
-**How has the production of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?**
+**How has the consumption of Soybean in Brazil changed over time, and how does it impact the afforestation or deforestation rates?**
 
 -   Our central question revolves around the historical evolution of soybean consumption and its potential implications for afforestation and deforestation rates in this vital agricultural region.
 
