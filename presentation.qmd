@@ -315,7 +315,7 @@ plot_2015 <- generateForestConversionPlot(2015)
 ## Forest Conversion Analysis {.smaller auto-animate="true"}
 
 -   Notable positive shifts occurred in the 2000s and 2010s in particular countries.
--   Significant portion of *South America* and *Africa* continues to bear the brunt of deforestation.
+-   *South America* and *Africa* continues to bear the brunt of deforestation.
 
 ```{r saving_plots, message=FALSE, include=FALSE}
 # Function for saving plot for animation
