@@ -1,7 +1,7 @@
 ---
 name: Write-up feedback
 about: Instructor review of project Write-up 
-title: Presentation feedback
+title: Write-up feedback
 labels: ''
 assignees: ''
 ---
