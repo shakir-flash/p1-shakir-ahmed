@@ -1,8 +1,5 @@
 # Forests in Transition: Visualizing Global Deforestation
 Uncovering Global Deforestation and Soy Bean Consumption  \
-This project was developed by The Plotting Pandas for INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. \
-*Authors: Megan, Shakir, Maria, Eshaan, Bharath*   \
-Affiliation: School of Information, University of Arizona  
 
 ## Overview
 This project delves into two crucial aspects of global environmental dynamics using the Global Deforestation dataset, a comprehensive resource published by Hannah Ritchie and Max Roser in the Our World in Data journal in 2021. The dataset encompasses a wide array of attributes related to global forest cover, deforestation rates, and associated factors. Two distinct questions guide our exploration.
